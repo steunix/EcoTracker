@@ -166,7 +166,7 @@ public class RegisterDB extends SQLiteOpenHelper {
             do {
                 Record r = new Record();
                 r.id = cursor.getLong(0);
-                r.date = cursor.getString(1);
+                r.date = Helper.isoToDate(cursor.getString(1));
                 r.account = getAccount(cursor.getLong(2));
                 r.entity = getEntity(cursor.getLong(3));
                 r.amount = cursor.getFloat(4);
@@ -196,7 +196,7 @@ public class RegisterDB extends SQLiteOpenHelper {
             do {
                 Record r = new Record();
                 r.id = cursor.getLong(0);
-                r.date = cursor.getString(1);
+                r.date = Helper.isoToDate(cursor.getString(1));
                 r.account = getAccount(cursor.getLong(2));
                 r.entity = getEntity(cursor.getLong(3));
                 r.amount = cursor.getFloat(4);
