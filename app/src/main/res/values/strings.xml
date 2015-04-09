@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">EcoTracker</string>
+
+    <string name="action_settings">Impostazioni</string>
+    <string name="action_newreg">Nuova registrazione</string>
+
+    <string name="monthlyreport">Riepilogo mensile</string>
+    <string name="title_activity_newreg">Nuova registrazione</string>
+    <string name="title_activity_account_list">Conti</string>
+    <string name="title_activity_new_account">Nuovo conto</string>
+    <string name="title_activity_edit_account">Modifica conto</string>
+    <string name="title_activity_entity_list">Fornitori</string>
+    <string name="title_activity_entity_edit">Modifica fornitore</string>
+    <string name="title_activity_new_entity">Nuovo fornitore</string>
+
+    <string name="type_expense">Spesa</string>
+    <string name="type_income">Entrata</string>
+    <string name="none">Nessuno</string>
+
+    <string name="entrate">Entrate</string>
+    <string name="uscite">Uscite</string>
+    <string name="saldo">Saldo</string>
+    <string name="mese">Mese</string>
+
+    <string name="hello_world">Hello world!</string>
+
+    <string name="date">Data</string>
+    <string name="amount">Importo</string>
+    <string name="entity">Entità</string>
+    <string name="account">Conto</string>
+
+    <string name="newrecord">Nuova registrazione</string>
+    <string name="save">Salva</string>
+    <string name="baddate">Data non valida</string>
+    <string name="badamount">Importo non valido</string>
+    <string name="amountzero">Importo non valido</string>
+    <string name="saved">Registrato!</string>
+
+    <string name="parent_account">Conto padre</string>
+    <string name="description">Descrizione</string>
+    <string name="type">Tipo</string>
+    <string name="title_activity_record_list">Registrazioni</string>
+    <string name="title_activity_time_report">TimeReportActivity</string>
+
+    <string name="report_section_day">Giorno</string>
+    <string name="report_section_week">Settimana</string>
+    <string name="report_section_month">Mese</string>
+</resources>

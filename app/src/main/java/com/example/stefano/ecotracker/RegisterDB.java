@@ -1,0 +1,401 @@
+package com.example.stefano.ecotracker;
+
+        import android.content.Context;
+        import android.database.Cursor;
+        import android.database.sqlite.SQLiteDatabase;
+        import android.database.sqlite.SQLiteOpenHelper;
+
+        import java.util.ArrayList;
+        import java.util.Date;
+
+/**
+ * Created by Stefano on 27/03/2015.
+ */
+public class RegisterDB extends SQLiteOpenHelper {
+    private static final int DATABASE_VERSION = 1;
+
+    private SQLiteDatabase db;
+
+    public enum DB_SORT {
+        SORT_DESCRIPTION,
+        SORT_ID,
+        SORT_USAGE,
+        SORT_DATE
+    }
+
+    RegisterDB(Context context) {
+        super(context, "ecotracker.db", null, DATABASE_VERSION);
+
+        db = this.getWritableDatabase();
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("create table entities ( id integer primary key, description text, usage integer )");
+        db.execSQL("create index entities_i1 on entities ( description )");
+
+        db.execSQL("create table accounts ( id integer primary key, parent integer, type text, description text, usage integer )");
+        db.execSQL("create index accounts_i1 on accounts ( description )");
+        db.execSQL("create index accounts_i2 on accounts ( parent )");
+
+        db.execSQL("create table register ( id integer primary key, date text, account integer, entity integer, amount real )");
+        db.execSQL("create index register_i1 on register ( date )");
+
+        db.execSQL("create table usage ( account integer, entity number, usage number )");
+        db.execSQL("create index usage_i1 on usage ( account )");
+        db.execSQL("create index usage_i2 on usage ( entity )");
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion ) {
+    }
+
+    public Account getAccount(String description) {
+        Cursor cursor = db.rawQuery("select id, parent, description, type from accounts where description='"+description+"'", null);
+        Account a = null;
+
+        if (cursor.moveToFirst()) {
+            a = new Account();
+            a.id = cursor.getLong(0);
+            a.parent = cursor.getLong(1);
+            a.description = cursor.getString(2);
+            a.type = cursor.getString(3);
+        }
+
+        cursor.close();
+        return a;
+    }
+
+    public Account getAccount(Long id) {
+        Cursor cursor = db.rawQuery("select id, parent, description, type from accounts where id="+id, null);
+        Account a = null;
+
+        if (cursor.moveToFirst()) {
+            a = new Account();
+            a.id = cursor.getLong(0);
+            a.parent = cursor.getLong(1);
+            a.description = cursor.getString(2);
+            a.type = cursor.getString(3);
+        }
+
+        cursor.close();
+        return a;
+    }
+
+    public Entity getEntity(String description) {
+        Cursor cursor = db.rawQuery("select id, description from entities where description='"+description+"'", null);
+        Entity e = null;
+
+        if (cursor.moveToFirst()) {
+            e = new Entity();
+            e.id = cursor.getLong(0);
+            e.description = cursor.getString(1);
+        }
+
+        cursor.close();
+        return e;
+    }
+
+    public Entity getEntity(Long id) {
+        Cursor cursor = db.rawQuery("select id, description from entities where id='"+id+"'", null);
+        Entity e = null;
+
+        if (cursor.moveToFirst()) {
+            e = new Entity();
+            e.id = cursor.getLong(0);
+            e.description = cursor.getString(1);
+        }
+
+        cursor.close();
+        return e;
+    }
+
+    /**
+     * Returns account list
+     * @return
+     */
+    public ArrayList<Account> getAccountsList(DB_SORT sort) {
+        ArrayList<Account> list = new ArrayList<Account>();
+
+        String sql = "select id, parent, description, type, usage from accounts ";
+        switch ( sort ) {
+            case SORT_DESCRIPTION:
+                sql += "order by description, usage desc";
+                break;
+            case SORT_USAGE:
+                sql += "order by usage desc, description";
+                break;
+            case SORT_ID:
+                sql += "order by id";
+                break;
+        }
+
+        Cursor cursor = db.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Account a = new Account();
+                a.id = cursor.getLong(0);
+                a.parent = cursor.getLong(1);
+                a.description = cursor.getString(2);
+                a.type = cursor.getString(3);
+                a.usage = cursor.getLong(4);
+                list.add(a);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return list;
+    }
+
+    /**
+     * Returns account list
+     * @return
+     */
+    public ArrayList<Record> getRecordList(DB_SORT sort) {
+        ArrayList<Record> list = new ArrayList<Record>();
+
+        String sql = "select id, date, account, entity, amount from register ";
+        switch ( sort ) {
+            case SORT_DATE:
+                sql += "order by date desc";
+                break;
+        }
+
+        Cursor cursor = db.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Record r = new Record();
+                r.id = cursor.getLong(0);
+                r.date = cursor.getString(1);
+                r.account = getAccount(cursor.getLong(2));
+                r.entity = getEntity(cursor.getLong(3));
+                r.amount = cursor.getFloat(4);
+                list.add(r);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return list;
+    }
+
+    /**
+     * Ritorna l'elenco dei fornitori
+     * @return
+     */
+    public ArrayList<Entity> getEntitiesList(DB_SORT sort) {
+        ArrayList<Entity> list = new ArrayList<Entity>();
+
+        String sql = "select id, description, usage from entities ";
+        switch ( sort ) {
+            case SORT_DESCRIPTION:
+                sql += "order by description, usage desc";
+                break;
+            case SORT_USAGE:
+                sql += "order by usage desc, description";
+                break;
+            case SORT_ID:
+                sql += "order by id";
+                break;
+        }
+
+        Cursor cursor = db.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Entity a = new Entity();
+                a.id = cursor.getLong(0);
+                a.description = cursor.getString(1);
+                a.usage = cursor.getLong(2);
+                list.add(a);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return list;
+    }
+
+    public float weekExpense(Date date) {
+        String from = Helper.toIso(Helper.getWeekStart(date));
+        String to   = Helper.toIso(Helper.getWeekEnd(date));
+        float  sum  = 0;
+
+        Cursor cursor = db.rawQuery(
+                "select ifnull(sum(r.amount),0) "+
+                        "from   register r, accounts a "+
+                        "where  r.account = a.id "+
+                        "and    a.type = 'EXP' "+
+                        "and    r.date>='"+from+"' and r.date<='"+to+"'", null);
+
+        if (cursor.moveToFirst())
+            sum = cursor.getFloat(0);
+
+        cursor.close();
+        return sum;
+    }
+
+    public float weekIncome(Date date) {
+        String from = Helper.toIso(Helper.getWeekStart(date));
+        String to   = Helper.toIso(Helper.getWeekEnd(date));
+        float  sum  = 0;
+
+        Cursor cursor = db.rawQuery(
+                "select ifnull(sum(r.amount),0) "+
+                        "from   register r, accounts a "+
+                        "where  r.account = a.id "+
+                        "and    a.type = 'INC' "+
+                        "and    r.date>='"+from+"' and r.date<='"+to+"'", null);
+
+        if (cursor.moveToFirst())
+            sum = cursor.getFloat(0);
+
+        cursor.close();
+        return sum;
+    }
+
+    public float dayExpense(Date date) {
+        String sqlDate = Helper.toIso(date);
+        float  sum  = 0;
+
+        Cursor cursor = db.rawQuery(
+                "select ifnull(sum(r.amount),0) "+
+                        "from   register r, accounts a "+
+                        "where  r.account = a.id "+
+                        "and    a.type = 'EXP' "+
+                        "and    r.date='"+sqlDate+"'", null);
+
+        if (cursor.moveToFirst())
+            sum = cursor.getFloat(0);
+
+        cursor.close();
+        return sum;
+    }
+
+    public float dayIncome(Date date) {
+        String sqlDate = Helper.toIso(date);
+        float  sum  = 0;
+
+        Cursor cursor = db.rawQuery(
+                "select ifnull(sum(r.amount),0) "+
+                        "from   register r, accounts a "+
+                        "where  r.account = a.id "+
+                        "and    a.type = 'INC' "+
+                        "and    r.date='"+sqlDate+"'", null);
+
+        if (cursor.moveToFirst())
+            sum = cursor.getFloat(0);
+
+        cursor.close();
+        return sum;
+    }
+
+    /**
+     * Ritorna le spese di un mese
+     * @param year Anno
+     * @param month Mese
+     * @return
+     */
+    public float monthExpense(int year, int month) {
+        String m = String.format("%02d", month);
+        String from = year+"-"+m+"-01";
+        String to   = year+"-"+m+"-99";
+        float  sum  = 0;
+
+        Cursor cursor = db.rawQuery(
+            "select ifnull(sum(r.amount),0) "+
+            "from   register r, accounts a "+
+            "where  r.account = a.id "+
+            "and    a.type = 'EXP' "+
+            "and    r.date>='"+from+"' and r.date<='"+to+"'", null);
+
+        if (cursor.moveToFirst())
+            sum = cursor.getFloat(0);
+
+        cursor.close();
+        return sum;
+    }
+
+    /**
+     * Ritorna gli introiti di un mese
+     * @param year Anno
+     * @param month Mese
+     * @return
+     */
+    public float monthIncome(int year, int month) {
+        String m = String.format("%02d", month);
+        String from = year+"-"+m+"-01";
+        String to   = year+"-"+m+"-99";
+        float  sum  = 0;
+
+        Cursor cursor = db.rawQuery(
+            "select ifnull(sum(r.amount),0) "+
+            "from   register r, accounts a "+
+            "where  r.account = a.id "+
+            "and    a.type = 'INC' "+
+            "and    r.date>='"+from+"' and r.date<='"+to+"'",null);
+
+        if (cursor.moveToFirst())
+            sum = cursor.getFloat(0);
+
+        cursor.close();
+        return sum;
+    }
+
+    public boolean saveRecord(Date date, Account account, Entity entity, Float amount) {
+        Long acctId = account.id;
+        Long entId = entity.id;
+
+        String sqlDate = Helper.toIso(date);
+        String sqlAmount = amount.toString();
+
+        String sql = "insert into register (id,date,account,entity,amount) values (null, '"+sqlDate+"', "+acctId+", "+entId+", "+sqlAmount+")";
+
+        try {
+            db.execSQL(sql);
+        } catch ( Exception e ) {
+            return false;
+        }
+
+        db.execSQL( "update accounts set usage = ifnull(usage,0)+1 where id="+acctId);
+        db.execSQL( "update entities set usage = ifnull(usage,0)+1 where id="+entId);
+        sql = "insert into usage ( account, entity, usage ) values ( "+acctId+", "+entId+",0 )";
+        try {
+            db.execSQL(sql);
+        } catch ( Exception e ) {
+        }
+
+        sql = "update usage set usage=usage+1 where account="+acctId+" and entity="+entId;
+        try {
+            db.execSQL(sql);
+        } catch ( Exception e ) {
+        }
+
+        return true;
+    }
+
+    public boolean saveAccount(Account account) {
+        String sql;
+        if ( account.id==null )
+            sql = "insert into accounts ( id, parent, type, description, usage ) values ( null, "+account.parent+", '"+account.type+"', '"+account.description+"',0)";
+        else
+            sql = "update accounts set parent="+account.parent+", description='"+account.description+"', type='"+account.type+"' where id="+account.id;
+
+        try {
+            db.execSQL(sql);
+        } catch ( Exception e ) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean saveEntity(Entity entity) {
+        String sql;
+        if ( entity.id==null )
+            sql = "insert into entities ( id, description, usage ) values ( null, '"+entity.description+"',0)";
+        else
+            sql = "update entities set description='"+entity.description+"' where id="+entity.id;
+
+        try {
+            db.execSQL(sql);
+        } catch ( Exception e ) {
+            return false;
+        }
+
+        return true;
+    }
+}

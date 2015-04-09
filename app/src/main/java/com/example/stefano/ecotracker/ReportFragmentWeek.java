@@ -1,0 +1,89 @@
+package com.example.stefano.ecotracker;
+
+import android.support.v4.app.Fragment;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+
+import java.util.Calendar;
+import java.util.Date;
+
+/**
+ * Created by Stefano on 09/04/2015.
+ */
+public class ReportFragmentWeek extends Fragment {
+
+    int current_offset = 0;
+    Calendar cal;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_report, container, false);
+        cal = Calendar.getInstance();
+
+        Button b = (Button) v.findViewById(R.id.btnPrevious);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                previousWeek();
+            }
+        });
+
+        b = (Button) v.findViewById(R.id.btnNext);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nextWeek();
+            }
+        });
+
+        updateTotals(v);
+        return v;
+    }
+
+    private void nextWeek() {
+        cal.add(Calendar.DAY_OF_MONTH, 7);
+        current_offset+=7;
+        updateTotals(getView());
+    }
+
+    private void previousWeek() {
+        cal.add(Calendar.DAY_OF_MONTH, -7);
+        current_offset-=7;
+        updateTotals(getView());
+    }
+
+    public void updateTotals(View v) {
+        Date d1 = Helper.getWeekStart(cal.getTime());
+        Date d2 = Helper.getWeekEnd(cal.getTime());
+        TextView cur = (TextView) v.findViewById(R.id.txtCurrent);
+        cur.setText(Helper.dateToString(d1,d2));
+
+        TextView ti = (TextView) v.findViewById(R.id.txtEntrate);
+        TextView te = (TextView) v.findViewById(R.id.txtUscite);
+        TextView ts = (TextView) v.findViewById(R.id.txtSaldo);
+
+        RegisterDB db = new RegisterDB(v.getContext());
+        float e = db.weekExpense(cal.getTime());
+        float i = db.weekIncome(cal.getTime());
+
+        float s = i - e;
+
+        ti.setText("+" + String.format("%.02f", i));
+        te.setText("-" + String.format("%.02f", e));
+        ts.setText((s > 0 ? "+" : "") + String.format("%.02f", s));
+    }
+
+    public static ReportFragmentWeek newInstance(String message) {
+        ReportFragmentWeek f = new ReportFragmentWeek();
+        Bundle b = new Bundle();
+        b.putString("message", message);
+
+        f.setArguments(b);
+
+        return f;
+    }
+}
