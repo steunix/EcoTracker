@@ -19,7 +19,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-
 public class AccountEditActivity extends ActionBarActivity {
 
     Account currentAccount;
@@ -42,13 +41,13 @@ public class AccountEditActivity extends ActionBarActivity {
         AccountListAdapter adAccounts = new AccountListAdapter(this, accounts);
         spnParent.setAdapter(adAccounts);
 
-        List<String> types = new ArrayList<String>();
+        List<String> types = new ArrayList<>();
         types.add(getString(R.string.type_expense));
         types.add(getString(R.string.type_income));
 
         // Fills type
         Spinner spnType = (Spinner) findViewById(R.id.spnAccountType);
-        ArrayAdapter<String> adType = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,types);
+        ArrayAdapter<String> adType = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item,types);
         spnType.setAdapter(adType);
 
         Intent i = getIntent();
@@ -109,21 +108,20 @@ public class AccountEditActivity extends ActionBarActivity {
     public void saveAccount(View v) {
         RegisterDB db = new RegisterDB(this);
         Account account = new Account();
-        Long parentId;
 
         account.description = ((EditText)findViewById(R.id.txtAccountDescr)).getText().toString();
         String t = ((Spinner)findViewById(R.id.spnAccountType)).getSelectedItem().toString();
-        if ( t == getString(R.string.type_expense) )
+        if ( t.equals(getString(R.string.type_expense)) )
             account.type = account.type_expense;
         else
             account.type = account.type_income;
 
         Account parent = (Account)((Spinner)findViewById(R.id.spnParentAccount)).getSelectedItem();
 
-        if ( parent.description == getString(R.string.none) )
-            parentId = new Long(0);
+        if ( parent.description.equals(getString(R.string.none)) )
+            account.parent = 0l;
         else
-            parentId = parent.id;
+            account.parent = parent.id;
 
         int mode = getIntent().getExtras().getInt("mode");
         if ( mode==1 )

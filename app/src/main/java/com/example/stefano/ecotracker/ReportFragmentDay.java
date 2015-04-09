@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- * Created by Stefano on 09/04/2015.
+ * Fragment for daily report
  */
 public class ReportFragmentDay extends Fragment {
 

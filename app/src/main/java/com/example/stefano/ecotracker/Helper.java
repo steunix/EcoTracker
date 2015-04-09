@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Created by Stefano on 09/04/2015.
+ * Helper class
  */
 public class Helper {
 
@@ -19,8 +19,7 @@ public class Helper {
             d = max.toString();
         }
 
-        Date dt = new Date(Integer.parseInt(y),Integer.parseInt(m),Integer.parseInt(d));
-        return dt;
+        return new Date(Integer.parseInt(y),Integer.parseInt(m),Integer.parseInt(d));
     }
 
     static String dateToString(Date date) {
@@ -37,8 +36,7 @@ public class Helper {
     }
 
     static String toIso(String date) {
-        String s = date.substring(6,10)+"-"+date.substring(3,5)+"-"+date.substring(0,2);
-        return s;
+        return date.substring(6,10)+"-"+date.substring(3,5)+"-"+date.substring(0,2);
     }
 
     static String toIso(Date date) {

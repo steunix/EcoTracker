@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by Stefano on 09/04/2015.
+ * Adapter for reocrd list
  */
 public class RecordListAdapter extends ArrayAdapter<Record> {
 

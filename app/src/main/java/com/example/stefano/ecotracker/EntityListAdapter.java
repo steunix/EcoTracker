@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by Stefano on 03/04/2015.
+ * Adapter for entity list
  */
 public class EntityListAdapter extends ArrayAdapter<Entity> {
     private final Context context;
@@ -52,7 +52,7 @@ public class EntityListAdapter extends ArrayAdapter<Entity> {
     public int getPosition(String description) {
         int i;
         for ( i=0; i<entityList.size(); i++ ) {
-            if ( entityList.get(i).description == description )
+            if ( entityList.get(i).description.equals(description) )
                 return i;
         }
         return -1;

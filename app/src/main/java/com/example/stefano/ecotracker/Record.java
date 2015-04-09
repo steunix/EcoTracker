@@ -3,7 +3,7 @@ package com.example.stefano.ecotracker;
 import java.util.Date;
 
 /**
- * Created by Stefano on 02/04/2015.
+ * Class for a record
  */
 public class Record {
     public Long    id;
@@ -13,17 +13,17 @@ public class Record {
     public Float   amount;
     public String  description;
 
-    public void Record() {
-        id = new Long(0);
+    public Record() {
+        id = 0l;
         date = null;
         account = null;
         entity = null;
-        amount = new Float(0);
+        amount = 0f;
         description = "";
     }
 
     public String getAmountString() {
-        if ( this.account.type == this.account.type_income )
+        if ( this.account.type.equals(this.account.type_income) )
             return "+"+String.format("%.02f", this.amount);
         else
             return "-"+String.format("%.02f", this.amount);

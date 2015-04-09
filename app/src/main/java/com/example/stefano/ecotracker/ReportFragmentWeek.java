@@ -14,7 +14,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Created by Stefano on 09/04/2015.
+ * Class for weekly report
  */
 public class ReportFragmentWeek extends Fragment {
 

@@ -9,7 +9,7 @@ package com.example.stefano.ecotracker;
         import java.util.Date;
 
 /**
- * Created by Stefano on 27/03/2015.
+ * Class for the database
  */
 public class RegisterDB extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
@@ -113,10 +113,10 @@ public class RegisterDB extends SQLiteOpenHelper {
 
     /**
      * Returns account list
-     * @return
+     * @return Account list
      */
     public ArrayList<Account> getAccountsList(DB_SORT sort) {
-        ArrayList<Account> list = new ArrayList<Account>();
+        ArrayList<Account> list = new ArrayList<>();
 
         String sql = "select id, parent, description, type, usage from accounts ";
         switch ( sort ) {
@@ -149,10 +149,10 @@ public class RegisterDB extends SQLiteOpenHelper {
 
     /**
      * Returns account list
-     * @return
+     * @return Account list
      */
     public ArrayList<Record> getRecordList(DB_SORT sort) {
-        ArrayList<Record> list = new ArrayList<Record>();
+        ArrayList<Record> list = new ArrayList<>();
 
         String sql = "select id, date, account, entity, amount from register ";
         switch ( sort ) {
@@ -181,7 +181,7 @@ public class RegisterDB extends SQLiteOpenHelper {
         String dtFrom = Helper.toIso(from);
         String dtTo = Helper.toIso(to);
 
-        ArrayList<Record> list = new ArrayList<Record>();
+        ArrayList<Record> list = new ArrayList<>();
 
         String sql = "select id, date, account, entity, amount from register "+
                 "where date>='"+dtFrom+"' and date<='"+dtTo+"' ";
@@ -208,11 +208,11 @@ public class RegisterDB extends SQLiteOpenHelper {
     }
 
     /**
-     * Ritorna l'elenco dei fornitori
-     * @return
+     * Returns the entities list
+     * @return Entities list
      */
     public ArrayList<Entity> getEntitiesList(DB_SORT sort) {
-        ArrayList<Entity> list = new ArrayList<Entity>();
+        ArrayList<Entity> list = new ArrayList<>();
 
         String sql = "select id, description, usage from entities ";
         switch ( sort ) {
@@ -316,10 +316,10 @@ public class RegisterDB extends SQLiteOpenHelper {
     }
 
     /**
-     * Ritorna le spese di un mese
+     * Returns the month expense
      * @param year Anno
      * @param month Mese
-     * @return
+     * @return Month espense
      */
     public float monthExpense(int year, int month) {
         String m = String.format("%02d", month);
@@ -342,10 +342,10 @@ public class RegisterDB extends SQLiteOpenHelper {
     }
 
     /**
-     * Ritorna gli introiti di un mese
+     * Returns month income
      * @param year Anno
      * @param month Mese
-     * @return
+     * @return Month income
      */
     public float monthIncome(int year, int month) {
         String m = String.format("%02d", month);
