@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public class Record {
     public Long    id;
-    public String  date;
+    public Date    date;
     public Account account;
     public Entity  entity;
     public Float   amount;
