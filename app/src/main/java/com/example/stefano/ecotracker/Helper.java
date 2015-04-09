@@ -3,6 +3,7 @@ package com.example.stefano.ecotracker;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Helper class
@@ -19,7 +20,7 @@ public class Helper {
             d = max.toString();
         }
 
-        return new Date(Integer.parseInt(y),Integer.parseInt(m),Integer.parseInt(d));
+        return new GregorianCalendar(Integer.parseInt(y),Integer.parseInt(m),Integer.parseInt(d)).getTime();
     }
 
     static String dateToString(Date date) {
