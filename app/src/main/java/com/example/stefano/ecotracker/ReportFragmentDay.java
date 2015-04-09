@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -18,6 +20,7 @@ public class ReportFragmentDay extends Fragment {
 
     int current_offset = 0;
     Calendar cal;
+    RecordListAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,6 +43,10 @@ public class ReportFragmentDay extends Fragment {
                 previousDay();
             }
         });
+
+        adapter = new RecordListAdapter(v.getContext(), new ArrayList<Record>() );
+        ListView list = (ListView) v.findViewById(R.id.lstRecords);
+        list.setAdapter(adapter);
 
         updateTotals(v);
         return v;
@@ -75,6 +82,10 @@ public class ReportFragmentDay extends Fragment {
         ti.setText("+"+String.format("%.02f", i));
         te.setText("-" + String.format("%.02f", e));
         ts.setText((s > 0 ? "+" : "") + String.format("%.02f", s));
+
+        adapter.clear();
+        ArrayList<Record> rec = db.getRecordList(cal.getTime(), cal.getTime(), RegisterDB.DB_SORT.SORT_DATE_DESC);
+        adapter.addAll(rec);
     }
 
     public static ReportFragmentDay newInstance(String message) {

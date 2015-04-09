@@ -6,10 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by Stefano on 09/04/2015.
@@ -18,6 +21,8 @@ public class ReportFragmentMonth extends Fragment {
 
     int current_month;
     int current_year;
+
+    RecordListAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,6 +48,10 @@ public class ReportFragmentMonth extends Fragment {
                 previousMonth();
             }
         });
+
+        adapter = new RecordListAdapter(v.getContext(), new ArrayList<Record>() );
+        ListView list = (ListView) v.findViewById(R.id.lstRecords);
+        list.setAdapter(adapter);
 
         updateTotals(v);
         return v;
@@ -83,6 +92,12 @@ public class ReportFragmentMonth extends Fragment {
         ti.setText("+"+String.format("%.02f", i));
         te.setText("-" + String.format("%.02f", e));
         ts.setText((s > 0 ? "+" : "") + String.format("%.02f", s));
+
+        adapter.clear();
+        Date d1 = Helper.isoToDate(String.format("%04d-%02d-01", current_year, current_month));
+        Date d2 = Helper.isoToDate(String.format("%04d-%02d-99", current_year, current_month));
+        ArrayList<Record> rec = db.getRecordList(d1, d2, RegisterDB.DB_SORT.SORT_DATE_DESC);
+        adapter.addAll(rec);
     }
 
     public static ReportFragmentMonth newInstance(String message) {

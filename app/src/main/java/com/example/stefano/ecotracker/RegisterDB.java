@@ -20,7 +20,8 @@ public class RegisterDB extends SQLiteOpenHelper {
         SORT_DESCRIPTION,
         SORT_ID,
         SORT_USAGE,
-        SORT_DATE
+        SORT_DATE,
+        SORT_DATE_DESC
     }
 
     RegisterDB(Context context) {
@@ -154,6 +155,36 @@ public class RegisterDB extends SQLiteOpenHelper {
         ArrayList<Record> list = new ArrayList<Record>();
 
         String sql = "select id, date, account, entity, amount from register ";
+        switch ( sort ) {
+            case SORT_DATE:
+                sql += "order by date desc";
+                break;
+        }
+
+        Cursor cursor = db.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Record r = new Record();
+                r.id = cursor.getLong(0);
+                r.date = cursor.getString(1);
+                r.account = getAccount(cursor.getLong(2));
+                r.entity = getEntity(cursor.getLong(3));
+                r.amount = cursor.getFloat(4);
+                list.add(r);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return list;
+    }
+
+    public ArrayList<Record> getRecordList(Date from, Date to, DB_SORT sort) {
+        String dtFrom = Helper.toIso(from);
+        String dtTo = Helper.toIso(to);
+
+        ArrayList<Record> list = new ArrayList<Record>();
+
+        String sql = "select id, date, account, entity, amount from register "+
+                "where date>='"+dtFrom+"' and date<='"+dtTo+"' ";
         switch ( sort ) {
             case SORT_DATE:
                 sql += "order by date desc";
