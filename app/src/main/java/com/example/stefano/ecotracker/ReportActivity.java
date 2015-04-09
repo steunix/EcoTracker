@@ -2,6 +2,7 @@ package com.example.stefano.ecotracker;
 
 import java.util.Locale;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -91,9 +92,27 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+        if ( id == R.id.action_newreg ) {
+            Intent intent = new Intent(this, NewregActivity.class);
+            startActivity(intent);
+        }
+
+        if ( id == R.id.action_accountlist ) {
+            Intent intent = new Intent(this, AccountListActivity.class);
+            startActivity(intent);
+        }
+
+        if ( id == R.id.action_entitylist ) {
+            Intent intent = new Intent(this, EntityListActivity.class);
+            startActivity(intent);
+        }
+
+        if ( id == R.id.action_recordlist ) {
+            Intent intent = new Intent(this, RecordListActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

@@ -3,7 +3,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.stefano.ecotracker.ReportActivity">
 
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+    <item
+        android:id="@+id/action_newreg"
+        android:icon="@drawable/document_edit"
+        android:title="Nuova registrazione"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_recordlist"
+        android:icon="@drawable/book_open"
+        android:title="Registrazioni"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_accountlist"
+        android:icon="@drawable/folder"
+        android:title="Conti"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_entitylist"
+        android:icon="@drawable/users"
+        android:title="Fornitori"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
 
 </menu>
