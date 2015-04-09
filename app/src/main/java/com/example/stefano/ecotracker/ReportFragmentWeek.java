@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,7 +29,7 @@ public class ReportFragmentWeek extends Fragment {
         View v = inflater.inflate(R.layout.fragment_report, container, false);
         cal = Calendar.getInstance();
 
-        Button b = (Button) v.findViewById(R.id.btnPrevious);
+        ImageButton b = (ImageButton) v.findViewById(R.id.btnPrevious);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,7 +37,7 @@ public class ReportFragmentWeek extends Fragment {
             }
         });
 
-        b = (Button) v.findViewById(R.id.btnNext);
+        b = (ImageButton) v.findViewById(R.id.btnNext);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -33,7 +34,7 @@ public class ReportFragmentMonth extends Fragment {
         current_month = c.get(Calendar.MONTH)+1;
         current_year  = c.get(Calendar.YEAR);
 
-        Button b = (Button) v.findViewById(R.id.btnNext);
+        ImageButton b = (ImageButton) v.findViewById(R.id.btnNext);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,7 +42,7 @@ public class ReportFragmentMonth extends Fragment {
             }
         });
 
-        b = (Button) v.findViewById(R.id.btnPrevious);
+        b = (ImageButton) v.findViewById(R.id.btnPrevious);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
