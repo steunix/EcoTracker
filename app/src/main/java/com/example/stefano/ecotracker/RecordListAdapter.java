@@ -49,7 +49,7 @@ public class RecordListAdapter extends ArrayAdapter<Record> {
 
         // 4. Set the text for textView
         Record r = recordList.get(position);
-        ldate.setText(r.date);
+        ldate.setText(Helper.dateToString(r.date));
         laccount.setText(r.account.description);
         lentity.setText(r.entity.description);
         lamount.setText(r.getAmountString());

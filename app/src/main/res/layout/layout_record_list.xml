@@ -18,7 +18,9 @@
             android:id="@+id/lblRLDate"
             android:layout_column="0"
             android:layout_span="2"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textIsSelectable="true" />
     </TableRow>
 
     <TableRow
@@ -28,19 +30,21 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/lblRLAccount"
             android:layout_column="0"
-            android:text="New text" />
+            android:text="New text"
+            android:textColor="#000000" />
 
         <TextView
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Large Text"
             android:id="@+id/lblRLAmount"
             android:layout_column="1"
-            android:gravity="right" />
+            android:gravity="right"
+            android:textColor="#000000" />
     </TableRow>
 
     <TableRow
