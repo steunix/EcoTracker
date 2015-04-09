@@ -26,7 +26,7 @@
 
     <string name="date">Data</string>
     <string name="amount">Importo</string>
-    <string name="entity">Entità</string>
+    <string name="entity">Fornitore</string>
     <string name="account">Conto</string>
 
     <string name="newrecord">Nuova registrazione</string>
@@ -40,7 +40,7 @@
     <string name="description">Descrizione</string>
     <string name="type">Tipo</string>
     <string name="title_activity_record_list">Registrazioni</string>
-    <string name="title_activity_time_report">TimeReportActivity</string>
+    <string name="title_activity_time_report">Riepilogo</string>
 
     <string name="report_section_day">Giorno</string>
     <string name="report_section_week">Settimana</string>
