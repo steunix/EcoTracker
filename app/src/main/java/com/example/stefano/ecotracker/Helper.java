@@ -48,14 +48,21 @@ public class Helper {
     static Date getWeekStart(Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        cal.set(Calendar.DAY_OF_WEEK,1);
+
+        int i = cal.getFirstDayOfWeek();
+        while ( cal.get(Calendar.DAY_OF_WEEK) != i )
+            cal.add(Calendar.DAY_OF_MONTH,-1);
+
         return cal.getTime();
     }
 
     static Date getWeekEnd(Date date) {
+        Date ws = Helper.getWeekStart(date);
+
         Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        cal.set(Calendar.DAY_OF_WEEK,7);
+        cal.setTime(ws);
+        cal.add(Calendar.DAY_OF_MONTH,6);
+
         return cal.getTime();
     }
 }
