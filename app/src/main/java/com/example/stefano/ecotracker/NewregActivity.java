@@ -109,7 +109,9 @@ public class NewregActivity extends ActionBarActivity {
         Account acc = (Account)((Spinner)findViewById(R.id.spnAccount)).getSelectedItem();
         Entity ent = (Entity)((Spinner)findViewById(R.id.spnEntity)).getSelectedItem();
 
-        if ( db.saveRecord(date, acc, ent, new Float(amt) ) )
+        if ( db.saveRecord(date, acc, ent, new Float(amt) ) ) {
             Toast.makeText(this, R.string.saved, Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 }
