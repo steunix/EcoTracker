@@ -22,6 +22,7 @@ public class ReportFragmentMonth extends Fragment {
 
     int current_month;
     int current_year;
+    View current_view;
 
     RecordListAdapter adapter;
 
@@ -54,7 +55,8 @@ public class ReportFragmentMonth extends Fragment {
         ListView list = (ListView) v.findViewById(R.id.lstRecords);
         list.setAdapter(adapter);
 
-        updateTotals(v);
+        current_view = v;
+        updateTotals();
         return v;
     }
 
@@ -64,7 +66,7 @@ public class ReportFragmentMonth extends Fragment {
             current_month = 1;
             current_year++;
         }
-        updateTotals(getView());
+        updateTotals();
     }
 
     public void previousMonth() {
@@ -73,10 +75,14 @@ public class ReportFragmentMonth extends Fragment {
             current_month = 12;
             current_year--;
         }
-        updateTotals(getView());
+        updateTotals();
     }
 
-    public void updateTotals(View v) {
+    public void updateTotals() {
+        View v = current_view;
+        if ( current_view==null )
+            return;
+
         TextView cur = (TextView) v.findViewById(R.id.txtCurrent);
         cur.setText(String.format("%02d/%4d", current_month, current_year));
 

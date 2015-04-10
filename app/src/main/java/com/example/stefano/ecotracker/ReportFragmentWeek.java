@@ -21,6 +21,7 @@ public class ReportFragmentWeek extends Fragment {
 
     int current_offset = 0;
     Calendar cal;
+    View current_view;
 
     RecordListAdapter adapter;
 
@@ -49,23 +50,28 @@ public class ReportFragmentWeek extends Fragment {
         ListView list = (ListView) v.findViewById(R.id.lstRecords);
         list.setAdapter(adapter);
 
-        updateTotals(v);
+        current_view = v;
+        updateTotals();
         return v;
     }
 
     private void nextWeek() {
         cal.add(Calendar.DAY_OF_MONTH, 7);
         current_offset+=7;
-        updateTotals(getView());
+        updateTotals();
     }
 
     private void previousWeek() {
         cal.add(Calendar.DAY_OF_MONTH, -7);
         current_offset-=7;
-        updateTotals(getView());
+        updateTotals();
     }
 
-    public void updateTotals(View v) {
+    public void updateTotals() {
+        View v = current_view;
+        if ( current_view==null )
+            return;
+
         Date d1 = Helper.getWeekStart(cal.getTime());
         Date d2 = Helper.getWeekEnd(cal.getTime());
         TextView cur = (TextView) v.findViewById(R.id.txtCurrent);

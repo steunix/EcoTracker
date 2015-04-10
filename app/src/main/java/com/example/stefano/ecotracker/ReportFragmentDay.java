@@ -22,6 +22,7 @@ public class ReportFragmentDay extends Fragment {
     int current_offset = 0;
     Calendar cal;
     RecordListAdapter adapter;
+    View current_view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,23 +50,28 @@ public class ReportFragmentDay extends Fragment {
         ListView list = (ListView) v.findViewById(R.id.lstRecords);
         list.setAdapter(adapter);
 
-        updateTotals(v);
+        current_view = v;
+        updateTotals();
         return v;
     }
 
     private void nextDay() {
         cal.add(Calendar.DAY_OF_MONTH, 1);
         current_offset++;
-        updateTotals(getView());
+        updateTotals();
     }
 
     private void previousDay() {
         cal.add(Calendar.DAY_OF_MONTH, -1);
         current_offset--;
-        updateTotals(getView());
+        updateTotals();
     }
 
-    public void updateTotals(View v) {
+    public void updateTotals() {
+        View v = current_view;
+        if ( current_view==null )
+            return;
+
         String dt = Helper.dateToString(cal.getTime());
         TextView cur = (TextView) v.findViewById(R.id.txtCurrent);
         cur.setText(dt);

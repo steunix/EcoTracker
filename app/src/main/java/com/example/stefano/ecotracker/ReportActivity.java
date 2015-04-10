@@ -133,6 +133,23 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if ( mSectionsPagerAdapter.getCount()==0 )
+            return;
+
+        ReportFragmentDay d = (ReportFragmentDay)mSectionsPagerAdapter.getItem(0);
+        d.updateTotals();
+
+        ReportFragmentWeek w = (ReportFragmentWeek)mSectionsPagerAdapter.getItem(1);
+        w.updateTotals();
+
+        ReportFragmentMonth m = (ReportFragmentMonth)mSectionsPagerAdapter.getItem(2);
+        m.updateTotals();
+    }
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
