@@ -20,7 +20,7 @@ public class Helper {
             d = max.toString();
         }
 
-        return new GregorianCalendar(Integer.parseInt(y),Integer.parseInt(m),Integer.parseInt(d)).getTime();
+        return new GregorianCalendar(Integer.parseInt(y),Integer.parseInt(m)-1,Integer.parseInt(d)).getTime();
     }
 
     static String dateToString(Date date) {
