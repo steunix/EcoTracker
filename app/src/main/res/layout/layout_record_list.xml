@@ -20,7 +20,7 @@
             android:layout_span="2"
             android:textAlignment="center"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textIsSelectable="true" />
+            android:textIsSelectable="false" />
     </TableRow>
 
     <TableRow
