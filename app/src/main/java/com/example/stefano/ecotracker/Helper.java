@@ -10,6 +10,10 @@ import java.util.GregorianCalendar;
  */
 public class Helper {
 
+    static String sqlString(String string) {
+        return string.replace("'","''");
+    }
+
     static Date isoToDate(String date) {
         String y = date.substring(0,4);
         String m = date.substring(5,7);

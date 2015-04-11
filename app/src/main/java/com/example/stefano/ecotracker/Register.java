@@ -371,7 +371,7 @@ public class Register extends SQLiteOpenHelper {
         String sql;
         String sqlDate = Helper.toIso(record.date);
         String sqlAmount = record.amount.toString();
-        String safedsc = record.description.replace("'", "''");
+        String safedsc = Helper.sqlString(record.description);
 
         if ( record.id==null )
             sql = "insert into register (id,date,account,entity,amount,description) values "+
@@ -405,7 +405,7 @@ public class Register extends SQLiteOpenHelper {
 
     public boolean saveAccount(Account account) {
         String sql;
-        String safedsc = account.description.replace("'","''");
+        String safedsc = Helper.sqlString(account.description);
 
         if ( account.id==null )
             sql = "insert into accounts ( id, parent, type, description, usage ) values ( null, "+account.parent+", '"+account.type+"', '"+safedsc+"',0)";
@@ -422,7 +422,7 @@ public class Register extends SQLiteOpenHelper {
 
     public boolean saveEntity(Entity entity) {
         String sql;
-        String safedsc = entity.description.replace("'","''");
+        String safedsc = Helper.sqlString(entity.description);
 
         if ( entity.id==null )
             sql = "insert into entities ( id, description, usage ) values ( null, '"+safedsc+"',0)";
