@@ -134,20 +134,22 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onRestart() {
+        super.onRestart();
 
-        if ( mSectionsPagerAdapter.getCount()==0 )
-            return;
+        FragmentManager fm = getSupportFragmentManager();
 
-        ReportFragmentDay d = (ReportFragmentDay)mSectionsPagerAdapter.getItem(0);
-        d.updateTotals();
+        ReportFragmentDay d = (ReportFragmentDay)fm.findFragmentByTag("android:switcher:"+mViewPager.getId()+":0");
+        if ( d!=null )
+            d.updateTotals();
 
-        ReportFragmentWeek w = (ReportFragmentWeek)mSectionsPagerAdapter.getItem(1);
-        w.updateTotals();
+        ReportFragmentWeek w = (ReportFragmentWeek)fm.findFragmentByTag("android:switcher:" + mViewPager.getId() + ":1");
+        if ( w!=null )
+            w.updateTotals();
 
-        ReportFragmentMonth m = (ReportFragmentMonth)mSectionsPagerAdapter.getItem(2);
-        m.updateTotals();
+        ReportFragmentMonth m = (ReportFragmentMonth) fm.findFragmentByTag("android:switcher:" + mViewPager.getId() + ":2");
+        if ( m!=null )
+            m.updateTotals();
     }
 
     /**
@@ -170,7 +172,7 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
                 case 2:
                     return ReportFragmentMonth.newInstance("3");
                 default:
-                    return ReportFragmentDay.newInstance("1");
+                    return null;
             }
         }
 
