@@ -11,13 +11,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-
-import static com.example.stefano.ecotracker.ReportFragmentDay.*;
 
 
 public class ReportActivity extends ActionBarActivity implements ActionBar.TabListener {
@@ -96,7 +91,7 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
             return true;
         }
         if ( id == R.id.action_newreg ) {
-            Intent intent = new Intent(this, NewregActivity.class);
+            Intent intent = new Intent(this, RecordEditActivity.class);
             startActivity(intent);
         }
 
