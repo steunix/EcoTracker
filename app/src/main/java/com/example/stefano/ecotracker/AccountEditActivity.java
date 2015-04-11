@@ -99,7 +99,7 @@ public class AccountEditActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
+    // TODO: handle account deletion
     public void saveAccount(View v) {
         Register db = new Register(this);
         Account account = new Account();

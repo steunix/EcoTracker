@@ -402,6 +402,7 @@ public class Register extends SQLiteOpenHelper {
     }
 
     public boolean saveAccount(Account account) {
+        // TODO: check for duplicates
         String sql;
         String safedsc = Helper.sqlString(account.description);
 
@@ -419,6 +420,7 @@ public class Register extends SQLiteOpenHelper {
     }
 
     public boolean saveEntity(Entity entity) {
+        // TODO: check for duplicates
         String sql;
         String safedsc = Helper.sqlString(entity.description);
 

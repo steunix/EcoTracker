@@ -63,6 +63,7 @@ public class EntityEditActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // TODO: handle entity deletion
     public void saveEntity(View v) {
         Register db = new Register(this);
         Entity entity = new Entity();
