@@ -157,6 +157,9 @@ public class RegisterDB extends SQLiteOpenHelper {
         String sql = "select id, date, account, entity, amount from register ";
         switch ( sort ) {
             case SORT_DATE:
+                sql += "order by date";
+                break;
+            case SORT_DATE_DESC:
                 sql += "order by date desc";
                 break;
         }
@@ -187,6 +190,9 @@ public class RegisterDB extends SQLiteOpenHelper {
                 "where date>='"+dtFrom+"' and date<='"+dtTo+"' ";
         switch ( sort ) {
             case SORT_DATE:
+                sql += "order by date";
+                break;
+            case SORT_DATE_DESC:
                 sql += "order by date desc";
                 break;
         }
