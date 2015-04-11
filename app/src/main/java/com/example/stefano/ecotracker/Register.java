@@ -12,7 +12,7 @@ package com.example.stefano.ecotracker;
  * Class for the database
  */
 public class Register extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 1;
 
     private SQLiteDatabase db;
 
@@ -39,7 +39,7 @@ public class Register extends SQLiteOpenHelper {
         db.execSQL("create index accounts_i1 on accounts ( description )");
         db.execSQL("create index accounts_i2 on accounts ( parent )");
 
-        db.execSQL("create table register ( id integer primary key, date text, account integer, entity integer, amount real )");
+        db.execSQL("create table register ( id integer primary key, date text, account integer, entity integer, amount real, description text )");
         db.execSQL("create index register_i1 on register ( date )");
 
         db.execSQL("create table usage ( account integer, entity number, usage number )");
@@ -49,8 +49,6 @@ public class Register extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion ) {
-        if ( newVersion==2 )
-            db.execSQL("alter table register add column description text");
     }
 
     public Account getAccount(Long id) {
