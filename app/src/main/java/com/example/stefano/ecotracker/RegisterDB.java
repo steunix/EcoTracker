@@ -407,10 +407,12 @@ public class RegisterDB extends SQLiteOpenHelper {
 
     public boolean saveAccount(Account account) {
         String sql;
+        String safedsc = account.description.replace("'","''");
+
         if ( account.id==null )
-            sql = "insert into accounts ( id, parent, type, description, usage ) values ( null, "+account.parent+", '"+account.type+"', '"+account.description+"',0)";
+            sql = "insert into accounts ( id, parent, type, description, usage ) values ( null, "+account.parent+", '"+account.type+"', '"+safedsc+"',0)";
         else
-            sql = "update accounts set parent="+account.parent+", description='"+account.description+"', type='"+account.type+"' where id="+account.id;
+            sql = "update accounts set parent="+account.parent+", description='"+safedsc+"', type='"+account.type+"' where id="+account.id;
 
         try {
             db.execSQL(sql);
@@ -422,10 +424,12 @@ public class RegisterDB extends SQLiteOpenHelper {
 
     public boolean saveEntity(Entity entity) {
         String sql;
+        String safedsc = entity.description.replace("'","''");
+
         if ( entity.id==null )
-            sql = "insert into entities ( id, description, usage ) values ( null, '"+entity.description+"',0)";
+            sql = "insert into entities ( id, description, usage ) values ( null, '"+safedsc+"',0)";
         else
-            sql = "update entities set description='"+entity.description+"' where id="+entity.id;
+            sql = "update entities set description='"+safedsc+"' where id="+entity.id;
 
         try {
             db.execSQL(sql);
