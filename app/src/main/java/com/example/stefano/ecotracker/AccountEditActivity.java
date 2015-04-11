@@ -51,12 +51,12 @@ public class AccountEditActivity extends ActionBarActivity {
         spnType.setAdapter(adType);
 
         Intent i = getIntent();
-        int mode = i.getExtras().getInt("mode");
-        if (mode == 1 ) {
+        String mode = i.getExtras().getString("mode");
+        if (mode.equals("edit") ) {
             // Edit existing account
             setTitle ( getString(R.string.title_activity_edit_account));
 
-            String editAccount = i.getExtras().getString("account");
+            long editAccount = i.getExtras().getLong("id");
 
             currentAccount = db.getAccount(editAccount);
             Account p = db.getAccount(currentAccount.parent);
@@ -123,8 +123,8 @@ public class AccountEditActivity extends ActionBarActivity {
         else
             account.parent = parent.id;
 
-        int mode = getIntent().getExtras().getInt("mode");
-        if ( mode==1 )
+        String mode = getIntent().getExtras().getString("mode");
+        if ( mode.equals("edit") )
             account.id = currentAccount.id;
         else
             account.id = null;

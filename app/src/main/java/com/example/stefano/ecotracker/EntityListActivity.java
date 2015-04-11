@@ -43,8 +43,8 @@ public class EntityListActivity extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Entity editEntity = (Entity) parent.getItemAtPosition(position);
                 Intent intent = new Intent(getApplicationContext(), EntityEditActivity.class);
-                intent.putExtra("mode", 1);
-                intent.putExtra("entity", editEntity.description);
+                intent.putExtra("mode", "edit");
+                intent.putExtra("id", editEntity.id);
                 startActivity(intent);
             }
         });
@@ -71,7 +71,7 @@ public class EntityListActivity extends ActionBarActivity {
 
         if ( id == R.id.action_newentity ) {
             Intent intent = new Intent(this, EntityEditActivity.class );
-            intent.putExtra("mode", 0);
+            intent.putExtra("mode", "new");
             startActivity(intent);
         }
 

@@ -23,12 +23,12 @@ public class EntityEditActivity extends ActionBarActivity {
         RegisterDB db = new RegisterDB(this);
 
         Intent i = getIntent();
-        int mode = i.getExtras().getInt("mode");
-        if (mode == 1 ) {
+        String mode = i.getExtras().getString("mode");
+        if (mode.equals("edit") ) {
             // Edit existing account
             setTitle ( getString(R.string.title_activity_entity_edit));
 
-            String editEntity = i.getExtras().getString("entity");
+            Long editEntity = i.getExtras().getLong("id");
 
             currentEntity = db.getEntity(editEntity);
 
@@ -70,8 +70,8 @@ public class EntityEditActivity extends ActionBarActivity {
 
         entity.description = ((EditText)findViewById(R.id.txtEntityDescr)).getText().toString();
 
-        int mode = getIntent().getExtras().getInt("mode");
-        if ( mode==1 )
+        String mode = getIntent().getExtras().getString("mode");
+        if ( mode.equals("edit") )
             entity.id = currentEntity.id;
         else
             entity.id = null;

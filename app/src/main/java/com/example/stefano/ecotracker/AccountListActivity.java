@@ -39,8 +39,8 @@ public class AccountListActivity extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Account editAccount = (Account)parent.getItemAtPosition(position);
                 Intent intent = new Intent(getApplicationContext(), AccountEditActivity.class );
-                intent.putExtra("mode", 1);
-                intent.putExtra("account", editAccount.description);
+                intent.putExtra("mode", "edit");
+                intent.putExtra("id", editAccount.id);
                 startActivity(intent);
             }
         });
@@ -74,7 +74,7 @@ public class AccountListActivity extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_newaccount) {
             Intent intent = new Intent(this, AccountEditActivity.class );
-            intent.putExtra("mode", 0);
+            intent.putExtra("mode", "new");
             startActivity(intent);
         }
 
