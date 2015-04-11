@@ -22,9 +22,9 @@ public class RecordEditActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_edit);
 
-        RegisterDB db = new RegisterDB(this);
-        ArrayList<Account> accounts = db.getAccountsList(RegisterDB.DB_SORT.SORT_USAGE);
-        ArrayList<Entity> entities = db.getEntitiesList(RegisterDB.DB_SORT.SORT_USAGE);
+        Register db = new Register(this);
+        ArrayList<Account> accounts = db.getAccountsList(Register.DB_SORT.SORT_USAGE);
+        ArrayList<Entity> entities = db.getEntitiesList(Register.DB_SORT.SORT_USAGE);
 
         Spinner spnAccounts = (Spinner) findViewById(R.id.spnAccount);
         AccountListAdapter adAccounts = new AccountListAdapter(this, accounts);
@@ -97,7 +97,7 @@ public class RecordEditActivity extends ActionBarActivity {
         }
 
         // Save record
-        RegisterDB db = new RegisterDB(this);
+        Register db = new Register(this);
         Account acc = (Account)((Spinner)findViewById(R.id.spnAccount)).getSelectedItem();
         Entity ent = (Entity)((Spinner)findViewById(R.id.spnEntity)).getSelectedItem();
 

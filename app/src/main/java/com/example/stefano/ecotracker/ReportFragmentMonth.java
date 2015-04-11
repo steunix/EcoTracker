@@ -5,10 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -89,7 +87,7 @@ public class ReportFragmentMonth extends Fragment {
         TextView te = (TextView) current_view.findViewById(R.id.txtUscite);
         TextView ts = (TextView) current_view.findViewById(R.id.txtSaldo);
 
-        RegisterDB db = new RegisterDB(current_view.getContext());
+        Register db = new Register(current_view.getContext());
         float e = db.monthExpense(current_year,current_month);
         float i = db.monthIncome(current_year,current_month);
 
@@ -102,7 +100,7 @@ public class ReportFragmentMonth extends Fragment {
         adapter.clear();
         Date d1 = Helper.isoToDate(String.format("%04d-%02d-01", current_year, current_month));
         Date d2 = Helper.isoToDate(String.format("%04d-%02d-99", current_year, current_month));
-        ArrayList<Record> rec = db.getRecordList(d1, d2, RegisterDB.DB_SORT.SORT_DATE_DESC);
+        ArrayList<Record> rec = db.getRecordList(d1, d2, Register.DB_SORT.SORT_DATE_DESC);
         adapter.addAll(rec);
     }
 

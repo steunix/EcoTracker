@@ -11,7 +11,7 @@ package com.example.stefano.ecotracker;
 /**
  * Class for the database
  */
-public class RegisterDB extends SQLiteOpenHelper {
+public class Register extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     private SQLiteDatabase db;
@@ -24,7 +24,7 @@ public class RegisterDB extends SQLiteOpenHelper {
         SORT_DATE_DESC
     }
 
-    RegisterDB(Context context) {
+    Register(Context context) {
         super(context, "ecotracker.db", null, DATABASE_VERSION);
 
         db = this.getWritableDatabase();

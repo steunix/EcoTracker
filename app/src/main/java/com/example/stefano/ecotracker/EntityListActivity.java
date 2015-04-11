@@ -30,8 +30,8 @@ public class EntityListActivity extends ActionBarActivity {
     }
 
     public void updateList() {
-        RegisterDB db = new RegisterDB(this);
-        ArrayList<Entity> entities = db.getEntitiesList(RegisterDB.DB_SORT.SORT_DESCRIPTION);
+        Register db = new Register(this);
+        ArrayList<Entity> entities = db.getEntitiesList(Register.DB_SORT.SORT_DESCRIPTION);
 
         ListView list = (ListView) findViewById(R.id.lstEntities);
         EntityListAdapter ad = new EntityListAdapter(getApplicationContext(), entities);

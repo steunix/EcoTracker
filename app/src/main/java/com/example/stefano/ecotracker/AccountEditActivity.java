@@ -1,8 +1,6 @@
 package com.example.stefano.ecotracker;
 
-import android.app.Application;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,10 +12,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 public class AccountEditActivity extends ActionBarActivity {
 
@@ -33,8 +28,8 @@ public class AccountEditActivity extends ActionBarActivity {
         none.type = "";
 
         // Fills parent account
-        RegisterDB db = new RegisterDB(this);
-        ArrayList<Account> accounts = db.getAccountsList(RegisterDB.DB_SORT.SORT_DESCRIPTION);
+        Register db = new Register(this);
+        ArrayList<Account> accounts = db.getAccountsList(Register.DB_SORT.SORT_DESCRIPTION);
         accounts.add(0, none);
 
         Spinner spnParent = (Spinner) findViewById(R.id.spnParentAccount);
@@ -106,7 +101,7 @@ public class AccountEditActivity extends ActionBarActivity {
     }
 
     public void saveAccount(View v) {
-        RegisterDB db = new RegisterDB(this);
+        Register db = new Register(this);
         Account account = new Account();
 
         account.description = ((EditText)findViewById(R.id.txtAccountDescr)).getText().toString();

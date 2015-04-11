@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 
@@ -20,7 +19,7 @@ public class EntityEditActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entity_edit);
 
-        RegisterDB db = new RegisterDB(this);
+        Register db = new Register(this);
 
         Intent i = getIntent();
         String mode = i.getExtras().getString("mode");
@@ -65,7 +64,7 @@ public class EntityEditActivity extends ActionBarActivity {
     }
 
     public void saveEntity(View v) {
-        RegisterDB db = new RegisterDB(this);
+        Register db = new Register(this);
         Entity entity = new Entity();
 
         entity.description = ((EditText)findViewById(R.id.txtEntityDescr)).getText().toString();

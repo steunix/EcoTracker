@@ -5,12 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -80,7 +78,7 @@ public class ReportFragmentDay extends Fragment {
         TextView te = (TextView) current_view.findViewById(R.id.txtUscite);
         TextView ts = (TextView) current_view.findViewById(R.id.txtSaldo);
 
-        RegisterDB db = new RegisterDB(current_view.getContext());
+        Register db = new Register(current_view.getContext());
         float e = db.dayExpense(cal.getTime());
         float i = db.dayIncome(cal.getTime());
 
@@ -91,7 +89,7 @@ public class ReportFragmentDay extends Fragment {
         ts.setText((s > 0 ? "+" : "") + String.format("%.02f", s));
 
         adapter.clear();
-        ArrayList<Record> rec = db.getRecordList(cal.getTime(), cal.getTime(), RegisterDB.DB_SORT.SORT_DATE_DESC);
+        ArrayList<Record> rec = db.getRecordList(cal.getTime(), cal.getTime(), Register.DB_SORT.SORT_DATE_DESC);
         adapter.addAll(rec);
     }
 

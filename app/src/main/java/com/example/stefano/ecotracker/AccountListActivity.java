@@ -1,6 +1,5 @@
 package com.example.stefano.ecotracker;
 
-import android.app.LauncherActivity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -8,12 +7,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class AccountListActivity extends ActionBarActivity {
 
@@ -26,8 +22,8 @@ public class AccountListActivity extends ActionBarActivity {
     }
 
     private void updateList() {
-        RegisterDB db = new RegisterDB(this);
-        ArrayList<Account> accounts = db.getAccountsList(RegisterDB.DB_SORT.SORT_DESCRIPTION);
+        Register db = new Register(this);
+        ArrayList<Account> accounts = db.getAccountsList(Register.DB_SORT.SORT_DESCRIPTION);
 
         ListView list = (ListView) findViewById(R.id.lstAccounts);
         AccountListAdapter ad = new AccountListAdapter(getApplicationContext(), accounts);

@@ -20,10 +20,10 @@ public class RecordListActivity extends ActionBarActivity {
     }
 
     public void updateList() {
-        RegisterDB db = new RegisterDB(this);
+        Register db = new Register(this);
 
         ArrayList<Record> rlist;
-        rlist = db.getRecordList(RegisterDB.DB_SORT.SORT_DATE);
+        rlist = db.getRecordList(Register.DB_SORT.SORT_DATE);
 
         RecordListAdapter ad = new RecordListAdapter(this, rlist);
         ListView lv = (ListView) findViewById(R.id.lstRecords);
