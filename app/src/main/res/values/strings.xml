@@ -53,4 +53,6 @@
     <string name="report_section_day">Giorno</string>
     <string name="report_section_week">Settimana</string>
     <string name="report_section_month">Mese</string>
+
+    <string name="notes">Note</string>
 </resources>

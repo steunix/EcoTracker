@@ -100,8 +100,9 @@ public class RecordEditActivity extends ActionBarActivity {
         Register db = new Register(this);
         Account acc = (Account)((Spinner)findViewById(R.id.spnAccount)).getSelectedItem();
         Entity ent = (Entity)((Spinner)findViewById(R.id.spnEntity)).getSelectedItem();
+        String description = ((EditText)findViewById(R.id.txtDescription)).getText().toString();
 
-        if ( db.saveRecord(date, acc, ent, new Float(amt) ) ) {
+        if ( db.saveRecord(date, acc, ent, new Float(amt), description ) ) {
             Toast.makeText(this, R.string.saved, Toast.LENGTH_SHORT).show();
             finish();
         }

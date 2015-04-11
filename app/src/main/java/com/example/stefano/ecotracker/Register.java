@@ -12,7 +12,7 @@ package com.example.stefano.ecotracker;
  * Class for the database
  */
 public class Register extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private SQLiteDatabase db;
 
@@ -49,6 +49,8 @@ public class Register extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion ) {
+        if ( newVersion==2 )
+            db.execSQL("alter table register add column description text");
     }
 
     public Account getAccount(Long id) {
@@ -124,7 +126,7 @@ public class Register extends SQLiteOpenHelper {
     public ArrayList<Record> getRecordList(DB_SORT sort) {
         ArrayList<Record> list = new ArrayList<>();
 
-        String sql = "select id, date, account, entity, amount from register ";
+        String sql = "select id, date, account, entity, amount, description from register ";
         switch ( sort ) {
             case SORT_DATE:
                 sql += "order by date";
@@ -143,6 +145,7 @@ public class Register extends SQLiteOpenHelper {
                 r.account = getAccount(cursor.getLong(2));
                 r.entity = getEntity(cursor.getLong(3));
                 r.amount = cursor.getFloat(4);
+                r.description = cursor.getString(5);
                 list.add(r);
             } while (cursor.moveToNext());
         }
@@ -156,7 +159,7 @@ public class Register extends SQLiteOpenHelper {
 
         ArrayList<Record> list = new ArrayList<>();
 
-        String sql = "select id, date, account, entity, amount from register "+
+        String sql = "select id, date, account, entity, amount, description from register "+
                 "where date>='"+dtFrom+"' and date<='"+dtTo+"' ";
         switch ( sort ) {
             case SORT_DATE:
@@ -176,6 +179,7 @@ public class Register extends SQLiteOpenHelper {
                 r.account = getAccount(cursor.getLong(2));
                 r.entity = getEntity(cursor.getLong(3));
                 r.amount = cursor.getFloat(4);
+                r.description = cursor.getString(5);
                 list.add(r);
             } while (cursor.moveToNext());
         }
@@ -343,14 +347,16 @@ public class Register extends SQLiteOpenHelper {
         return sum;
     }
 
-    public boolean saveRecord(Date date, Account account, Entity entity, Float amount) {
+    public boolean saveRecord(Date date, Account account, Entity entity, Float amount, String description) {
         Long acctId = account.id;
         Long entId = entity.id;
 
         String sqlDate = Helper.toIso(date);
         String sqlAmount = amount.toString();
+        String safedsc = description.replace("'", "''");
 
-        String sql = "insert into register (id,date,account,entity,amount) values (null, '"+sqlDate+"', "+acctId+", "+entId+", "+sqlAmount+")";
+        String sql = "insert into register (id,date,account,entity,amount,description) values "+
+                "(null, '"+sqlDate+"', "+acctId+", "+entId+", "+sqlAmount+",'"+safedsc+"')";
 
         try {
             db.execSQL(sql);
