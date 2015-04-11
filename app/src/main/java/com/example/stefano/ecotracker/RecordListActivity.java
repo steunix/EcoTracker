@@ -1,9 +1,12 @@
 package com.example.stefano.ecotracker;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -26,8 +29,19 @@ public class RecordListActivity extends ActionBarActivity {
         rlist = db.getRecordList(Register.DB_SORT.SORT_DATE);
 
         RecordListAdapter ad = new RecordListAdapter(this, rlist);
-        ListView lv = (ListView) findViewById(R.id.lstRecords);
-        lv.setAdapter(ad);
+        ListView list = (ListView) findViewById(R.id.lstRecordList);
+        list.setAdapter(ad);
+
+        list.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Record editRecord = (Record) parent.getItemAtPosition(position);
+                Intent intent = new Intent(getApplicationContext(), RecordEditActivity.class);
+                intent.putExtra("mode", "edit");
+                intent.putExtra("id", editRecord.id);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

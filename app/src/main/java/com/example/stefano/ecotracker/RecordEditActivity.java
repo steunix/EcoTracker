@@ -1,5 +1,6 @@
 package com.example.stefano.ecotracker;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,6 +17,8 @@ import java.util.Date;
 
 
 public class RecordEditActivity extends ActionBarActivity {
+
+    Record editRecord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,26 @@ public class RecordEditActivity extends ActionBarActivity {
         EditText txtDate = (EditText) findViewById(R.id.txtDate);
         String strDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
         txtDate.setText(strDate);
+
+        Intent i = getIntent();
+        String mode = i.getExtras().getString("mode");
+        if (mode.equals("edit") ) {
+            editRecord = db.getRecord(i.getExtras().getLong("id"));
+
+            int pos = adAccounts.getPosition(editRecord.account.description);
+            spnAccounts.setSelection(pos);
+
+            pos = adEntities.getPosition(editRecord.entity.description);
+            spnEntities.setSelection(pos);
+
+            txtDate.setText(Helper.dateToString(editRecord.date));
+
+            EditText txtAmount = (EditText) findViewById(R.id.txtAmount);
+            txtAmount.setText(Float.toString(editRecord.amount));
+
+            EditText txtDescription = (EditText) findViewById(R.id.txtDescription);
+            txtDescription.setText(editRecord.description);
+        }
     }
 
 
