@@ -165,7 +165,6 @@ public class Register extends SQLiteOpenHelper {
             rec.entity = getEntity(cursor.getLong(3));
             rec.amount = cursor.getFloat(4);
             rec.description = cursor.getString(5);
-            return rec;
         }
         cursor.close();
         return rec;
