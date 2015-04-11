@@ -51,22 +51,6 @@ public class RegisterDB extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion ) {
     }
 
-    public Account getAccount(String description) {
-        Cursor cursor = db.rawQuery("select id, parent, description, type from accounts where description='"+description+"'", null);
-        Account a = null;
-
-        if (cursor.moveToFirst()) {
-            a = new Account();
-            a.id = cursor.getLong(0);
-            a.parent = cursor.getLong(1);
-            a.description = cursor.getString(2);
-            a.type = cursor.getString(3);
-        }
-
-        cursor.close();
-        return a;
-    }
-
     public Account getAccount(Long id) {
         Cursor cursor = db.rawQuery("select id, parent, description, type from accounts where id="+id, null);
         Account a = null;
@@ -81,20 +65,6 @@ public class RegisterDB extends SQLiteOpenHelper {
 
         cursor.close();
         return a;
-    }
-
-    public Entity getEntity(String description) {
-        Cursor cursor = db.rawQuery("select id, description from entities where description='"+description+"'", null);
-        Entity e = null;
-
-        if (cursor.moveToFirst()) {
-            e = new Entity();
-            e.id = cursor.getLong(0);
-            e.description = cursor.getString(1);
-        }
-
-        cursor.close();
-        return e;
     }
 
     public Entity getEntity(Long id) {
