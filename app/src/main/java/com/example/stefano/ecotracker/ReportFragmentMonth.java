@@ -79,18 +79,17 @@ public class ReportFragmentMonth extends Fragment {
     }
 
     public void updateTotals() {
-        View v = current_view;
         if ( current_view==null )
             return;
 
-        TextView cur = (TextView) v.findViewById(R.id.txtCurrent);
+        TextView cur = (TextView) current_view.findViewById(R.id.txtCurrent);
         cur.setText(String.format("%02d/%4d", current_month, current_year));
 
-        TextView ti = (TextView) v.findViewById(R.id.txtEntrate);
-        TextView te = (TextView) v.findViewById(R.id.txtUscite);
-        TextView ts = (TextView) v.findViewById(R.id.txtSaldo);
+        TextView ti = (TextView) current_view.findViewById(R.id.txtEntrate);
+        TextView te = (TextView) current_view.findViewById(R.id.txtUscite);
+        TextView ts = (TextView) current_view.findViewById(R.id.txtSaldo);
 
-        RegisterDB db = new RegisterDB(v.getContext());
+        RegisterDB db = new RegisterDB(current_view.getContext());
         float e = db.monthExpense(current_year,current_month);
         float i = db.monthIncome(current_year,current_month);
 

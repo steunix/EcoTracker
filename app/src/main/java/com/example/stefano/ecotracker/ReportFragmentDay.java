@@ -68,19 +68,19 @@ public class ReportFragmentDay extends Fragment {
     }
 
     public void updateTotals() {
-        View v = current_view;
+
         if ( current_view==null )
             return;
 
         String dt = Helper.dateToString(cal.getTime());
-        TextView cur = (TextView) v.findViewById(R.id.txtCurrent);
+        TextView cur = (TextView) current_view.findViewById(R.id.txtCurrent);
         cur.setText(dt);
 
-        TextView ti = (TextView) v.findViewById(R.id.txtEntrate);
-        TextView te = (TextView) v.findViewById(R.id.txtUscite);
-        TextView ts = (TextView) v.findViewById(R.id.txtSaldo);
+        TextView ti = (TextView) current_view.findViewById(R.id.txtEntrate);
+        TextView te = (TextView) current_view.findViewById(R.id.txtUscite);
+        TextView ts = (TextView) current_view.findViewById(R.id.txtSaldo);
 
-        RegisterDB db = new RegisterDB(v.getContext());
+        RegisterDB db = new RegisterDB(current_view.getContext());
         float e = db.dayExpense(cal.getTime());
         float i = db.dayIncome(cal.getTime());
 

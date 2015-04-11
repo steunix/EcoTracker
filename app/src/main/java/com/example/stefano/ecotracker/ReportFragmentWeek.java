@@ -68,20 +68,19 @@ public class ReportFragmentWeek extends Fragment {
     }
 
     public void updateTotals() {
-        View v = current_view;
         if ( current_view==null )
             return;
 
         Date d1 = Helper.getWeekStart(cal.getTime());
         Date d2 = Helper.getWeekEnd(cal.getTime());
-        TextView cur = (TextView) v.findViewById(R.id.txtCurrent);
+        TextView cur = (TextView) current_view.findViewById(R.id.txtCurrent);
         cur.setText(Helper.dateToString(d1,d2));
 
-        TextView ti = (TextView) v.findViewById(R.id.txtEntrate);
-        TextView te = (TextView) v.findViewById(R.id.txtUscite);
-        TextView ts = (TextView) v.findViewById(R.id.txtSaldo);
+        TextView ti = (TextView) current_view.findViewById(R.id.txtEntrate);
+        TextView te = (TextView) current_view.findViewById(R.id.txtUscite);
+        TextView ts = (TextView) current_view.findViewById(R.id.txtSaldo);
 
-        RegisterDB db = new RegisterDB(v.getContext());
+        RegisterDB db = new RegisterDB(current_view.getContext());
         float e = db.weekExpense(cal.getTime());
         float i = db.weekIncome(cal.getTime());
 
