@@ -367,16 +367,18 @@ public class Register extends SQLiteOpenHelper {
         return sum;
     }
 
-    public boolean saveRecord(Date date, Account account, Entity entity, Float amount, String description) {
-        Long acctId = account.id;
-        Long entId = entity.id;
+    public boolean saveRecord(Record record) {
+        String sql;
+        String sqlDate = Helper.toIso(record.date);
+        String sqlAmount = record.amount.toString();
+        String safedsc = record.description.replace("'", "''");
 
-        String sqlDate = Helper.toIso(date);
-        String sqlAmount = amount.toString();
-        String safedsc = description.replace("'", "''");
-
-        String sql = "insert into register (id,date,account,entity,amount,description) values "+
-                "(null, '"+sqlDate+"', "+acctId+", "+entId+", "+sqlAmount+",'"+safedsc+"')";
+        if ( record.id==null )
+            sql = "insert into register (id,date,account,entity,amount,description) values "+
+                    "(null, '"+sqlDate+"', "+record.account.id+", "+record.entity.id+", "+sqlAmount+",'"+safedsc+"')";
+        else
+            sql = "update register set date='"+sqlDate+"', account="+record.account.id+", entity="+record.entity.id+", "+
+                    "amount="+sqlAmount+", description='"+safedsc+"' where id="+record.id;
 
         try {
             db.execSQL(sql);
@@ -384,15 +386,15 @@ public class Register extends SQLiteOpenHelper {
             return false;
         }
 
-        db.execSQL( "update accounts set usage = ifnull(usage,0)+1 where id="+acctId);
-        db.execSQL( "update entities set usage = ifnull(usage,0)+1 where id="+entId);
-        sql = "insert into usage ( account, entity, usage ) values ( "+acctId+", "+entId+",0 )";
+        db.execSQL( "update accounts set usage = ifnull(usage,0)+1 where id="+record.account.id);
+        db.execSQL( "update entities set usage = ifnull(usage,0)+1 where id="+record.entity.id);
+        sql = "insert into usage ( account, entity, usage ) values ( "+record.account.id+", "+record.entity.id+",0 )";
         try {
             db.execSQL(sql);
         } catch ( Exception e ) {
         }
 
-        sql = "update usage set usage=usage+1 where account="+acctId+" and entity="+entId;
+        sql = "update usage set usage=usage+1 where account="+record.account.id+" and entity="+record.entity.id;
         try {
             db.execSQL(sql);
         } catch ( Exception e ) {

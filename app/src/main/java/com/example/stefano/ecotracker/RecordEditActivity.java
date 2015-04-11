@@ -121,11 +121,21 @@ public class RecordEditActivity extends ActionBarActivity {
 
         // Save record
         Register db = new Register(this);
-        Account acc = (Account)((Spinner)findViewById(R.id.spnAccount)).getSelectedItem();
-        Entity ent = (Entity)((Spinner)findViewById(R.id.spnEntity)).getSelectedItem();
-        String description = ((EditText)findViewById(R.id.txtDescription)).getText().toString();
+        Record r = new Record();
 
-        if ( db.saveRecord(date, acc, ent, new Float(amt), description ) ) {
+        Intent i = getIntent();
+        if ( i.getExtras().getString("mode").equals("edit") )
+            r.id = editRecord.id;
+        else
+            r.id = null;
+
+        r.account = (Account)((Spinner)findViewById(R.id.spnAccount)).getSelectedItem();
+        r.entity = (Entity)((Spinner)findViewById(R.id.spnEntity)).getSelectedItem();
+        r.description = ((EditText)findViewById(R.id.txtDescription)).getText().toString();
+        r.date = date;
+        r.amount = amt;
+
+        if ( db.saveRecord(r) ) {
             Toast.makeText(this, R.string.saved, Toast.LENGTH_SHORT).show();
             finish();
         }
