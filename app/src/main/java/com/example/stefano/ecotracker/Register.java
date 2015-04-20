@@ -30,6 +30,9 @@ public class Register extends SQLiteOpenHelper {
         db = this.getWritableDatabase();
     }
 
+    public class ETExists extends Exception {
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table entities ( id integer primary key, description text, usage integer )");
@@ -400,10 +403,19 @@ public class Register extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean saveAccount(Account account) {
-        // TODO: check for duplicates
+    public boolean saveAccount(Account account) throws ETExists {
         String sql;
         String safedsc = Helper.sqlString(account.description);
+        Long   cnt;
+
+        Cursor cursor = db.rawQuery("select count(*) from accounts where description='"+safedsc+"'"+
+                (account.id==null ? "" : " and id!="+account.id)
+                , null);
+        cursor.moveToFirst();
+        cnt = cursor.getLong(0);
+
+        if ( cnt>0 )
+            throw new ETExists();
 
         if ( account.id==null )
             sql = "insert into accounts ( id, parent, type, description, usage ) values ( null, "+account.parent+", '"+account.type+"', '"+safedsc+"',0)";
@@ -418,15 +430,24 @@ public class Register extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean saveEntity(Entity entity) {
-        // TODO: check for duplicates
+    public boolean saveEntity(Entity entity) throws ETExists {
         String sql;
         String safedsc = Helper.sqlString(entity.description);
+        Long   cnt;
+
+        Cursor cursor = db.rawQuery("select count(*) from entities where description='"+safedsc+"'"+
+                (entity.id==null ? "" : " and id!="+entity.id)
+                , null);
+        cursor.moveToFirst();
+        cnt = cursor.getLong(0);
+
+        if ( cnt>0 )
+            throw new ETExists();
 
         if ( entity.id==null )
-            sql = "insert into entities ( id, description, usage ) values ( null, '"+safedsc+"',0)";
+            sql = "insert into entities ( id, description, usage ) values ( null, '" + safedsc + "',0)";
         else
-            sql = "update entities set description='"+safedsc+"' where id="+entity.id;
+            sql = "update entities set description='" + safedsc + "' where id=" + entity.id;
 
         try {
             db.execSQL(sql);

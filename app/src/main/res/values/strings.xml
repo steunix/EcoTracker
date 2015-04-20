@@ -55,4 +55,5 @@
     <string name="report_section_month">Mese</string>
 
     <string name="notes">Note</string>
+    <string name="exists_already">Esiste già!</string>
 </resources>

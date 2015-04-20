@@ -124,9 +124,13 @@ public class AccountEditActivity extends ActionBarActivity {
         else
             account.id = null;
 
-        if ( db.saveAccount(account) ) {
-            Toast.makeText(this, R.string.saved, Toast.LENGTH_SHORT).show();
-            finish();
+        try {
+            if (db.saveAccount(account)) {
+                Toast.makeText(this, R.string.saved, Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        } catch ( Register.ETExists ex ) {
+            Toast.makeText(this, R.string.exists_already, Toast.LENGTH_SHORT).show();
         }
     }
 }
