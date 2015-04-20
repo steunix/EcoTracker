@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
     <item
         android:id="@+id/action_newreg"
-        android:icon="@drawable/document_edit"
+        android:icon="@drawable/button_add"
         android:title="Nuova registrazione"
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />
@@ -23,12 +23,6 @@
         android:id="@+id/action_entitylist"
         android:icon="@drawable/users"
         android:title="Fornitori"
-        android:orderInCategory="100"
-        app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/action_report"
-        android:icon="@drawable/users"
-        android:title="Report"
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />
     <item
