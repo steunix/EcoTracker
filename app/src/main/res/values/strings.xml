@@ -2,8 +2,8 @@
 
     <color name="actionbar_text">#ffffff</color>
     <color name="actionbar_color">#8e1413</color>
-    <color name="actionbartab_color">#a84342</color>
-    <color name="actionbartab_inactive">#a84342</color>
+    <color name="actionbartab_color">#8e1413</color>
+    <color name="actionbartab_inactive">#8e1413</color>
     <color name="actionbartab_active">#3786d8</color>
 
     <string name="app_name">EcoTracker</string>
