@@ -26,7 +26,7 @@ public class RecordListActivity extends ActionBarActivity {
         Register db = new Register(this);
 
         ArrayList<Record> rlist;
-        rlist = db.getRecordList(Register.DB_SORT.SORT_DATE);
+        rlist = db.getRecordList(Register.DB_SORT.SORT_DATE_DESC);
 
         RecordListAdapter ad = new RecordListAdapter(this, rlist);
         ListView list = (ListView) findViewById(R.id.lstRecordList);
