@@ -1,10 +1,12 @@
 package com.example.stefano.ecotracker;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -48,6 +50,17 @@ public class ReportFragmentWeek extends Fragment {
         adapter = new RecordListAdapter(v.getContext(), new ArrayList<Record>() );
         ListView list = (ListView) v.findViewById(R.id.lstRecords);
         list.setAdapter(adapter);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Record editRecord = (Record) parent.getItemAtPosition(position);
+                Intent intent = new Intent(current_view.getContext(), RecordEditActivity.class);
+                intent.putExtra("mode", "edit");
+                intent.putExtra("id", editRecord.id);
+                startActivity(intent);
+            }
+        });
 
         current_view = v;
         updateTotals();
