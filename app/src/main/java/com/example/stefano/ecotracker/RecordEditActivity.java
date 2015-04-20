@@ -65,7 +65,7 @@ public class RecordEditActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_newreg, menu);
+        getMenuInflater().inflate(R.menu.menu_record_edit, menu);
         return true;
     }
 
