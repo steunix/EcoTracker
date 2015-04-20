@@ -5,7 +5,7 @@
 
     <item
         android:id="@+id/action_newreg"
-        android:icon="@drawable/document_edit"
+        android:icon="@drawable/button_add"
         android:title="Nuova registrazione"
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />
