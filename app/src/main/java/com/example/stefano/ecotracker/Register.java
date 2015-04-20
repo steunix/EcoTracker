@@ -367,6 +367,17 @@ public class Register extends SQLiteOpenHelper {
         return sum;
     }
 
+    public boolean deleteEntity (Entity entity) {
+        try {
+            db.execSQL("delete from register where entity=" + entity.id);
+            db.execSQL("delete from usage where entity=" + entity.id);
+            db.execSQL("delete from entities where id=" + entity.id);
+        } catch ( Exception ex ) {
+            return false;
+        }
+        return true;
+    }
+
     public boolean saveRecord(Record record) {
         String sql;
         String sqlDate = Helper.toIso(record.date);
@@ -400,6 +411,17 @@ public class Register extends SQLiteOpenHelper {
         } catch ( Exception e ) {
         }
 
+        return true;
+    }
+
+    public boolean deleteAccount(Account account) {
+        try {
+            db.execSQL("delete from register where account=" + account.id);
+            db.execSQL("delete from usage where account=" + account.id);
+            db.execSQL("delete from accounts where id=" + account.id);
+        } catch ( Exception ex ) {
+            return false;
+        }
         return true;
     }
 

@@ -1,5 +1,7 @@
 package com.example.stefano.ecotracker;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import java.util.List;
 public class AccountEditActivity extends ActionBarActivity {
 
     Account currentAccount;
+    String  mode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +49,7 @@ public class AccountEditActivity extends ActionBarActivity {
         spnType.setAdapter(adType);
 
         Intent i = getIntent();
-        String mode = i.getExtras().getString("mode");
+        mode = i.getExtras().getString("mode");
         if (mode.equals("edit") ) {
             // Edit existing account
             setTitle ( getString(R.string.title_activity_edit_account));
@@ -81,6 +84,7 @@ public class AccountEditActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_account_edit, menu);
+        menu.findItem(R.id.action_deleteaccount).setVisible(mode.equals("edit"));
         return true;
     }
 
@@ -97,9 +101,36 @@ public class AccountEditActivity extends ActionBarActivity {
             return true;
         }
 
+        if ( id==R.id.action_deleteaccount ) {
+            deleteAccount(null);
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
-    // TODO: handle account deletion
+
+    public void deleteAccount(View v) {
+        AlertDialog.Builder dlg = new AlertDialog.Builder(this);
+        dlg.setMessage(R.string.account_delete_warning)
+                .setTitle(R.string.alert_warning);
+        dlg.setPositiveButton(R.string.alert_ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Register db = new Register(getApplicationContext());
+                        db.deleteAccount(currentAccount);
+                        Toast.makeText(getApplicationContext(), R.string.deleted, Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }
+        );
+        dlg.setNegativeButton(R.string.alert_cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                }
+        );
+        AlertDialog d = dlg.create();
+        d.show();
+    }
+
     public void saveAccount(View v) {
         Register db = new Register(this);
         Account account = new Account();

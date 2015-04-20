@@ -43,6 +43,7 @@
     <string name="badamount">Importo non valido</string>
     <string name="amountzero">Importo non valido</string>
     <string name="saved">Registrato!</string>
+    <string name="deleted">Cancellato!</string>
 
     <string name="parent_account">Conto padre</string>
     <string name="description">Descrizione</string>
@@ -56,4 +57,10 @@
 
     <string name="notes">Note</string>
     <string name="exists_already">Esiste già!</string>
+
+    <string name="account_delete_warning">Cancellare il conto e tutte le sue registrazioni? Attenzione, non si può tornare indietro!</string>
+    <string name="entity_delete_warning">Cancellare il fornitore e tutte le sue registrazioni? Attenzione, non si può tornare indietro!</string>
+    <string name="alert_warning">Attenzione</string>
+    <string name="alert_ok">OK</string>
+    <string name="alert_cancel">Annulla</string>
 </resources>
