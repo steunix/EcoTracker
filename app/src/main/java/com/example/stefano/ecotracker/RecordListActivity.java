@@ -63,6 +63,12 @@ public class RecordListActivity extends ActionBarActivity {
             return true;
         }
 
+        if ( id == R.id.action_newreg ) {
+            Intent intent = new Intent(this, RecordEditActivity.class);
+            intent.putExtra("mode","new");
+            startActivity(intent);
+        }
+
         return super.onOptionsItemSelected(item);
     }
 }

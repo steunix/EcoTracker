@@ -2,6 +2,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.stefano.ecotracker.RecordListActivity">
+
+    <item
+        android:id="@+id/action_newreg"
+        android:icon="@drawable/button_add"
+        android:title="Nuova registrazione"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom" />
+
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>
