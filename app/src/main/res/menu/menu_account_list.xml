@@ -10,4 +10,12 @@
         android:title="Nuovo conto"
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_entitylist"
+        android:icon="@drawable/users"
+        android:title="Fornitori"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom" />
+
 </menu>

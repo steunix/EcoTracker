@@ -11,4 +11,12 @@
         android:title="Nuovo conto"
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_accountlist"
+        android:icon="@drawable/folder"
+        android:title="Conti"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom" />
+
 </menu>

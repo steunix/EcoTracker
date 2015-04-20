@@ -74,6 +74,11 @@ public class AccountListActivity extends ActionBarActivity {
             startActivity(intent);
         }
 
+        if ( id == R.id.action_entitylist ) {
+            Intent intent = new Intent(this, EntityListActivity.class);
+            startActivity(intent);
+        }
+
         return super.onOptionsItemSelected(item);
     }
 }
