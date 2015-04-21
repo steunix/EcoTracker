@@ -1,5 +1,7 @@
 package com.example.stefano.ecotracker;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -40,6 +42,26 @@ public class RecordEditActivity extends ActionBarActivity {
         EditText txtDate = (EditText) findViewById(R.id.txtDate);
         String strDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
         txtDate.setText(strDate);
+
+        // Check that accounts and entities are existent
+        if ( adAccounts.getCount()==0 || adEntities.getCount()==0 ) {
+            AlertDialog.Builder bld = new AlertDialog.Builder(this);
+            bld.setTitle(R.string.alert_warning)
+                    .setMessage(R.string.no_accounts_or_entities);
+            bld.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                }
+            });
+            bld.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    finish();
+                }
+            });
+            AlertDialog dlg = bld.create();
+            dlg.show();
+        }
 
         Intent i = getIntent();
         String mode = i.getExtras().getString("mode");

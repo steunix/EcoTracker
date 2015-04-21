@@ -62,5 +62,12 @@
     <string name="entity_delete_warning">Cancellare il fornitore e tutte le sue registrazioni? Attenzione, non si può tornare indietro!</string>
     <string name="alert_warning">Attenzione</string>
     <string name="alert_ok">OK</string>
-    <string name="alert_cancel">Annulla</string>
+    <string name="alert_cancel">Annulla</string>+
+
+    <string name="no_accounts">Non hai ancora creato nessun conto! Fallo ora cliccando sul + nella barra</string>
+    <string name="no_entities">Non hai ancora creato nessun fornitore! Fallo ora cliccando sul + nella barra</string>
+    <string name="no_accounts_or_entities">Non hai ancora creato i conti o i fornitori! Fallo adesso per poter inserire delle registrazioni!</string>
+
+    <string name="no_entities_initial">Per poter usare EcoTracker devi prima creare almeno un fornitore!</string>
+    <string name="no_accounts_initial">Per poter usare EcoTracker devi prima creare almeno un conto!</string>
 </resources>

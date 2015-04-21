@@ -12,6 +12,15 @@
         android:layout_height="wrap_content"
         android:id="@+id/lstAccounts"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:choiceMode="singleChoice" />
+        android:choiceMode="singleChoice"
+        android:layout_below="@+id/txtEmpty" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/no_accounts"
+        android:id="@+id/txtEmpty"
+        android:layout_alignParentStart="true"
+        android:gravity="center_horizontal" />
 </RelativeLayout>

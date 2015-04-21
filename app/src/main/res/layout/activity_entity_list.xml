@@ -6,12 +6,23 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.stefano.ecotracker.EntityListActivity">
 
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/no_entities"
+        android:id="@+id/txtEmpty"
+        android:gravity="center_horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/lstEntities"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:choiceMode="singleChoice" />
+        android:layout_alignParentTop="false"
+        android:choiceMode="singleChoice"
+        android:layout_below="@+id/txtEmpty" />
 
 </RelativeLayout>

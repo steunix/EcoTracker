@@ -38,23 +38,23 @@ public class RecordListAdapter extends ArrayAdapter<Record> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        // 2. Get rowView from inflater
         View rowView = inflater.inflate(R.layout.layout_record_list, parent, false);
 
-        // 3. Get the two text view from the rowView
         TextView ldate = (TextView) rowView.findViewById(R.id.lblRLDate);
         TextView laccount = (TextView) rowView.findViewById(R.id.lblRLAccount);
         TextView lamount = (TextView) rowView.findViewById(R.id.lblRLAmount);
         TextView lentity = (TextView) rowView.findViewById(R.id.lblRLEntity);
 
-        // 4. Set the text for textView
         Record r = recordList.get(position);
         ldate.setText(Helper.dateToString(r.date));
         laccount.setText(r.account.description);
         lentity.setText(r.entity.description);
         lamount.setText(r.getAmountString());
 
-        // 5. retrn rowView
+        if ( r.account.type.equals(r.account.type_income) )
+            lamount.setTextAppearance(getContext(), R.style.income );
+        else
+            lamount.setTextAppearance(getContext(), R.style.expense );
         return rowView;
     }
 
