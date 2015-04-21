@@ -162,4 +162,16 @@ public class RecordEditActivity extends ActionBarActivity {
             finish();
         }
     }
+
+    public void newEntity(View v) {
+        Intent i = new Intent(this, EntityEditActivity.class);
+        i.putExtra("mode","new");
+        startActivity(i);
+    }
+
+    public void newAccount(View v) {
+        Intent i = new Intent(this, AccountEditActivity.class);
+        i.putExtra("mode","new");
+        startActivity(i);
+    }
 }
