@@ -55,7 +55,8 @@ public class Register extends SQLiteOpenHelper {
     }
 
     public Account getAccount(Long id) {
-        Cursor cursor = db.rawQuery("select id, parent, description, type from accounts where id="+id, null);
+        String sql = String.format("select id, parent, description, type from accounts where id=%d", id);
+        Cursor cursor = db.rawQuery(sql, null);
         Account a = null;
 
         if (cursor.moveToFirst()) {
@@ -71,7 +72,8 @@ public class Register extends SQLiteOpenHelper {
     }
 
     public Entity getEntity(Long id) {
-        Cursor cursor = db.rawQuery("select id, description from entities where id='"+id+"'", null);
+        String sql = String.format("select id, description from entities where id=%d", id);
+        Cursor cursor = db.rawQuery(sql, null);
         Entity e = null;
 
         if (cursor.moveToFirst()) {
@@ -157,9 +159,9 @@ public class Register extends SQLiteOpenHelper {
     public Record getRecord(Long id) {
         Record rec = null;
 
-        String sql = "select id, date, account, entity, amount, description from register where id="+id;
-
+        String sql = String.format("select id, date, account, entity, amount, description from register where id=%d", id);
         Cursor cursor = db.rawQuery(sql, null);
+
         if (cursor.moveToFirst()) {
             rec = new Record();
             rec.id = cursor.getLong(0);
@@ -179,8 +181,7 @@ public class Register extends SQLiteOpenHelper {
 
         ArrayList<Record> list = new ArrayList<>();
 
-        String sql = "select id, date, account, entity, amount, description from register "+
-                "where date>='"+dtFrom+"' and date<='"+dtTo+"' ";
+        String sql = String.format("select id, date, account, entity, amount, description from register where date>='%s' and date<='%s' ", dtFrom, dtTo);
         switch ( sort ) {
             case SORT_DATE:
                 sql += "order by date";
@@ -246,13 +247,10 @@ public class Register extends SQLiteOpenHelper {
         String to   = Helper.toIso(Helper.getWeekEnd(date));
         float  sum  = 0;
 
-        Cursor cursor = db.rawQuery(
-                "select ifnull(sum(r.amount),0) "+
-                        "from   register r, accounts a "+
-                        "where  r.account = a.id "+
-                        "and    a.type = 'EXP' "+
-                        "and    r.date>='"+from+"' and r.date<='"+to+"'", null);
+        String sql = String.format(
+                "select ifnull(sum(r.amount),0) from register r, accounts a where r.account = a.id and a.type = 'EXP' and r.date>='%s' and r.date<='%s'", from, to);
 
+        Cursor cursor = db.rawQuery(sql,null);
         if (cursor.moveToFirst())
             sum = cursor.getFloat(0);
 
@@ -265,13 +263,9 @@ public class Register extends SQLiteOpenHelper {
         String to   = Helper.toIso(Helper.getWeekEnd(date));
         float  sum  = 0;
 
-        Cursor cursor = db.rawQuery(
-                "select ifnull(sum(r.amount),0) "+
-                        "from   register r, accounts a "+
-                        "where  r.account = a.id "+
-                        "and    a.type = 'INC' "+
-                        "and    r.date>='"+from+"' and r.date<='"+to+"'", null);
-
+        String sql = String.format(
+                "select ifnull(sum(r.amount),0) from register r, accounts a where r.account = a.id and a.type = 'INC' and r.date>='%s' and r.date<='%s'", from, to);
+        Cursor cursor = db.rawQuery(sql,null);
         if (cursor.moveToFirst())
             sum = cursor.getFloat(0);
 
@@ -283,13 +277,10 @@ public class Register extends SQLiteOpenHelper {
         String sqlDate = Helper.toIso(date);
         float  sum  = 0;
 
-        Cursor cursor = db.rawQuery(
-                "select ifnull(sum(r.amount),0) "+
-                        "from   register r, accounts a "+
-                        "where  r.account = a.id "+
-                        "and    a.type = 'EXP' "+
-                        "and    r.date='"+sqlDate+"'", null);
+        String sql = String.format(
+                "select ifnull(sum(r.amount),0) from   register r, accounts a where  r.account = a.id and a.type = 'EXP' and r.date='%s'", sqlDate);
 
+        Cursor cursor = db.rawQuery(sql, null);
         if (cursor.moveToFirst())
             sum = cursor.getFloat(0);
 
@@ -301,13 +292,10 @@ public class Register extends SQLiteOpenHelper {
         String sqlDate = Helper.toIso(date);
         float  sum  = 0;
 
-        Cursor cursor = db.rawQuery(
-                "select ifnull(sum(r.amount),0) "+
-                        "from   register r, accounts a "+
-                        "where  r.account = a.id "+
-                        "and    a.type = 'INC' "+
-                        "and    r.date='"+sqlDate+"'", null);
+        String sql = String.format(
+                "select ifnull(sum(r.amount),0) from   register r, accounts a where  r.account = a.id and a.type = 'INC' and r.date='%s'", sqlDate);
 
+        Cursor cursor = db.rawQuery(sql,null);
         if (cursor.moveToFirst())
             sum = cursor.getFloat(0);
 
@@ -327,13 +315,10 @@ public class Register extends SQLiteOpenHelper {
         String to   = year+"-"+m+"-99";
         float  sum  = 0;
 
-        Cursor cursor = db.rawQuery(
-            "select ifnull(sum(r.amount),0) "+
-            "from   register r, accounts a "+
-            "where  r.account = a.id "+
-            "and    a.type = 'EXP' "+
-            "and    r.date>='"+from+"' and r.date<='"+to+"'", null);
+        String sql = String.format(
+            "select ifnull(sum(r.amount),0) from register r, accounts a where r.account = a.id and a.type = 'EXP' and r.date>='%s' and r.date<='%s'", from, to);
 
+        Cursor cursor = db.rawQuery(sql,null);
         if (cursor.moveToFirst())
             sum = cursor.getFloat(0);
 
@@ -353,13 +338,10 @@ public class Register extends SQLiteOpenHelper {
         String to   = year+"-"+m+"-99";
         float  sum  = 0;
 
-        Cursor cursor = db.rawQuery(
-            "select ifnull(sum(r.amount),0) "+
-            "from   register r, accounts a "+
-            "where  r.account = a.id "+
-            "and    a.type = 'INC' "+
-            "and    r.date>='"+from+"' and r.date<='"+to+"'",null);
+        String sql = String.format(
+                "select ifnull(sum(r.amount),0) from register r, accounts a where r.account = a.id and a.type = 'INC' and r.date>='%s' and r.date<='%s'", from, to);
 
+        Cursor cursor = db.rawQuery(sql,null);
         if (cursor.moveToFirst())
             sum = cursor.getFloat(0);
 
@@ -442,9 +424,11 @@ public class Register extends SQLiteOpenHelper {
         cursor.close();
 
         if ( account.id==null )
-            sql = "insert into accounts ( id, parent, type, description, usage ) values ( null, "+account.parent+", '"+account.type+"', '"+safedsc+"',0)";
+            sql = String.format(
+                    "insert into accounts ( id, parent, type, description, usage ) values ( null, %d, '%s', '%s',0)", account.parent, account.type, safedsc);
         else
-            sql = "update accounts set parent="+account.parent+", description='"+safedsc+"', type='"+account.type+"' where id="+account.id;
+            sql = String.format(
+                    "update accounts set parent=%d, description='%s', type='%s' where id=%d", account.parent, safedsc, account.type, account.id);
 
         try {
             db.execSQL(sql);
@@ -471,9 +455,9 @@ public class Register extends SQLiteOpenHelper {
             throw new ETExists();
 
         if ( entity.id==null )
-            sql = "insert into entities ( id, description, usage ) values ( null, '" + safedsc + "',0)";
+            sql = String.format("insert into entities ( id, description, usage ) values ( null, '%s', 0)", safedsc);
         else
-            sql = "update entities set description='" + safedsc + "' where id=" + entity.id;
+            sql = String.format("update entities set description='%s' where id=%d", safedsc, entity.id);
 
         try {
             db.execSQL(sql);
