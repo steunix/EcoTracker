@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -28,6 +29,11 @@ public class AccountListActivity extends ActionBarActivity {
         ListView list = (ListView) findViewById(R.id.lstAccounts);
         AccountListAdapter ad = new AccountListAdapter(getApplicationContext(), accounts);
         list.setAdapter(ad);
+
+        if ( ad.getCount()>0 ) {
+            TextView v = (TextView) findViewById(R.id.txtEmpty);
+            v.setVisibility(View.GONE);
+        }
 
         // Listener for click
         list.setOnItemClickListener( new AdapterView.OnItemClickListener() {
