@@ -60,8 +60,10 @@ public class AccountEditActivity extends ActionBarActivity {
             Account p = db.getAccount(currentAccount.parent);
 
             // Type
-            int pos = adType.getPosition(currentAccount.type);
-            spnType.setSelection(pos);
+            if ( currentAccount.type.equals(currentAccount.type_expense) )
+                spnType.setSelection(0);
+            else
+                spnType.setSelection(1);
 
             // Description
             EditText descr = (EditText) findViewById(R.id.txtAccountDescr);
@@ -69,6 +71,7 @@ public class AccountEditActivity extends ActionBarActivity {
 
             // Parent
             if ( p!=null ) {
+                int pos;
                 pos = adAccounts.getPosition(p.description);
                 spnParent.setSelection(pos);
             } else
