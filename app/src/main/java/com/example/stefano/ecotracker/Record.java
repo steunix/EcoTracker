@@ -28,4 +28,9 @@ public class Record {
         else
             return "-"+String.format("%.02f", this.amount);
     }
+
+    public String getAbsAmountString() {
+        return String.format("%.02f", this.amount);
+    }
+
 }
