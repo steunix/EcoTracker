@@ -401,6 +401,7 @@ public class Register extends SQLiteOpenHelper {
             db.execSQL("delete from register where account=" + account.id);
             db.execSQL("delete from usage where account=" + account.id);
             db.execSQL("delete from accounts where id=" + account.id);
+            db.execSQL("update accounts set parent=0 where parent=" + account.id);
         } catch ( Exception ex ) {
             return false;
         }
