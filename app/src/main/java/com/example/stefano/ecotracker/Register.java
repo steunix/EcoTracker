@@ -436,6 +436,8 @@ public class Register extends SQLiteOpenHelper {
         cursor.moveToFirst();
         cnt = cursor.getLong(0);
 
+        cursor.close();
+
         if ( cnt>0 )
             throw new ETExists();
 
@@ -462,6 +464,8 @@ public class Register extends SQLiteOpenHelper {
                 , null);
         cursor.moveToFirst();
         cnt = cursor.getLong(0);
+
+        cursor.close();
 
         if ( cnt>0 )
             throw new ETExists();
