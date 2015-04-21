@@ -34,11 +34,14 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
      * The {@link ViewPager} that will host the section contents.
      */
     ViewPager mViewPager;
+    Register register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report);
+
+        register = new Register(this);
 
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
@@ -75,8 +78,7 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
         }
 
         // If no accounts or entities exists, then direct to the proper page
-        Register db = new Register(this);
-        ArrayList<Account> accounts = db.getAccountsList(Register.DB_SORT.SORT_DESCRIPTION);
+        ArrayList<Account> accounts = register.getAccountsList(Register.DB_SORT.SORT_DESCRIPTION);
 
         if ( accounts.size()==0 ) {
             AlertDialog.Builder bld = new AlertDialog.Builder(this);
@@ -100,7 +102,7 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
             return;
         }
 
-        ArrayList<Entity> entities = db.getEntitiesList(Register.DB_SORT.SORT_DESCRIPTION);
+        ArrayList<Entity> entities = register.getEntitiesList(Register.DB_SORT.SORT_DESCRIPTION);
         if ( entities.size()==0 ) {
             AlertDialog.Builder bld = new AlertDialog.Builder(this);
             bld.setTitle(R.string.alert_warning)

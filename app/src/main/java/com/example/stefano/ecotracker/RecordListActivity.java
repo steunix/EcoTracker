@@ -14,19 +14,20 @@ import java.util.ArrayList;
 
 public class RecordListActivity extends ActionBarActivity {
 
+    Register register;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_list);
 
+        register = new Register(this);
         updateList();
     }
 
     public void updateList() {
-        Register db = new Register(this);
-
         ArrayList<Record> rlist;
-        rlist = db.getRecordList(Register.DB_SORT.SORT_DATE_DESC);
+        rlist = register.getRecordList(Register.DB_SORT.SORT_DATE_DESC);
 
         RecordListAdapter ad = new RecordListAdapter(this, rlist);
         ListView list = (ListView) findViewById(R.id.lstRecordList);

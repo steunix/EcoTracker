@@ -16,13 +16,12 @@ public class EntityEditActivity extends ActionBarActivity {
 
     Entity currentEntity;
     String mode;
+    Register register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entity_edit);
-
-        Register db = new Register(this);
 
         Intent i = getIntent();
         mode = i.getExtras().getString("mode");
@@ -32,7 +31,7 @@ public class EntityEditActivity extends ActionBarActivity {
 
             Long editEntity = i.getExtras().getLong("id");
 
-            currentEntity = db.getEntity(editEntity);
+            currentEntity = register.getEntity(editEntity);
 
             EditText descr = (EditText) findViewById(R.id.txtEntityDescr);
             descr.setText(currentEntity.description);
@@ -77,8 +76,7 @@ public class EntityEditActivity extends ActionBarActivity {
                 .setTitle(R.string.alert_warning);
         dlg.setPositiveButton(R.string.alert_ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Register db = new Register(getApplicationContext());
-                        db.deleteEntity(currentEntity);
+                        register.deleteEntity(currentEntity);
                         Toast.makeText(getApplicationContext(), R.string.deleted, Toast.LENGTH_SHORT).show();
                         finish();
                     }
@@ -94,7 +92,6 @@ public class EntityEditActivity extends ActionBarActivity {
     }
 
     public void saveEntity(View v) {
-        Register db = new Register(this);
         Entity entity = new Entity();
 
         entity.description = ((EditText)findViewById(R.id.txtEntityDescr)).getText().toString();
@@ -106,7 +103,7 @@ public class EntityEditActivity extends ActionBarActivity {
             entity.id = null;
 
         try {
-            if (db.saveEntity(entity)) {
+            if (register.saveEntity(entity)) {
                 Toast.makeText(this, R.string.saved, Toast.LENGTH_SHORT).show();
                 finish();
             }

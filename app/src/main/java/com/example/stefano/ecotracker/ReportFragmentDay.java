@@ -23,10 +23,13 @@ public class ReportFragmentDay extends Fragment {
     Calendar cal;
     RecordListAdapter adapter;
     View current_view;
+    Register register;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_report, container, false);
+
+        register = new Register(v.getContext());
 
         cal = Calendar.getInstance();
 
@@ -91,9 +94,9 @@ public class ReportFragmentDay extends Fragment {
         TextView te = (TextView) current_view.findViewById(R.id.txtUscite);
         TextView ts = (TextView) current_view.findViewById(R.id.txtSaldo);
 
-        Register db = new Register(current_view.getContext());
-        float e = db.dayExpense(cal.getTime());
-        float i = db.dayIncome(cal.getTime());
+
+        float e = register.dayExpense(cal.getTime());
+        float i = register.dayIncome(cal.getTime());
 
         float s = i - e;
 
@@ -102,7 +105,7 @@ public class ReportFragmentDay extends Fragment {
         ts.setText((s > 0 ? "+" : "") + String.format("%.02f", s));
 
         adapter.clear();
-        ArrayList<Record> rec = db.getRecordList(cal.getTime(), cal.getTime(), Register.DB_SORT.SORT_DATE_DESC);
+        ArrayList<Record> rec = register.getRecordList(cal.getTime(), cal.getTime(), Register.DB_SORT.SORT_DATE_DESC);
         adapter.addAll(rec);
     }
 

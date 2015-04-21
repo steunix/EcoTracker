@@ -21,15 +21,16 @@ import java.util.Date;
 public class RecordEditActivity extends ActionBarActivity {
 
     Record editRecord;
+    Register register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_edit);
 
-        Register db = new Register(this);
-        ArrayList<Account> accounts = db.getAccountsList(Register.DB_SORT.SORT_USAGE);
-        ArrayList<Entity> entities = db.getEntitiesList(Register.DB_SORT.SORT_USAGE);
+        register = new Register(this);
+        ArrayList<Account> accounts = register.getAccountsList(Register.DB_SORT.SORT_USAGE);
+        ArrayList<Entity> entities = register.getEntitiesList(Register.DB_SORT.SORT_USAGE);
 
         Spinner spnAccounts = (Spinner) findViewById(R.id.spnAccount);
         AccountListAdapter adAccounts = new AccountListAdapter(this, accounts);
@@ -66,7 +67,7 @@ public class RecordEditActivity extends ActionBarActivity {
         Intent i = getIntent();
         String mode = i.getExtras().getString("mode");
         if (mode.equals("edit") ) {
-            editRecord = db.getRecord(i.getExtras().getLong("id"));
+            editRecord = register.getRecord(i.getExtras().getLong("id"));
 
             int pos = adAccounts.getPosition(editRecord.account.description);
             spnAccounts.setSelection(pos);
@@ -142,7 +143,6 @@ public class RecordEditActivity extends ActionBarActivity {
         }
 
         // Save record
-        Register db = new Register(this);
         Record r = new Record();
 
         Intent i = getIntent();
@@ -157,7 +157,7 @@ public class RecordEditActivity extends ActionBarActivity {
         r.date = date;
         r.amount = amt;
 
-        if ( db.saveRecord(r) ) {
+        if ( register.saveRecord(r) ) {
             Toast.makeText(this, R.string.saved, Toast.LENGTH_SHORT).show();
             finish();
         }

@@ -15,11 +15,14 @@ import java.util.ArrayList;
 
 public class EntityListActivity extends ActionBarActivity {
 
+    Register register;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entity_list);
 
+        register = new Register(this);
         updateList();
     }
 
@@ -31,8 +34,7 @@ public class EntityListActivity extends ActionBarActivity {
     }
 
     public void updateList() {
-        Register db = new Register(this);
-        ArrayList<Entity> entities = db.getEntitiesList(Register.DB_SORT.SORT_DESCRIPTION);
+        ArrayList<Entity> entities = register.getEntitiesList(Register.DB_SORT.SORT_DESCRIPTION);
 
         ListView list = (ListView) findViewById(R.id.lstEntities);
         EntityListAdapter ad = new EntityListAdapter(getApplicationContext(), entities);

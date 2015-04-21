@@ -23,12 +23,14 @@ public class ReportFragmentMonth extends Fragment {
     int current_month;
     int current_year;
     View current_view;
-
+    Register register;
     RecordListAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_report, container, false);
+
+        register = new Register(v.getContext());
 
         Calendar c = Calendar.getInstance();
 
@@ -100,9 +102,8 @@ public class ReportFragmentMonth extends Fragment {
         TextView te = (TextView) current_view.findViewById(R.id.txtUscite);
         TextView ts = (TextView) current_view.findViewById(R.id.txtSaldo);
 
-        Register db = new Register(current_view.getContext());
-        float e = db.monthExpense(current_year,current_month);
-        float i = db.monthIncome(current_year,current_month);
+        float e = register.monthExpense(current_year,current_month);
+        float i = register.monthIncome(current_year,current_month);
 
         float s = i - e;
 
@@ -113,7 +114,7 @@ public class ReportFragmentMonth extends Fragment {
         adapter.clear();
         Date d1 = Helper.isoToDate(String.format("%04d-%02d-01", current_year, current_month));
         Date d2 = Helper.isoToDate(String.format("%04d-%02d-99", current_year, current_month));
-        ArrayList<Record> rec = db.getRecordList(d1, d2, Register.DB_SORT.SORT_DATE_DESC);
+        ArrayList<Record> rec = register.getRecordList(d1, d2, Register.DB_SORT.SORT_DATE_DESC);
         adapter.addAll(rec);
     }
 

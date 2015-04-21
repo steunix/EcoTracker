@@ -14,17 +14,19 @@ import java.util.ArrayList;
 
 public class AccountListActivity extends ActionBarActivity {
 
+    Register register;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_list);
 
+        register = new Register(this);
         updateList();
     }
 
     private void updateList() {
-        Register db = new Register(this);
-        ArrayList<Account> accounts = db.getAccountsList(Register.DB_SORT.SORT_DESCRIPTION);
+        ArrayList<Account> accounts = register.getAccountsList(Register.DB_SORT.SORT_DESCRIPTION);
 
         ListView list = (ListView) findViewById(R.id.lstAccounts);
         AccountListAdapter ad = new AccountListAdapter(getApplicationContext(), accounts);

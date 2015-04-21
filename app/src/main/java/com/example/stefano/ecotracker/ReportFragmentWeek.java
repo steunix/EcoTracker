@@ -23,13 +23,16 @@ public class ReportFragmentWeek extends Fragment {
     int current_offset = 0;
     Calendar cal;
     View current_view;
-
+    Register register;
     RecordListAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_report, container, false);
+
         cal = Calendar.getInstance();
+
+        register = new Register(v.getContext());
 
         ImageButton b = (ImageButton) v.findViewById(R.id.btnPrevious);
         b.setOnClickListener(new View.OnClickListener() {
@@ -92,9 +95,8 @@ public class ReportFragmentWeek extends Fragment {
         TextView te = (TextView) current_view.findViewById(R.id.txtUscite);
         TextView ts = (TextView) current_view.findViewById(R.id.txtSaldo);
 
-        Register db = new Register(current_view.getContext());
-        float e = db.weekExpense(cal.getTime());
-        float i = db.weekIncome(cal.getTime());
+        float e = register.weekExpense(cal.getTime());
+        float i = register.weekIncome(cal.getTime());
 
         float s = i - e;
 
@@ -103,7 +105,7 @@ public class ReportFragmentWeek extends Fragment {
         ts.setText((s > 0 ? "+" : "") + String.format("%.02f", s));
 
         adapter.clear();
-        ArrayList<Record> rec = db.getRecordList(d1, d2, Register.DB_SORT.SORT_DATE_DESC);
+        ArrayList<Record> rec = register.getRecordList(d1, d2, Register.DB_SORT.SORT_DATE_DESC);
         adapter.addAll(rec);
     }
 

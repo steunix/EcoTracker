@@ -20,6 +20,7 @@ public class AccountEditActivity extends ActionBarActivity {
 
     Account currentAccount;
     String  mode;
+    Register register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +32,8 @@ public class AccountEditActivity extends ActionBarActivity {
         none.type = "";
 
         // Fills parent account
-        Register db = new Register(this);
-        ArrayList<Account> accounts = db.getAccountsList(Register.DB_SORT.SORT_DESCRIPTION);
+        register = new Register(this);
+        ArrayList<Account> accounts = register.getAccountsList(Register.DB_SORT.SORT_DESCRIPTION);
         accounts.add(0, none);
 
         Spinner spnParent = (Spinner) findViewById(R.id.spnParentAccount);
@@ -56,8 +57,8 @@ public class AccountEditActivity extends ActionBarActivity {
 
             long editAccount = i.getExtras().getLong("id");
 
-            currentAccount = db.getAccount(editAccount);
-            Account p = db.getAccount(currentAccount.parent);
+            currentAccount = register.getAccount(editAccount);
+            Account p = register.getAccount(currentAccount.parent);
 
             // Type
             if ( currentAccount.type.equals(currentAccount.type_expense) )
@@ -118,8 +119,7 @@ public class AccountEditActivity extends ActionBarActivity {
                 .setTitle(R.string.alert_warning);
         dlg.setPositiveButton(R.string.alert_ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Register db = new Register(getApplicationContext());
-                        db.deleteAccount(currentAccount);
+                        register.deleteAccount(currentAccount);
                         Toast.makeText(getApplicationContext(), R.string.deleted, Toast.LENGTH_SHORT).show();
                         finish();
                     }
@@ -135,7 +135,6 @@ public class AccountEditActivity extends ActionBarActivity {
     }
 
     public void saveAccount(View v) {
-        Register db = new Register(this);
         Account account = new Account();
 
         account.description = ((EditText)findViewById(R.id.txtAccountDescr)).getText().toString();
@@ -159,7 +158,7 @@ public class AccountEditActivity extends ActionBarActivity {
             account.id = null;
 
         try {
-            if (db.saveAccount(account)) {
+            if (register.saveAccount(account)) {
                 Toast.makeText(this, R.string.saved, Toast.LENGTH_SHORT).show();
                 finish();
             }
