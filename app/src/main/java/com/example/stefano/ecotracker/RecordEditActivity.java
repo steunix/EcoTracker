@@ -51,7 +51,6 @@ public class RecordEditActivity extends ActionBarActivity {
             bld.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    finish();
                 }
             });
             bld.setOnDismissListener(new DialogInterface.OnDismissListener() {

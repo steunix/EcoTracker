@@ -1,7 +1,10 @@
 package com.example.stefano.ecotracker;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -13,6 +16,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 public class ReportActivity extends ActionBarActivity implements ActionBar.TabListener {
@@ -69,6 +73,55 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
                     actionBar.newTab()
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
+        }
+
+        // If no accounts or entities exists, then direct to the proper page
+        Register db = new Register(this);
+        ArrayList<Account> accounts = db.getAccountsList(Register.DB_SORT.SORT_DESCRIPTION);
+
+        if ( accounts.size()==0 ) {
+            AlertDialog.Builder bld = new AlertDialog.Builder(this);
+            bld.setTitle(R.string.alert_warning)
+                    .setMessage(R.string.no_accounts_initial);
+            bld.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                }
+            });
+            bld.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    Intent intent = new Intent(getApplicationContext(), AccountEditActivity.class );
+                    intent.putExtra("mode", "new");
+                    startActivity(intent);
+                }
+            });
+            AlertDialog dlg = bld.create();
+            dlg.show();
+            return;
+        }
+
+        ArrayList<Entity> entities = db.getEntitiesList(Register.DB_SORT.SORT_DESCRIPTION);
+        if ( entities.size()==0 ) {
+            AlertDialog.Builder bld = new AlertDialog.Builder(this);
+            bld.setTitle(R.string.alert_warning)
+                    .setMessage(R.string.no_entities_initial);
+            bld.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                }
+            });
+            bld.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    Intent intent = new Intent(getApplicationContext(), EntityEditActivity.class );
+                    intent.putExtra("mode", "new");
+                    startActivity(intent);
+                }
+            });
+            AlertDialog dlg = bld.create();
+            dlg.show();
+            return;
         }
     }
 
