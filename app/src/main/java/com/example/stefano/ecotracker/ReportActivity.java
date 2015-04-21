@@ -16,7 +16,6 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 
 public class ReportActivity extends ActionBarActivity implements ActionBar.TabListener {
@@ -39,7 +38,7 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_time_report);
+        setContentView(R.layout.activity_report);
 
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
