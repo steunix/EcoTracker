@@ -15,6 +15,11 @@
 
     </style>
 
+    <style name="tiny">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">?android:attr/textColorTertiary</item>
+    </style>
+
     <style name="expense" parent="@android:style/TextAppearance.Widget.TextView">
         <item name="android:textColor">#aa0000</item>
     </style>
