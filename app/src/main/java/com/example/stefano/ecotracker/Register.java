@@ -439,6 +439,8 @@ public class Register extends SQLiteOpenHelper {
         if ( cnt>0 )
             throw new ETExists();
 
+        cursor.close();
+
         if ( account.id==null )
             sql = "insert into accounts ( id, parent, type, description, usage ) values ( null, "+account.parent+", '"+account.type+"', '"+safedsc+"',0)";
         else
@@ -462,6 +464,8 @@ public class Register extends SQLiteOpenHelper {
                 , null);
         cursor.moveToFirst();
         cnt = cursor.getLong(0);
+
+        cursor.close();
 
         if ( cnt>0 )
             throw new ETExists();
