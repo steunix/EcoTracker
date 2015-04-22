@@ -1,4 +1,4 @@
-package com.example.stefano.ecotrack;
+package com.example.stefano.myecotracker;
 
 import java.util.ArrayList;
 import java.util.Locale;
