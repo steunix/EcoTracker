@@ -21,7 +21,7 @@
     <string name="mese">Month</string>
     <string name="monthlyreport">Monthly report</string>
     <string name="no_accounts">You haven\'t created any account yet! Do it now by clicking on the + in the top bar</string>
-    <string name="no_accounts_initial">In oreder to use EcoTracker you must create at least one account!</string>
+    <string name="no_accounts_initial">In order to use EcoTracker you must create at least one account!</string>
     <string name="no_accounts_or_entities">You haven\'t created accounts or suppliers! Do it now, in order to add records!</string>
     <string name="no_entities">You haven\'t created any supplier yet! Do it now by clicking on the + in the top bar</string>
     <string name="no_entities_initial">In order to use EcoTracker you must create at least one supplier!</string>
