@@ -73,12 +73,12 @@
     <string name="no_entities">You haven\'t created any supplier yet! Do it now by clicking on the + in the top bar</string>
     <string name="no_accounts_or_entities">You haven\'t created accounts or suppliers! Do it now, in order to add records!</string>
 
-    <string name="no_entities_initial">In order to use EcoTracker you must create at least one supplier!</string>
-    <string name="no_accounts_initial">In order to use EcoTracker you must create at least one account!</string>
+    <string name="no_entities_initial">In order to use EcoTrack you must create at least one supplier!</string>
+    <string name="no_accounts_initial">In order to use EcoTrack you must create at least one account!</string>
     <string name="title_activity_info">About</string>
 
     <string name="copyright">© 2015 Stefano Rivoir</string>
-    <string name="offer">EcoTracker is free. If you like this app and find it useful, you can always make a free offer with PayPal to: rs4000@gmail.com</string>
+    <string name="offer">EcoTrack is free. If you like this app and find it useful, you can always make a free offer with PayPal to: rs4000@gmail.com</string>
     <string name="version">Version</string>
 
     <string name="db_account_others">Other</string>

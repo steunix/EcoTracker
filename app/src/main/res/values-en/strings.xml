@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">EcoTracker</string>
+    <string name="app_name">EcoTrack</string>
     <string name="account">Account</string>
     <string name="account_delete_warning">Do you want to delete the account and all of its records? Warning: this action cannot be reverted!</string>
     <string name="action_settings">Settings</string>
@@ -21,10 +21,10 @@
     <string name="mese">Month</string>
     <string name="monthlyreport">Monthly report</string>
     <string name="no_accounts">You haven\'t created any account yet! Do it now by clicking on the + in the top bar</string>
-    <string name="no_accounts_initial">In order to use EcoTracker you must create at least one account!</string>
+    <string name="no_accounts_initial">In order to use EcoTrack you must create at least one account!</string>
     <string name="no_accounts_or_entities">You haven\'t created accounts or suppliers! Do it now, in order to add records!</string>
     <string name="no_entities">You haven\'t created any supplier yet! Do it now by clicking on the + in the top bar</string>
-    <string name="no_entities_initial">In order to use EcoTracker you must create at least one supplier!</string>
+    <string name="no_entities_initial">In order to use EcoTrack you must create at least one supplier!</string>
     <string name="none">None</string>
     <string name="notes">Notes</string>
     <string name="parent_account">Parent account</string>
@@ -56,7 +56,7 @@
     <string name="entities">Suppliers</string>
     <string name="record">Record</string>
     <string name="records">Records</string>
-    <string name="offer">EcoTracker is free. If you like this app and find it useful, you can always make a free offer with PayPal to: rs4000@gmail.com</string>
+    <string name="offer">EcoTrack is free. If you like this app and find it useful, you can always make a free offer with PayPal to: rs4000@gmail.com</string>
     <string name="version">Version</string>
     <string name="db_account_others">Other</string>
     <string name="db_entity_others">Other</string>
