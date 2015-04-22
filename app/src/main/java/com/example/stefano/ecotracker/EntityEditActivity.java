@@ -23,6 +23,8 @@ public class EntityEditActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entity_edit);
 
+        register = new Register(this);
+
         Intent i = getIntent();
         mode = i.getExtras().getString("mode");
         if (mode.equals("edit") ) {
