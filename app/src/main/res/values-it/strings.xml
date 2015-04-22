@@ -60,4 +60,6 @@
     <string name="version">Versione</string>
     <string name="db_account_others">Altro</string>
     <string name="db_entity_others">Altro</string>
+    <string name="backup">Backup</string>
+    <string name="restore">Restore</string>
 </resources>

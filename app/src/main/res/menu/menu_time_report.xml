@@ -28,6 +28,18 @@
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/action_backup"
+        android:title="@string/backup"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_restore"
+        android:title="@string/restore"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
     <item android:id="@+id/action_info" android:title="@string/action_info"
         android:orderInCategory="100" app:showAsAction="never" />
 

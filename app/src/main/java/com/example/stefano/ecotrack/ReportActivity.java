@@ -164,6 +164,10 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
             startActivity(intent);
         }
 
+        if ( id == R.id.action_backup ) {
+            register.backup();
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

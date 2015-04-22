@@ -5,8 +5,15 @@ package com.example.stefano.ecotrack;
         import android.database.sqlite.SQLiteDatabase;
         import android.database.sqlite.SQLiteException;
         import android.database.sqlite.SQLiteOpenHelper;
+        import android.os.Environment;
+        import android.provider.Settings;
         import android.util.Log;
+        import android.widget.Toast;
 
+        import java.io.File;
+        import java.io.FileInputStream;
+        import java.io.FileOutputStream;
+        import java.nio.channels.FileChannel;
         import java.util.ArrayList;
         import java.util.Date;
 
@@ -481,5 +488,39 @@ public class Register extends SQLiteOpenHelper {
         }
 
         return true;
+    }
+
+    public void backup()
+    {
+        db.close();
+
+        try
+        {
+            File sd = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+            File data = Environment.getDataDirectory();
+
+            if (sd.canWrite())
+            {
+                String currentDBPath = "//data//com.example.stefano.ecotrack//databases//ecotrack.db";
+                String backupDBPath = "ecot-backup.db";
+                File currentDB = new File(data, currentDBPath);
+                File backupDB = new File(sd, backupDBPath);
+
+                if (currentDB.exists()) {
+                    FileChannel src = new FileInputStream(currentDB).getChannel();
+                    FileChannel dst = new FileOutputStream(backupDB).getChannel();
+                    dst.transferFrom(src, 0, src.size());
+                    src.close();
+                    dst.close();
+
+                    Toast.makeText(context, "Backup Complete", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+        catch (Exception e) {
+            Log.w("Settings Backup", e);
+        }
+
+        db = this.getWritableDatabase();
     }
 }
