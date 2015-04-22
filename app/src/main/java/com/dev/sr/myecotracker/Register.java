@@ -58,6 +58,8 @@ public class Register extends SQLiteOpenHelper {
 
         db.execSQL("create table register ( id integer primary key, date text, account integer, entity integer, amount real, description text )");
         db.execSQL("create index register_i1 on register ( date )");
+        db.execSQL("create index register_i2 on register ( account )");
+        db.execSQL("create index register_i3 on register ( entity )");
 
         db.execSQL("create table usage ( account integer, entity number, usage number )");
         db.execSQL("create index usage_i1 on usage ( account )");
