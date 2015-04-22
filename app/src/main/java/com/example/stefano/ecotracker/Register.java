@@ -17,6 +17,7 @@ public class Register extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     private SQLiteDatabase db;
+    private Context context;
 
     public enum DB_SORT {
         SORT_DESCRIPTION,
@@ -26,8 +27,9 @@ public class Register extends SQLiteOpenHelper {
         SORT_DATE_DESC
     }
 
-    Register(Context context) {
-        super(context, "ecotracker.db", null, DATABASE_VERSION);
+    Register(Context ctx) {
+        super(ctx, "ecotracker.db", null, DATABASE_VERSION);
+        context = ctx;
 
         try {
             db = this.getWritableDatabase();
@@ -54,6 +56,10 @@ public class Register extends SQLiteOpenHelper {
         db.execSQL("create table usage ( account integer, entity number, usage number )");
         db.execSQL("create index usage_i1 on usage ( account )");
         db.execSQL("create index usage_i2 on usage ( entity )");
+
+        // Default account and entity
+        db.execSQL("insert into accounts ( parent, type, description, usage ) values ( 0, 'EXP', '" + context.getString(R.string.db_account_others) + "', 0)");
+        db.execSQL("insert into entities ( description, usage ) values ( '" + context.getString(R.string.db_entity_others) + "', 0)");
     }
 
     @Override

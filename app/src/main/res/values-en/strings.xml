@@ -58,4 +58,6 @@
     <string name="records">Records</string>
     <string name="offer">EcoTracker is free. If you like this app and find it useful, you can always make a free offer with PayPal to: rs4000@gmail.com</string>
     <string name="version">Version</string>
+    <string name="db_account_others">Other</string>
+    <string name="db_entity_others">Other</string>
 </resources>

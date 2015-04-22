@@ -58,4 +58,6 @@
     <string name="records">Registrazioni</string>
     <string name="offer">EcoTracker è assolutamente gratuita. Se ti piace questa app e la trovi utile, puoi sempre fare un\'offerta tramite PayPal a questo indirizzo: rs4000@gmail.com</string>
     <string name="version">Versione</string>
+    <string name="db_account_others">Altro</string>
+    <string name="db_entity_others">Altro</string>
 </resources>
