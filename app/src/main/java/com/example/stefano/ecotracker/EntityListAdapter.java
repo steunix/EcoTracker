@@ -18,7 +18,7 @@ public class EntityListAdapter extends ArrayAdapter<Entity> {
 
     public EntityListAdapter(Context context, ArrayList<Entity> itemsArrayList) {
 
-        super(context, R.layout.layout_entity_list, itemsArrayList);
+        super(context, R.layout.layout_entity, itemsArrayList);
 
         this.context = context;
         this.entityList = itemsArrayList;
@@ -38,7 +38,7 @@ public class EntityListAdapter extends ArrayAdapter<Entity> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View rowView = inflater.inflate(R.layout.layout_entity_list, parent, false);
+        View rowView = inflater.inflate(R.layout.layout_entity, parent, false);
 
         TextView lblDescr = (TextView) rowView.findViewById(R.id.description);
         TextView lblType = (TextView) rowView.findViewById(R.id.type);

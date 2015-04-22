@@ -18,7 +18,7 @@ public class AccountListAdapter extends ArrayAdapter<Account> {
 
     public AccountListAdapter(Context context, ArrayList<Account> itemsArrayList) {
 
-        super(context, R.layout.layout_account_list, itemsArrayList);
+        super(context, R.layout.layout_account, itemsArrayList);
 
         this.context = context;
         this.accountList = itemsArrayList;
@@ -40,7 +40,7 @@ public class AccountListAdapter extends ArrayAdapter<Account> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         // 2. Get rowView from inflater
-        View rowView = inflater.inflate(R.layout.layout_account_list, parent, false);
+        View rowView = inflater.inflate(R.layout.layout_account, parent, false);
 
         // 3. Get the two text view from the rowView
         TextView lblDescr = (TextView) rowView.findViewById(R.id.description);

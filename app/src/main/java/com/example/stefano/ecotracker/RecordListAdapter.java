@@ -18,7 +18,7 @@ public class RecordListAdapter extends ArrayAdapter<Record> {
     private final ArrayList<Record> recordList;
 
     public RecordListAdapter(Context context, ArrayList<Record> items) {
-        super(context, R.layout.layout_record_list, items);
+        super(context, R.layout.layout_record, items);
 
         this.context = context;
         this.recordList = items;
@@ -38,7 +38,7 @@ public class RecordListAdapter extends ArrayAdapter<Record> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View rowView = inflater.inflate(R.layout.layout_record_list, parent, false);
+        View rowView = inflater.inflate(R.layout.layout_record, parent, false);
 
         TextView ldate = (TextView) rowView.findViewById(R.id.lblRLDate);
         TextView laccount = (TextView) rowView.findViewById(R.id.lblRLAccount);
