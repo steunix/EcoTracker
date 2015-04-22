@@ -1,4 +1,4 @@
-package com.example.stefano.myecotracker;
+package com.dev.sr.myecotracker;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;

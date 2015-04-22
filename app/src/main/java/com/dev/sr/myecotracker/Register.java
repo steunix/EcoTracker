@@ -1,4 +1,4 @@
-package com.example.stefano.myecotracker;
+package com.dev.sr.myecotracker;
 
         import android.content.Context;
         import android.database.Cursor;
@@ -500,7 +500,7 @@ public class Register extends SQLiteOpenHelper {
 
             if (sd.canWrite())
             {
-                String currentDBPath = "//data//com.example.stefano.myecotracker//databases//myecotracker.db";
+                String currentDBPath = "//data//com.dev.sr.myecotracker//databases//myecotracker.db";
                 String backupDBPath = "ecot-backup.db";
                 File currentDB = new File(data, currentDBPath);
                 File backupDB = new File(sd, backupDBPath);

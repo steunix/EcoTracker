@@ -1,4 +1,4 @@
-package com.example.stefano.myecotracker;
+package com.dev.sr.myecotracker;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -13,40 +13,39 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
- * Class for weekly report
+ * Fragment for daily report
  */
-public class ReportFragmentWeek extends Fragment {
+public class ReportFragmentDay extends Fragment {
 
     int current_offset = 0;
     Calendar cal;
+    RecordListAdapter adapter;
     View current_view;
     Register register;
-    RecordListAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_report, container, false);
 
-        cal = Calendar.getInstance();
-
         register = new Register(v.getContext());
 
-        ImageButton b = (ImageButton) v.findViewById(R.id.btnPrevious);
+        cal = Calendar.getInstance();
+
+        ImageButton b = (ImageButton) v.findViewById(R.id.btnNext);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                previousWeek();
+                nextDay();
             }
         });
 
-        b = (ImageButton) v.findViewById(R.id.btnNext);
+        b = (ImageButton) v.findViewById(R.id.btnPrevious);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nextWeek();
+                previousDay();
             }
         });
 
@@ -70,47 +69,48 @@ public class ReportFragmentWeek extends Fragment {
         return v;
     }
 
-    private void nextWeek() {
-        cal.add(Calendar.DAY_OF_MONTH, 7);
-        current_offset+=7;
+    private void nextDay() {
+        cal.add(Calendar.DAY_OF_MONTH, 1);
+        current_offset++;
         updateTotals();
     }
 
-    private void previousWeek() {
-        cal.add(Calendar.DAY_OF_MONTH, -7);
-        current_offset-=7;
+    private void previousDay() {
+        cal.add(Calendar.DAY_OF_MONTH, -1);
+        current_offset--;
         updateTotals();
     }
 
     public void updateTotals() {
+
         if ( current_view==null )
             return;
 
-        Date d1 = Helper.getWeekStart(cal.getTime());
-        Date d2 = Helper.getWeekEnd(cal.getTime());
+        String dt = Helper.dateToString(cal.getTime());
         TextView cur = (TextView) current_view.findViewById(R.id.txtCurrent);
-        cur.setText(Helper.dateToString(d1,d2));
+        cur.setText(dt);
 
         TextView ti = (TextView) current_view.findViewById(R.id.txtEntrate);
         TextView te = (TextView) current_view.findViewById(R.id.txtUscite);
         TextView ts = (TextView) current_view.findViewById(R.id.txtSaldo);
 
-        float e = register.weekExpense(cal.getTime());
-        float i = register.weekIncome(cal.getTime());
+
+        float e = register.dayExpense(cal.getTime());
+        float i = register.dayIncome(cal.getTime());
 
         float s = i - e;
 
-        ti.setText("+" + String.format("%.02f", i));
+        ti.setText("+"+String.format("%.02f", i));
         te.setText("-" + String.format("%.02f", e));
         ts.setText((s > 0 ? "+" : "") + String.format("%.02f", s));
 
         adapter.clear();
-        ArrayList<Record> rec = register.getRecordList(d1, d2, Register.DB_SORT.SORT_DATE_DESC);
+        ArrayList<Record> rec = register.getRecordList(cal.getTime(), cal.getTime(), Register.DB_SORT.SORT_DATE_DESC);
         adapter.addAll(rec);
     }
 
-    public static ReportFragmentWeek newInstance(String message) {
-        ReportFragmentWeek f = new ReportFragmentWeek();
+    public static ReportFragmentDay newInstance(String message) {
+        ReportFragmentDay f = new ReportFragmentDay();
         Bundle b = new Bundle();
         b.putString("message", message);
 
@@ -118,4 +118,5 @@ public class ReportFragmentWeek extends Fragment {
 
         return f;
     }
+
 }

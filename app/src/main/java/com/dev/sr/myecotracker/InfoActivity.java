@@ -1,4 +1,4 @@
-package com.example.stefano.myecotracker;
+package com.dev.sr.myecotracker;
 
 import android.content.pm.PackageInfo;
 import android.support.v7.app.ActionBarActivity;

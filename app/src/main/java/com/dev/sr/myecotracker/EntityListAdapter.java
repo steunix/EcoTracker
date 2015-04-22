@@ -1,4 +1,4 @@
-package com.example.stefano.myecotracker;
+package com.dev.sr.myecotracker;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,18 +10,18 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by Stefano on 03/04/2015.
+ * Adapter for entity list
  */
-public class AccountListAdapter extends ArrayAdapter<Account> {
+public class EntityListAdapter extends ArrayAdapter<Entity> {
     private final Context context;
-    private final ArrayList<Account> accountList;
+    private final ArrayList<Entity> entityList;
 
-    public AccountListAdapter(Context context, ArrayList<Account> itemsArrayList) {
+    public EntityListAdapter(Context context, ArrayList<Entity> itemsArrayList) {
 
-        super(context, R.layout.layout_account, itemsArrayList);
+        super(context, R.layout.layout_entity, itemsArrayList);
 
         this.context = context;
-        this.accountList = itemsArrayList;
+        this.entityList = itemsArrayList;
     }
 
     @Override
@@ -35,30 +35,24 @@ public class AccountListAdapter extends ArrayAdapter<Account> {
     }
 
     public View getCustomView(int position, View convertView, ViewGroup parent) {
-        // 1. Create inflater
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        // 2. Get rowView from inflater
-        View rowView = inflater.inflate(R.layout.layout_account, parent, false);
+        View rowView = inflater.inflate(R.layout.layout_entity, parent, false);
 
-        // 3. Get the two text view from the rowView
         TextView lblDescr = (TextView) rowView.findViewById(R.id.description);
         TextView lblType = (TextView) rowView.findViewById(R.id.type);
 
-        // 4. Set the text for textView
-        Account a = accountList.get(position);
+        Entity a = entityList.get(position);
         lblDescr.setText(a.description);
-        lblType.setText(a.getTypeDescription(context));
 
-        // 5. retrn rowView
         return rowView;
     }
 
     public int getPosition(String description) {
         int i;
-        for ( i=0; i<accountList.size(); i++ ) {
-            if ( accountList.get(i).description == description )
+        for ( i=0; i<entityList.size(); i++ ) {
+            if ( entityList.get(i).description.equals(description) )
                 return i;
         }
         return -1;

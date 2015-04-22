@@ -1,4 +1,4 @@
-package com.example.stefano.myecotracker;
+package com.dev.sr.myecotracker;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.stefano.myecotracker.RecordEditActivity" tools:Title="Test">
+    tools:context="com.dev.sr.myecotracker.RecordEditActivity" tools:Title="Test">
 
     <item
         android:id="@+id/action_saverecord"

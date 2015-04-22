@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.stefano.myecotracker"
+    package="com.dev.sr.myecotracker"
     android:versionCode="1"
     android:versionName="1.0.0" >
 
@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:theme="@style/EcoTheme" >
         <activity
-            android:name="com.example.stefano.myecotracker.ReportActivity"
+            android:name="com.dev.sr.myecotracker.ReportActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,31 +21,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.stefano.myecotracker.RecordEditActivity"
+            android:name="com.dev.sr.myecotracker.RecordEditActivity"
             android:label="@string/title_activity_newreg" >
         </activity>
         <activity
-            android:name="com.example.stefano.myecotracker.AccountEditActivity"
+            android:name="com.dev.sr.myecotracker.AccountEditActivity"
             android:label="@string/title_activity_new_account" >
         </activity>
         <activity
-            android:name="com.example.stefano.myecotracker.AccountListActivity"
+            android:name="com.dev.sr.myecotracker.AccountListActivity"
             android:label="@string/title_activity_account_list" >
         </activity>
         <activity
-            android:name="com.example.stefano.myecotracker.EntityListActivity"
+            android:name="com.dev.sr.myecotracker.EntityListActivity"
             android:label="@string/title_activity_entity_list" >
         </activity>
         <activity
-            android:name="com.example.stefano.myecotracker.EntityEditActivity"
+            android:name="com.dev.sr.myecotracker.EntityEditActivity"
             android:label="@string/title_activity_entity_edit" >
         </activity>
         <activity
-            android:name="com.example.stefano.myecotracker.RecordListActivity"
+            android:name="com.dev.sr.myecotracker.RecordListActivity"
             android:label="@string/title_activity_record_list" >
         </activity>
         <activity
-            android:name="com.example.stefano.myecotracker.InfoActivity"
+            android:name="com.dev.sr.myecotracker.InfoActivity"
             android:label="@string/title_activity_info" >
         </activity>
     </application>

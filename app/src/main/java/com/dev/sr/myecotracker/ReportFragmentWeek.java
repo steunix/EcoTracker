@@ -1,4 +1,4 @@
-package com.example.stefano.myecotracker;
+package com.dev.sr.myecotracker;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -16,12 +16,12 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Class for monthly record
+ * Class for weekly report
  */
-public class ReportFragmentMonth extends Fragment {
+public class ReportFragmentWeek extends Fragment {
 
-    int current_month;
-    int current_year;
+    int current_offset = 0;
+    Calendar cal;
     View current_view;
     Register register;
     RecordListAdapter adapter;
@@ -30,26 +30,23 @@ public class ReportFragmentMonth extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_report, container, false);
 
+        cal = Calendar.getInstance();
+
         register = new Register(v.getContext());
 
-        Calendar c = Calendar.getInstance();
-
-        current_month = c.get(Calendar.MONTH)+1;
-        current_year  = c.get(Calendar.YEAR);
-
-        ImageButton b = (ImageButton) v.findViewById(R.id.btnNext);
+        ImageButton b = (ImageButton) v.findViewById(R.id.btnPrevious);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nextMonth();
+                previousWeek();
             }
         });
 
-        b = (ImageButton) v.findViewById(R.id.btnPrevious);
+        b = (ImageButton) v.findViewById(R.id.btnNext);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                previousMonth();
+                nextWeek();
             }
         });
 
@@ -73,21 +70,15 @@ public class ReportFragmentMonth extends Fragment {
         return v;
     }
 
-    public void nextMonth() {
-        current_month++;
-        if ( current_month==13 ) {
-            current_month = 1;
-            current_year++;
-        }
+    private void nextWeek() {
+        cal.add(Calendar.DAY_OF_MONTH, 7);
+        current_offset+=7;
         updateTotals();
     }
 
-    public void previousMonth() {
-        current_month--;
-        if ( current_month==0 ) {
-            current_month = 12;
-            current_year--;
-        }
+    private void previousWeek() {
+        cal.add(Calendar.DAY_OF_MONTH, -7);
+        current_offset-=7;
         updateTotals();
     }
 
@@ -95,31 +86,31 @@ public class ReportFragmentMonth extends Fragment {
         if ( current_view==null )
             return;
 
+        Date d1 = Helper.getWeekStart(cal.getTime());
+        Date d2 = Helper.getWeekEnd(cal.getTime());
         TextView cur = (TextView) current_view.findViewById(R.id.txtCurrent);
-        cur.setText(String.format("%02d/%4d", current_month, current_year));
+        cur.setText(Helper.dateToString(d1,d2));
 
         TextView ti = (TextView) current_view.findViewById(R.id.txtEntrate);
         TextView te = (TextView) current_view.findViewById(R.id.txtUscite);
         TextView ts = (TextView) current_view.findViewById(R.id.txtSaldo);
 
-        float e = register.monthExpense(current_year,current_month);
-        float i = register.monthIncome(current_year,current_month);
+        float e = register.weekExpense(cal.getTime());
+        float i = register.weekIncome(cal.getTime());
 
         float s = i - e;
 
-        ti.setText("+"+String.format("%.02f", i));
+        ti.setText("+" + String.format("%.02f", i));
         te.setText("-" + String.format("%.02f", e));
         ts.setText((s > 0 ? "+" : "") + String.format("%.02f", s));
 
         adapter.clear();
-        Date d1 = Helper.isoToDate(String.format("%04d-%02d-01", current_year, current_month));
-        Date d2 = Helper.isoToDate(String.format("%04d-%02d-99", current_year, current_month));
         ArrayList<Record> rec = register.getRecordList(d1, d2, Register.DB_SORT.SORT_DATE_DESC);
         adapter.addAll(rec);
     }
 
-    public static ReportFragmentMonth newInstance(String message) {
-        ReportFragmentMonth f = new ReportFragmentMonth();
+    public static ReportFragmentWeek newInstance(String message) {
+        ReportFragmentWeek f = new ReportFragmentWeek();
         Bundle b = new Bundle();
         b.putString("message", message);
 

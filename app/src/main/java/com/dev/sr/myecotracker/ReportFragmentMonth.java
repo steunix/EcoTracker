@@ -1,4 +1,4 @@
-package com.example.stefano.myecotracker;
+package com.dev.sr.myecotracker;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -13,17 +13,18 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
- * Fragment for daily report
+ * Class for monthly record
  */
-public class ReportFragmentDay extends Fragment {
+public class ReportFragmentMonth extends Fragment {
 
-    int current_offset = 0;
-    Calendar cal;
-    RecordListAdapter adapter;
+    int current_month;
+    int current_year;
     View current_view;
     Register register;
+    RecordListAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,13 +32,16 @@ public class ReportFragmentDay extends Fragment {
 
         register = new Register(v.getContext());
 
-        cal = Calendar.getInstance();
+        Calendar c = Calendar.getInstance();
+
+        current_month = c.get(Calendar.MONTH)+1;
+        current_year  = c.get(Calendar.YEAR);
 
         ImageButton b = (ImageButton) v.findViewById(R.id.btnNext);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nextDay();
+                nextMonth();
             }
         });
 
@@ -45,7 +49,7 @@ public class ReportFragmentDay extends Fragment {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                previousDay();
+                previousMonth();
             }
         });
 
@@ -69,34 +73,37 @@ public class ReportFragmentDay extends Fragment {
         return v;
     }
 
-    private void nextDay() {
-        cal.add(Calendar.DAY_OF_MONTH, 1);
-        current_offset++;
+    public void nextMonth() {
+        current_month++;
+        if ( current_month==13 ) {
+            current_month = 1;
+            current_year++;
+        }
         updateTotals();
     }
 
-    private void previousDay() {
-        cal.add(Calendar.DAY_OF_MONTH, -1);
-        current_offset--;
+    public void previousMonth() {
+        current_month--;
+        if ( current_month==0 ) {
+            current_month = 12;
+            current_year--;
+        }
         updateTotals();
     }
 
     public void updateTotals() {
-
         if ( current_view==null )
             return;
 
-        String dt = Helper.dateToString(cal.getTime());
         TextView cur = (TextView) current_view.findViewById(R.id.txtCurrent);
-        cur.setText(dt);
+        cur.setText(String.format("%02d/%4d", current_month, current_year));
 
         TextView ti = (TextView) current_view.findViewById(R.id.txtEntrate);
         TextView te = (TextView) current_view.findViewById(R.id.txtUscite);
         TextView ts = (TextView) current_view.findViewById(R.id.txtSaldo);
 
-
-        float e = register.dayExpense(cal.getTime());
-        float i = register.dayIncome(cal.getTime());
+        float e = register.monthExpense(current_year,current_month);
+        float i = register.monthIncome(current_year,current_month);
 
         float s = i - e;
 
@@ -105,12 +112,14 @@ public class ReportFragmentDay extends Fragment {
         ts.setText((s > 0 ? "+" : "") + String.format("%.02f", s));
 
         adapter.clear();
-        ArrayList<Record> rec = register.getRecordList(cal.getTime(), cal.getTime(), Register.DB_SORT.SORT_DATE_DESC);
+        Date d1 = Helper.isoToDate(String.format("%04d-%02d-01", current_year, current_month));
+        Date d2 = Helper.isoToDate(String.format("%04d-%02d-99", current_year, current_month));
+        ArrayList<Record> rec = register.getRecordList(d1, d2, Register.DB_SORT.SORT_DATE_DESC);
         adapter.addAll(rec);
     }
 
-    public static ReportFragmentDay newInstance(String message) {
-        ReportFragmentDay f = new ReportFragmentDay();
+    public static ReportFragmentMonth newInstance(String message) {
+        ReportFragmentMonth f = new ReportFragmentMonth();
         Bundle b = new Bundle();
         b.putString("message", message);
 
@@ -118,5 +127,4 @@ public class ReportFragmentDay extends Fragment {
 
         return f;
     }
-
 }

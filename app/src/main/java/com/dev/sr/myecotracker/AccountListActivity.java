@@ -1,4 +1,4 @@
-package com.example.stefano.myecotracker;
+package com.dev.sr.myecotracker;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -12,32 +12,24 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-
-public class EntityListActivity extends ActionBarActivity {
+public class AccountListActivity extends ActionBarActivity {
 
     Register register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_entity_list);
+        setContentView(R.layout.activity_account_list);
 
         register = new Register(this);
         updateList();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_entity_list, menu);
-        return true;
-    }
+    private void updateList() {
+        ArrayList<Account> accounts = register.getAccountsList(Register.DB_SORT.SORT_DESCRIPTION);
 
-    public void updateList() {
-        ArrayList<Entity> entities = register.getEntitiesList(Register.DB_SORT.SORT_DESCRIPTION);
-
-        ListView list = (ListView) findViewById(R.id.lstEntities);
-        EntityListAdapter ad = new EntityListAdapter(getApplicationContext(), entities);
+        ListView list = (ListView) findViewById(R.id.lstAccounts);
+        AccountListAdapter ad = new AccountListAdapter(getApplicationContext(), accounts);
         list.setAdapter(ad);
 
         if ( ad.getCount()>0 ) {
@@ -46,13 +38,13 @@ public class EntityListActivity extends ActionBarActivity {
         }
 
         // Listener for click
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        list.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Entity editEntity = (Entity) parent.getItemAtPosition(position);
-                Intent intent = new Intent(getApplicationContext(), EntityEditActivity.class);
+                Account editAccount = (Account)parent.getItemAtPosition(position);
+                Intent intent = new Intent(getApplicationContext(), AccountEditActivity.class );
                 intent.putExtra("mode", "edit");
-                intent.putExtra("id", editEntity.id);
+                intent.putExtra("id", editAccount.id);
                 startActivity(intent);
             }
         });
@@ -70,6 +62,13 @@ public class EntityListActivity extends ActionBarActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_account_list, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
@@ -78,14 +77,14 @@ public class EntityListActivity extends ActionBarActivity {
             startActivity(i);
         }
 
-        if ( id == R.id.action_newentity ) {
-            Intent intent = new Intent(this, EntityEditActivity.class );
+        if (id == R.id.action_newaccount) {
+            Intent intent = new Intent(this, AccountEditActivity.class );
             intent.putExtra("mode", "new");
             startActivity(intent);
         }
 
-        if ( id == R.id.action_accountlist ) {
-            Intent intent = new Intent(this, AccountListActivity.class);
+        if ( id == R.id.action_entitylist ) {
+            Intent intent = new Intent(this, EntityListActivity.class);
             startActivity(intent);
         }
 
