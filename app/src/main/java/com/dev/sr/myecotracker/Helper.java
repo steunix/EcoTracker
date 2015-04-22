@@ -2,8 +2,10 @@ package com.dev.sr.myecotracker;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Currency;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 /**
  * Helper class
@@ -69,4 +71,13 @@ public class Helper {
 
         return cal.getTime();
     }
+
+    static String formatAmount(Float amount) {
+        String cs = Currency.getInstance(Locale.getDefault()).getSymbol();
+        if ( amount>=0 )
+            return "+"+String.format("%.02f%s", amount, cs );
+        else
+            return String.format("%.02f%s", amount, cs);
+    }
+
 }
