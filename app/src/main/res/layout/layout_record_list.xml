@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:columnCount="2"
     android:stretchColumns="0"
     android:shrinkColumns="-"
-    >
+    android:background="@drawable/rounded_border">
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -18,7 +20,6 @@
             android:id="@+id/lblRLDate"
             android:layout_column="0"
             android:layout_span="2"
-            android:textAlignment="center"
             android:textAppearance="@style/tiny"
             android:textIsSelectable="false"
             android:textColor="@color/text_color_light" />
