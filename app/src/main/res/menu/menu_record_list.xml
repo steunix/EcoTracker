@@ -6,10 +6,10 @@
     <item
         android:id="@+id/action_newreg"
         android:icon="@drawable/button_add"
-        android:title="Nuova registrazione"
+        android:title="@string/create"
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />
 
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
+    <item android:id="@+id/action_info" android:title="@string/action_info"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>

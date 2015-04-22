@@ -173,7 +173,7 @@
         android:layout_width="fill_parent"
         android:layout_height="30dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/record_list"
+        android:text="@string/records"
         android:id="@+id/textView14"
         android:layout_below="@+id/gridLayout"
         android:layout_alignParentStart="false"

@@ -136,14 +136,14 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_info) {
+            Intent i = new Intent(this, InfoActivity.class);
+            startActivity(i);
             return true;
         }
+
         if ( id == R.id.action_newreg ) {
             Intent intent = new Intent(this, RecordEditActivity.class);
             intent.putExtra("mode","new");

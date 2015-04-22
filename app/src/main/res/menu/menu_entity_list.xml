@@ -3,20 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.stefano.ecotracker.EntityListActivity">
 
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
     <item
         android:id="@+id/action_newentity"
         android:icon="@drawable/button_add"
-        android:title="Nuovo conto"
+        android:title="@string/create"
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_accountlist"
         android:icon="@drawable/folder"
-        android:title="Conti"
+        android:title="@string/accounts"
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />
+
+    <item android:id="@+id/action_info" android:title="@string/action_info"
+        android:orderInCategory="100" app:showAsAction="never" />
 
 </menu>

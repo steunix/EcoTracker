@@ -11,7 +11,7 @@
     <string name="app_name">EcoTracker</string>
 
     <string name="action_settings">Impostazioni</string>
-    <string name="action_newreg">Nuova registrazione</string>
+    <string name="action_info">Info</string>
 
     <string name="monthlyreport">Riepilogo mensile</string>
     <string name="title_activity_newreg">Nuova registrazione</string>
@@ -34,11 +34,16 @@
     <string name="date">Data</string>
     <string name="amount">Importo</string>
     <string name="entity">Fornitore</string>
+    <string name="entities">Fornitori</string>
     <string name="account">Conto</string>
-    <string name="record_list">Registrazioni</string>
+    <string name="accounts">Conti</string>
+    <string name="record">Registrazione</string>
+    <string name="records">Registrazioni</string>
 
-    <string name="newrecord">Nuova registrazione</string>
     <string name="save">Salva</string>
+    <string name="create">Nuovo</string>
+    <string name="delete">Elimina</string>
+
     <string name="baddate">Data non valida</string>
     <string name="badamount">Importo non valido</string>
     <string name="amountzero">Importo non valido</string>
@@ -70,4 +75,9 @@
 
     <string name="no_entities_initial">Per poter usare EcoTracker devi prima creare almeno un fornitore!</string>
     <string name="no_accounts_initial">Per poter usare EcoTracker devi prima creare almeno un conto!</string>
+    <string name="title_activity_info">Info</string>
+
+    <string name="copyright">© 2015 Stefano Rivoir</string>
+    <string name="offer">EcoTracker è assolutamente gratuita. Se ti piace questa app e la trovi utile, puoi sempre fare un\'offerta tramite PayPal a questo indirizzo: rs4000@gmail.com</string>
+    <string name="version">Versione</string>
 </resources>

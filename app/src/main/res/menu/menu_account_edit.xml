@@ -6,17 +6,17 @@
     <item
         android:id="@+id/action_saveaccount"
         android:icon="@drawable/button_check"
-        android:title="Salva"
+        android:title="@string/save"
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_deleteaccount"
         android:icon="@drawable/bin"
-        android:title="Salva"
+        android:title="@string/delete"
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />
 
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
+    <item android:id="@+id/action_info" android:title="@string/action_info"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>

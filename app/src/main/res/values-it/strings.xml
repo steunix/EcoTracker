@@ -2,7 +2,6 @@
 <resources>
     <string name="app_name">EcoTracker</string>
     <string name="account_delete_warning">Cancellare il conto e tutte le sue registrazioni? Attenzione, non si può tornare indietro!</string>
-    <string name="action_newreg">Nuova registrazione</string>
     <string name="action_settings">Impostazioni</string>
     <string name="alert_cancel">Annulla</string>
     <string name="alert_ok">OK</string>
@@ -20,7 +19,6 @@
     <string name="exists_already">Esiste già!</string>
     <string name="mese">Mese</string>
     <string name="monthlyreport">Riepilogo mensile</string>
-    <string name="newrecord">Nuova registrazione</string>
     <string name="no_accounts">Non hai ancora creato nessun conto! Fallo ora cliccando sul + nella barra</string>
     <string name="no_accounts_initial">Per poter usare EcoTracker devi prima creare almeno un conto!</string>
     <string name="no_accounts_or_entities">Non hai ancora creato i conti o i fornitori! Fallo adesso per poter inserire delle registrazioni!</string>
@@ -29,7 +27,6 @@
     <string name="none">Nessuno</string>
     <string name="notes">Note</string>
     <string name="parent_account">Conto padre</string>
-    <string name="record_list">Registrazioni</string>
     <string name="report_section_day">Giorno</string>
     <string name="report_section_month">Mese</string>
     <string name="report_section_week">Settimana</string>
@@ -50,4 +47,15 @@
     <string name="type_income">Entrata</string>
     <string name="uscite">Uscite</string>
     <string name="account">Conto</string>
+    <string name="copyright">© 2015 Stefano Rivoir</string>
+    <string name="action_info">Info</string>
+    <string name="title_activity_info">Info</string>
+    <string name="accounts">Conti</string>
+    <string name="create">Nuovo</string>
+    <string name="delete">Elimina</string>
+    <string name="entities">Fornitori</string>
+    <string name="record">Registrazione</string>
+    <string name="records">Registrazioni</string>
+    <string name="offer">EcoTracker è assolutamente gratuita. Se ti piace questa app e la trovi utile, puoi sempre fare un\'offerta tramite PayPal a questo indirizzo: rs4000@gmail.com</string>
+    <string name="version">Versione</string>
 </resources>
