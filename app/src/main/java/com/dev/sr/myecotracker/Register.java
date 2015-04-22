@@ -503,20 +503,52 @@ public class Register extends SQLiteOpenHelper {
             if (sd.canWrite())
             {
                 String currentDBPath = "//data//com.dev.sr.myecotracker//databases//myecotracker.db";
-                String backupDBPath = "ecot-backup.db";
+                String backupDBPath = "myecotracker-backup.db";
                 File currentDB = new File(data, currentDBPath);
                 File backupDB = new File(sd, backupDBPath);
 
                 if (currentDB.exists()) {
                     FileChannel src = new FileInputStream(currentDB).getChannel();
                     FileChannel dst = new FileOutputStream(backupDB).getChannel();
-                    dst.transferFrom(src, 0, src.size());
+                    long l = dst.transferFrom(src, 0, src.size());
                     src.close();
                     dst.close();
 
-                    Toast.makeText(context, "Backup Complete", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.backup_complete), Toast.LENGTH_SHORT).show();
                 }
             }
+        }
+        catch (Exception e) {
+            Log.w("Settings Backup", e);
+        }
+
+        db = this.getWritableDatabase();
+    }
+
+    public void restore()
+    {
+        db.close();
+
+        try
+        {
+            File sd = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+            File data = Environment.getDataDirectory();
+
+            String currentDBPath = "//data//com.dev.sr.myecotracker//databases//myecotracker.db";
+            String backupDBPath = "myecotracker-backup.db";
+            File currentDB = new File(data, currentDBPath);
+            File backupDB = new File(sd, backupDBPath);
+
+            if (backupDB.exists()) {
+                FileChannel src = new FileInputStream(backupDB).getChannel();
+                FileChannel dst = new FileOutputStream(currentDB).getChannel();
+                Long l = dst.transferFrom(src, 0, src.size());
+                src.close();
+                dst.close();
+
+                Toast.makeText(context, context.getString(R.string.restore_complete), Toast.LENGTH_SHORT).show();
+            }
+
         }
         catch (Exception e) {
             Log.w("Settings Backup", e);
