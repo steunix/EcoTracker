@@ -59,17 +59,14 @@ public class EntityEditActivity extends ActionBarActivity {
         if (id == R.id.action_info) {
             Intent i = new Intent(this, InfoActivity.class);
             startActivity(i);
-            return true;
         }
 
         if ( id==R.id.action_saveentity ) {
             saveEntity(null);
-            return true;
         }
 
         if ( id==R.id.action_deleteentity ) {
             deleteEntity(null);
-            return true;
         }
         return super.onOptionsItemSelected(item);
     }

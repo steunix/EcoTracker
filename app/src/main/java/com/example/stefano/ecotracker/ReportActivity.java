@@ -141,7 +141,6 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
         if (id == R.id.action_info) {
             Intent i = new Intent(this, InfoActivity.class);
             startActivity(i);
-            return true;
         }
 
         if ( id == R.id.action_newreg ) {

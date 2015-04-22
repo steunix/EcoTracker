@@ -99,17 +99,14 @@ public class AccountEditActivity extends ActionBarActivity {
         if (id == R.id.action_info) {
             Intent i = new Intent(this, InfoActivity.class);
             startActivity(i);
-            return true;
         }
 
         if ( id==R.id.action_saveaccount ) {
             saveAccount(null);
-            return true;
         }
 
         if ( id==R.id.action_deleteaccount ) {
             deleteAccount(null);
-            return true;
         }
 
         return super.onOptionsItemSelected(item);

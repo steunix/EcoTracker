@@ -99,12 +99,10 @@ public class RecordEditActivity extends ActionBarActivity {
         if (id == R.id.action_info) {
             Intent i = new Intent(this, InfoActivity.class);
             startActivity(i);
-            return true;
         }
 
         if ( id==R.id.action_saverecord ) {
             saveRecord(null);
-            return true;
         }
 
         return super.onOptionsItemSelected(item);

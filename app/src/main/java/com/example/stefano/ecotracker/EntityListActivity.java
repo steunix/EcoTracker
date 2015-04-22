@@ -76,7 +76,6 @@ public class EntityListActivity extends ActionBarActivity {
         if (id == R.id.action_info) {
             Intent i = new Intent(this, InfoActivity.class);
             startActivity(i);
-            return true;
         }
 
         if ( id == R.id.action_newentity ) {
