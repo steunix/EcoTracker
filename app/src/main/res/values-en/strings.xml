@@ -62,4 +62,7 @@
     <string name="db_entity_others">Other</string>
     <string name="backup">Backup</string>
     <string name="restore">Restore</string>
+    <string name="backup_complete">Backup complete!</string>
+    <string name="app_long_name">My Economy Tracker</string>
+    <string name="restore_complete">Restore complete!</string>
 </resources>
