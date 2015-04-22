@@ -11,7 +11,7 @@
         android:paddingLeft="5dp"
         android:text="Account description"
         android:textColor="@color/text_color"
-        android:textIsSelectable="true"
+        android:textIsSelectable="false"
         android:textAppearance="?android:attr/textAppearanceMedium">
     </TextView>
 
