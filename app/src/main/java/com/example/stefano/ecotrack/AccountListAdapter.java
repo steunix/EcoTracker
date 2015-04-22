@@ -1,4 +1,4 @@
-package com.example.stefano.ecotracker;
+package com.example.stefano.ecotrack;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -1,4 +1,4 @@
-package com.example.stefano.ecotracker;
+package com.example.stefano.ecotrack;
 
 /**
  * Created by Stefano on 02/04/2015.

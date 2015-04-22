@@ -1,4 +1,4 @@
-package com.example.stefano.ecotracker;
+package com.example.stefano.ecotrack;
 
         import android.content.Context;
         import android.database.Cursor;
@@ -28,7 +28,7 @@ public class Register extends SQLiteOpenHelper {
     }
 
     Register(Context ctx) {
-        super(ctx, "ecotracker.db", null, DATABASE_VERSION);
+        super(ctx, "ecotrack.db", null, DATABASE_VERSION);
         context = ctx;
 
         try {

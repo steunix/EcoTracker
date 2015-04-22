@@ -8,7 +8,7 @@
     <color name="text_color">#000000</color>
     <color name="text_color_light">#555555</color>
 
-    <string name="app_name">EcoTracker</string>
+    <string name="app_name">EcoTrack</string>
 
     <string name="action_settings">Settings</string>
     <string name="action_info">About</string>

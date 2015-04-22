@@ -1,8 +1,6 @@
-package com.example.stefano.ecotracker;
+package com.example.stefano.ecotrack;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.database.sqlite.SQLiteDatabase;
 
 /**
  * Created by Stefano on 02/04/2015.

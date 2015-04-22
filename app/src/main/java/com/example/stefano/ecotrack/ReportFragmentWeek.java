@@ -1,4 +1,4 @@
-package com.example.stefano.ecotracker;
+package com.example.stefano.ecotrack;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -13,39 +13,40 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
- * Fragment for daily report
+ * Class for weekly report
  */
-public class ReportFragmentDay extends Fragment {
+public class ReportFragmentWeek extends Fragment {
 
     int current_offset = 0;
     Calendar cal;
-    RecordListAdapter adapter;
     View current_view;
     Register register;
+    RecordListAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_report, container, false);
 
-        register = new Register(v.getContext());
-
         cal = Calendar.getInstance();
 
-        ImageButton b = (ImageButton) v.findViewById(R.id.btnNext);
+        register = new Register(v.getContext());
+
+        ImageButton b = (ImageButton) v.findViewById(R.id.btnPrevious);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nextDay();
+                previousWeek();
             }
         });
 
-        b = (ImageButton) v.findViewById(R.id.btnPrevious);
+        b = (ImageButton) v.findViewById(R.id.btnNext);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                previousDay();
+                nextWeek();
             }
         });
 
@@ -69,48 +70,47 @@ public class ReportFragmentDay extends Fragment {
         return v;
     }
 
-    private void nextDay() {
-        cal.add(Calendar.DAY_OF_MONTH, 1);
-        current_offset++;
+    private void nextWeek() {
+        cal.add(Calendar.DAY_OF_MONTH, 7);
+        current_offset+=7;
         updateTotals();
     }
 
-    private void previousDay() {
-        cal.add(Calendar.DAY_OF_MONTH, -1);
-        current_offset--;
+    private void previousWeek() {
+        cal.add(Calendar.DAY_OF_MONTH, -7);
+        current_offset-=7;
         updateTotals();
     }
 
     public void updateTotals() {
-
         if ( current_view==null )
             return;
 
-        String dt = Helper.dateToString(cal.getTime());
+        Date d1 = Helper.getWeekStart(cal.getTime());
+        Date d2 = Helper.getWeekEnd(cal.getTime());
         TextView cur = (TextView) current_view.findViewById(R.id.txtCurrent);
-        cur.setText(dt);
+        cur.setText(Helper.dateToString(d1,d2));
 
         TextView ti = (TextView) current_view.findViewById(R.id.txtEntrate);
         TextView te = (TextView) current_view.findViewById(R.id.txtUscite);
         TextView ts = (TextView) current_view.findViewById(R.id.txtSaldo);
 
-
-        float e = register.dayExpense(cal.getTime());
-        float i = register.dayIncome(cal.getTime());
+        float e = register.weekExpense(cal.getTime());
+        float i = register.weekIncome(cal.getTime());
 
         float s = i - e;
 
-        ti.setText("+"+String.format("%.02f", i));
+        ti.setText("+" + String.format("%.02f", i));
         te.setText("-" + String.format("%.02f", e));
         ts.setText((s > 0 ? "+" : "") + String.format("%.02f", s));
 
         adapter.clear();
-        ArrayList<Record> rec = register.getRecordList(cal.getTime(), cal.getTime(), Register.DB_SORT.SORT_DATE_DESC);
+        ArrayList<Record> rec = register.getRecordList(d1, d2, Register.DB_SORT.SORT_DATE_DESC);
         adapter.addAll(rec);
     }
 
-    public static ReportFragmentDay newInstance(String message) {
-        ReportFragmentDay f = new ReportFragmentDay();
+    public static ReportFragmentWeek newInstance(String message) {
+        ReportFragmentWeek f = new ReportFragmentWeek();
         Bundle b = new Bundle();
         b.putString("message", message);
 
@@ -118,5 +118,4 @@ public class ReportFragmentDay extends Fragment {
 
         return f;
     }
-
 }
