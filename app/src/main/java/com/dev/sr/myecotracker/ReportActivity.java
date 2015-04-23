@@ -1,7 +1,6 @@
 package com.dev.sr.myecotracker;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -130,7 +129,7 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_time_report, menu);
+        getMenuInflater().inflate(R.menu.menu_report, menu);
         return true;
     }
 
