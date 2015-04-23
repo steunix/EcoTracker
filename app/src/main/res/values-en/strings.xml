@@ -65,4 +65,5 @@
     <string name="backup_complete">Backup complete!</string>
     <string name="app_long_name">My Economy Tracker</string>
     <string name="restore_complete">Restore complete!</string>
+    <string name="credits">Credits for app icon goes to http://iconleak.com\nCredits for icon set goes to http://icons8.com</string>
 </resources>

@@ -5,14 +5,14 @@
 
     <item
         android:id="@+id/action_newentity"
-        android:icon="@drawable/button_add"
+        android:icon="@drawable/ic_add"
         android:title="@string/create"
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_accountlist"
-        android:icon="@drawable/folder"
+        android:icon="@drawable/ic_account"
         android:title="@string/accounts"
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />

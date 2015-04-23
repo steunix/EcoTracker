@@ -80,6 +80,7 @@
 
     <string name="copyright">© 2015 Stefano Rivoir</string>
     <string name="offer">MyEcoTracker is free. If you like this app and find it useful, you can always make a free offer with PayPal to: rs4000@gmail.com</string>
+    <string name="credits">Credits for app icon goes to http://iconleak.com\nCredits for icon set goes to http://icons8.com</string>
     <string name="version">Version</string>
 
     <string name="db_account_others">Other</string>

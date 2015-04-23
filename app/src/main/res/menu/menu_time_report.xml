@@ -5,25 +5,25 @@
 
     <item
         android:id="@+id/action_newreg"
-        android:icon="@drawable/button_add"
+        android:icon="@drawable/ic_add"
         android:title="@string/create"
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_recordlist"
-        android:icon="@drawable/book_open"
+        android:icon="@drawable/ic_folder"
         android:title="@string/records"
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_accountlist"
-        android:icon="@drawable/folder"
+        android:icon="@drawable/ic_account"
         android:title="@string/accounts"
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_entitylist"
-        android:icon="@drawable/users"
+        android:icon="@drawable/ic_entity"
         android:title="@string/entities"
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />
