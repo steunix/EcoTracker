@@ -133,7 +133,7 @@ public class RecordEditActivity extends ActionBarActivity {
 
         r.account = (Account)((Spinner)findViewById(R.id.spnAccount)).getSelectedItem();
         r.entity = (Entity)((Spinner)findViewById(R.id.spnEntity)).getSelectedItem();
-        r.description = ((EditText)findViewById(R.id.txtDescription)).getText().toString();
+        r.description = ((EditText)findViewById(R.id.txtDescription)).getText().toString().trim();
         r.date = date;
         r.amount = amt;
 
