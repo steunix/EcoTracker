@@ -60,6 +60,8 @@
     <string name="report_section_day">Day</string>
     <string name="report_section_week">Week</string>
     <string name="report_section_month">Month</string>
+    <string name="report_section_week_bd">Weekly breakdown</string>
+    <string name="report_section_month_bd">Monthly breakdown</string>
 
     <string name="notes">Notes</string>
     <string name="exists_already">This already exists!</string>

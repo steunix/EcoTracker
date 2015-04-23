@@ -207,6 +207,14 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
         ReportFragmentMonth m = (ReportFragmentMonth) fm.findFragmentByTag("android:switcher:" + mViewPager.getId() + ":2");
         if ( m!=null )
             m.updateTotals();
+
+        ReportFragmentWeekBreakdown wb = (ReportFragmentWeekBreakdown)fm.findFragmentByTag("android:switcher:" + mViewPager.getId() + ":3");
+        if ( wb!=null )
+            wb.updateTotals();
+
+        ReportFragmentMonthBreakdown mb = (ReportFragmentMonthBreakdown) fm.findFragmentByTag("android:switcher:" + mViewPager.getId() + ":4");
+        if ( mb!=null )
+            mb.updateTotals();
     }
 
     /**
@@ -228,6 +236,10 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
                     return ReportFragmentWeek.newInstance("2");
                 case 2:
                     return ReportFragmentMonth.newInstance("3");
+                case 3:
+                    return ReportFragmentWeekBreakdown.newInstance("4");
+                case 4:
+                    return ReportFragmentMonthBreakdown.newInstance("5");
                 default:
                     return null;
             }
@@ -235,13 +247,11 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            return 5;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            Locale l = Locale.getDefault();
             switch (position) {
                 case 0:
                     return getString(R.string.report_section_day);
@@ -249,6 +259,10 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
                     return getString(R.string.report_section_week);
                 case 2:
                     return getString(R.string.report_section_month);
+                case 3:
+                    return getString(R.string.report_section_week_bd);
+                case 4:
+                    return getString(R.string.report_section_month_bd);
             }
             return null;
         }

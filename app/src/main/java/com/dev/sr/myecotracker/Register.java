@@ -228,6 +228,30 @@ public class Register extends SQLiteOpenHelper {
         return list;
     }
 
+    public ArrayList<AccountBreakdown> getAccountBreakdown(Date from, Date to) {
+        String dtFrom = Helper.toIso(from);
+        String dtTo = Helper.toIso(to);
+
+        ArrayList<AccountBreakdown> list = new ArrayList<>();
+
+        String sql = String.format(
+                "select r.account, a.type, a.description, sum(r.amount) from register r, accounts a "+
+                        "where r.account=a.id and r.date>='%s' and r.date<='%s' "+
+                        "group by r.account, a.type, a.description order by a.type desc, sum(r.amount) desc, a.description ", dtFrom, dtTo);
+
+        Cursor cursor = db.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            do {
+                AccountBreakdown a = new AccountBreakdown();
+                a.account = getAccount(cursor.getLong(0));
+                a.amount = cursor.getFloat(3);
+                list.add(a);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return list;
+    }
+
     /**
      * Returns the entities list
      * @return Entities list
