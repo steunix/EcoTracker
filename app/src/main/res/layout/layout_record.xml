@@ -39,7 +39,7 @@
             android:textColor="@color/text_color" />
 
         <TextView
-            android:layout_width="80dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/none"
