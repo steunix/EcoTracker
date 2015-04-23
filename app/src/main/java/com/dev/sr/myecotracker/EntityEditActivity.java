@@ -48,7 +48,8 @@ public class EntityEditActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_entity_edit, menu);
-        menu.findItem(R.id.action_deleteentity).setVisible(mode.equals("edit"));
+        if ( mode.equals("edit") || currentEntity.id==0 )
+            menu.findItem(R.id.action_deleteentity).setVisible(false);
         return true;
     }
 

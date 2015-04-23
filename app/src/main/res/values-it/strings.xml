@@ -19,11 +19,6 @@
     <string name="exists_already">Esiste già!</string>
     <string name="mese">Mese</string>
     <string name="monthlyreport">Riepilogo mensile</string>
-    <string name="no_accounts">Non hai ancora creato nessun conto! Fallo ora cliccando sul + nella barra</string>
-    <string name="no_accounts_initial">Per poter usare MyEcoTracker devi prima creare almeno un conto!</string>
-    <string name="no_accounts_or_entities">Non hai ancora creato i conti o i fornitori! Fallo adesso per poter inserire delle registrazioni!</string>
-    <string name="no_entities">Non hai ancora creato nessun fornitore! Fallo ora cliccando sul + nella barra</string>
-    <string name="no_entities_initial">Per poter usare MyEcoTracker devi prima creare almeno un fornitore!</string>
     <string name="none">Nessuno</string>
     <string name="notes">Note</string>
     <string name="parent_account">Conto padre</string>
@@ -58,8 +53,8 @@
     <string name="records">Registrazioni</string>
     <string name="offer">MyEcoTracker è assolutamente gratuita. Se ti piace questa app e la trovi utile, puoi sempre fare un\'offerta tramite PayPal a questo indirizzo: rs4000@gmail.com</string>
     <string name="version">Versione</string>
-    <string name="db_account_others">Altro</string>
-    <string name="db_entity_others">Altro</string>
+    <string name="db_account_others">Altre spese</string>
+    <string name="db_entity_others">Altro fornitore</string>
     <string name="backup">Backup</string>
     <string name="restore">Restore</string>
     <string name="backup_complete">Backup completo!</string>

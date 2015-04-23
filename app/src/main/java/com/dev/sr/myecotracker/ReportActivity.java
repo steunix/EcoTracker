@@ -75,54 +75,6 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
-
-        // If no accounts or entities exists, then direct to the proper page
-        ArrayList<Account> accounts = register.getAccountsList(Register.DB_SORT.SORT_DESCRIPTION);
-
-        if ( accounts.size()==0 ) {
-            AlertDialog.Builder bld = new AlertDialog.Builder(this);
-            bld.setTitle(R.string.alert_warning)
-                    .setMessage(R.string.no_accounts_initial);
-            bld.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                }
-            });
-            bld.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialog) {
-                    Intent intent = new Intent(getApplicationContext(), AccountEditActivity.class );
-                    intent.putExtra("mode", "new");
-                    startActivity(intent);
-                }
-            });
-            AlertDialog dlg = bld.create();
-            dlg.show();
-            return;
-        }
-
-        ArrayList<Entity> entities = register.getEntitiesList(Register.DB_SORT.SORT_DESCRIPTION);
-        if ( entities.size()==0 ) {
-            AlertDialog.Builder bld = new AlertDialog.Builder(this);
-            bld.setTitle(R.string.alert_warning)
-                    .setMessage(R.string.no_entities_initial);
-            bld.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                }
-            });
-            bld.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialog) {
-                    Intent intent = new Intent(getApplicationContext(), EntityEditActivity.class );
-                    intent.putExtra("mode", "new");
-                    startActivity(intent);
-                }
-            });
-            AlertDialog dlg = bld.create();
-            dlg.show();
-            return;
-        }
     }
 
 

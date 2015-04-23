@@ -88,7 +88,8 @@ public class AccountEditActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_account_edit, menu);
-        menu.findItem(R.id.action_deleteaccount).setVisible(mode.equals("edit"));
+        if ( mode.equals("edit") || currentAccount.id==0 )
+            menu.findItem(R.id.action_deleteentity).setVisible(false);
         return true;
     }
 

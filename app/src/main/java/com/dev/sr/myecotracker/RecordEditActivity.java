@@ -62,26 +62,6 @@ public class RecordEditActivity extends ActionBarActivity {
 
             EditText txtDescription = (EditText) findViewById(R.id.txtDescription);
             txtDescription.setText(editRecord.description);
-        } else {
-            // Check that accounts and entities are existent
-            if ( adAccounts.getCount()==0 || adEntities.getCount()==0 ) {
-                AlertDialog.Builder bld = new AlertDialog.Builder(this);
-                bld.setTitle(R.string.alert_warning)
-                        .setMessage(R.string.no_accounts_or_entities);
-                bld.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                bld.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        finish();
-                    }
-                });
-                AlertDialog dlg = bld.create();
-                dlg.show();
-            }
         }
     }
 
