@@ -100,9 +100,9 @@ public class ReportFragmentWeek extends Fragment {
 
         float s = i - e;
 
-        ti.setText("+" + String.format("%.02f", i));
-        te.setText("-" + String.format("%.02f", e));
-        ts.setText((s > 0 ? "+" : "") + String.format("%.02f", s));
+        ti.setText(Helper.formatAmount(i));
+        te.setText(Helper.formatAmount(-e));
+        ts.setText(Helper.formatAmount(s));
 
         adapter.clear();
         ArrayList<Record> rec = register.getRecordList(d1, d2, Register.DB_SORT.SORT_DATE_DESC);

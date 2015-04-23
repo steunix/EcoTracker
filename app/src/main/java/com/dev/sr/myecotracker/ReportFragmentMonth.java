@@ -107,9 +107,9 @@ public class ReportFragmentMonth extends Fragment {
 
         float s = i - e;
 
-        ti.setText("+"+String.format("%.02f", i));
-        te.setText("-" + String.format("%.02f", e));
-        ts.setText((s > 0 ? "+" : "") + String.format("%.02f", s));
+        ti.setText(Helper.formatAmount(i));
+        te.setText(Helper.formatAmount(-e));
+        ts.setText(Helper.formatAmount(s));
 
         adapter.clear();
         Date d1 = Helper.isoToDate(String.format("%04d-%02d-01", current_year, current_month));
