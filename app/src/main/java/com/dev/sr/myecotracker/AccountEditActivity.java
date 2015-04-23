@@ -138,7 +138,13 @@ public class AccountEditActivity extends ActionBarActivity {
     public void saveAccount(View v) {
         Account account = new Account();
 
-        account.description = ((EditText)findViewById(R.id.txtAccountDescr)).getText().toString();
+        account.description = ((EditText)findViewById(R.id.txtAccountDescr)).getText().toString().trim();
+
+        if (account.description.length() == 0) {
+            Toast.makeText(this, R.string.baddescription, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         String t = ((Spinner)findViewById(R.id.spnAccountType)).getSelectedItem().toString();
         if ( t.equals(getString(R.string.type_expense)) )
             account.type = account.type_expense;

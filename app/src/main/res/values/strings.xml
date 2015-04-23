@@ -47,6 +47,7 @@
 
     <string name="baddate">Invalid date</string>
     <string name="badamount">Invalid amount</string>
+    <string name="baddescription">Invalid description</string>
     <string name="amountzero">Invalid amount</string>
     <string name="saved">Saved!</string>
     <string name="deleted">Deleted!</string>

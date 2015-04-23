@@ -63,4 +63,5 @@
     <string name="credits">Credits for app icon goes to http://iconleak.com\nCredits for icon set goes to http://icons8.com</string>
     <string name="report_section_month_bd">Riepilogo mensile</string>
     <string name="report_section_week_bd">Riepilogo settimanale</string>
+    <string name="baddescription">Descrizione non valida</string>
 </resources>

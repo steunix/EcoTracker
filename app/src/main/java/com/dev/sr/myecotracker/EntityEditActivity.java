@@ -96,7 +96,12 @@ public class EntityEditActivity extends ActionBarActivity {
     public void saveEntity(View v) {
         Entity entity = new Entity();
 
-        entity.description = ((EditText)findViewById(R.id.txtEntityDescr)).getText().toString();
+        entity.description = ((EditText) findViewById(R.id.txtEntityDescr)).getText().toString().trim();
+
+        if (entity.description.length() == 0) {
+            Toast.makeText(this, R.string.baddescription, Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         String mode = getIntent().getExtras().getString("mode");
         if ( mode.equals("edit") )
