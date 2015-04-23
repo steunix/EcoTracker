@@ -77,6 +77,7 @@ public class AccountEditActivity extends ActionBarActivity {
                 spnParent.setSelection(pos);
             } else
                 spnParent.setSelection(0);
+
         } else {
             // New account
             setTitle(getString(R.string.title_activity_new_account));
@@ -88,8 +89,8 @@ public class AccountEditActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_account_edit, menu);
-        if ( mode.equals("edit") || currentAccount.id==0 )
-            menu.findItem(R.id.action_deleteentity).setVisible(false);
+        if ( mode.equals("new") || currentAccount.id==0 )
+            menu.findItem(R.id.action_deleteaccount).setVisible(false);
         return true;
     }
 

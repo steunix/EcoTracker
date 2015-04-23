@@ -40,11 +40,6 @@ public class EntityListActivity extends ActionBarActivity {
         EntityListAdapter ad = new EntityListAdapter(getApplicationContext(), entities);
         list.setAdapter(ad);
 
-        if ( ad.getCount()>0 ) {
-            TextView v = (TextView) findViewById(R.id.txtEmpty);
-            v.setVisibility(View.GONE);
-        }
-
         // Listener for click
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/lstAccounts"
         android:layout_alignParentStart="true"
-        android:choiceMode="singleChoice"
-        android:layout_below="@+id/txtEmpty" />
+        android:choiceMode="singleChoice" />
 
 </RelativeLayout>
