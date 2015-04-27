@@ -58,7 +58,7 @@ public class RecordEditActivity extends ActionBarActivity {
             txtDate.setText(Helper.dateToString(editRecord.date));
 
             EditText txtAmount = (EditText) findViewById(R.id.txtAmount);
-            txtAmount.setText(editRecord.getAbsAmountString());
+            txtAmount.setText(editRecord.getRawAmountString());
 
             EditText txtDescription = (EditText) findViewById(R.id.txtDescription);
             txtDescription.setText(editRecord.description);

@@ -40,4 +40,7 @@ public class Record {
         return String.format("%.02f%s", this.amount, cs);
     }
 
+    public String getRawAmountString() {
+        return String.format("%.02f", this.amount);
+    }
 }
