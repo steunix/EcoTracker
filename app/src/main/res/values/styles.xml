@@ -3,15 +3,19 @@
 
     <style name="EcoTheme" parent="Theme.AppCompat.Light">
         <item name="android:actionBarStyle">@style/EcoActionBar</item>
+        <!--
         <item name="android:actionBarTabStyle">@style/EcoActionBarTab</item>
         <item name="android:actionBarTabTextStyle">@style/EcoActionBarTabText</item>
         <item name="android:actionMenuTextColor">@color/actionbar_text</item>
+        -->
 
         <!-- Support library compatibility -->
         <item name="actionBarStyle">@style/EcoActionBar</item>
+        <!--
         <item name="actionBarTabStyle">@style/EcoActionBarTab</item>
         <item name="actionBarTabTextStyle">@style/EcoActionBarTabText</item>
         <item name="actionMenuTextColor">@color/actionbar_text</item>
+        -->
 
     </style>
 
@@ -56,7 +60,6 @@
     <style name="EcoActionBarTabText"
         parent="@style/Widget.AppCompat.ActionBar.TabText">
         <item name="android:textColor">@color/actionbar_text</item>
-        <!-- The textColor property is backward compatible with the Support Library -->
     </style>
 
     <!-- ActionBar styles -->
