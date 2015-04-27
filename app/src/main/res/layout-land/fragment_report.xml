@@ -159,6 +159,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/lstRecords"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/gridLayout" />
+        android:layout_below="@+id/sep" />
 
 </RelativeLayout>
