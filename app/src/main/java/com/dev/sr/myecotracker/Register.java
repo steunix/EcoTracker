@@ -30,7 +30,8 @@ public class Register extends SQLiteOpenHelper {
         SORT_ID,
         SORT_USAGE,
         SORT_DATE,
-        SORT_DATE_DESC
+        SORT_DATE_DESC,
+        SORT_USAGE_COMBINED
     }
 
     Register(Context ctx) {
@@ -256,7 +257,7 @@ public class Register extends SQLiteOpenHelper {
      * Returns the entities list
      * @return Entities list
      */
-    public ArrayList<Entity> getEntitiesList(DB_SORT sort) {
+    public ArrayList<Entity> getEntitiesList(DB_SORT sort, Account account) {
         ArrayList<Entity> list = new ArrayList<>();
 
         String sql = "select id, description, usage from entities ";
@@ -270,6 +271,13 @@ public class Register extends SQLiteOpenHelper {
             case SORT_ID:
                 sql += "order by id";
                 break;
+            case SORT_USAGE_COMBINED:
+                if ( account!=null ) {
+                    sql = "select e.id, e.description, u.usage " +
+                            "from entities e " +
+                            "left outer join usage u on e.id=u.entity and u.account=" + account.id + " " +
+                            "order by u.usage desc";
+                }
         }
 
         Cursor cursor = db.rawQuery(sql, null);

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -22,6 +23,8 @@ public class RecordEditActivity extends ActionBarActivity {
 
     Record editRecord;
     Register register;
+    AccountListAdapter adAccounts;
+    EntityListAdapter adEntities;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,16 +32,15 @@ public class RecordEditActivity extends ActionBarActivity {
         setContentView(R.layout.activity_record_edit);
 
         register = new Register(this);
-        ArrayList<Account> accounts = register.getAccountsList(Register.DB_SORT.SORT_USAGE);
-        ArrayList<Entity> entities = register.getEntitiesList(Register.DB_SORT.SORT_USAGE);
+
+        adAccounts = new AccountListAdapter(this, new ArrayList<Account>());
+        adEntities = new EntityListAdapter(this, new ArrayList<Entity>());
 
         Spinner spnAccounts = (Spinner) findViewById(R.id.spnAccount);
-        AccountListAdapter adAccounts = new AccountListAdapter(this, accounts);
-        spnAccounts.setAdapter(adAccounts);
-
         Spinner spnEntities = (Spinner) findViewById(R.id.spnEntity);
-        EntityListAdapter adEntities = new EntityListAdapter(this, entities);
-        spnEntities.setAdapter(adEntities);
+
+        updateAccounts();
+        updateEntities();
 
         EditText txtDate = (EditText) findViewById(R.id.txtDate);
         String strDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
@@ -47,6 +49,7 @@ public class RecordEditActivity extends ActionBarActivity {
         Intent i = getIntent();
         String mode = i.getExtras().getString("mode");
         if (mode.equals("edit") ) {
+
             editRecord = register.getRecord(i.getExtras().getLong("id"));
 
             int pos = adAccounts.getPosition(editRecord.account.description);
@@ -63,8 +66,40 @@ public class RecordEditActivity extends ActionBarActivity {
             EditText txtDescription = (EditText) findViewById(R.id.txtDescription);
             txtDescription.setText(editRecord.description);
         }
+
+        // Add events for click
+        spnAccounts.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                updateEntities();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
 
+    private void updateAccounts() {
+        ArrayList<Account> accounts = register.getAccountsList(Register.DB_SORT.SORT_USAGE);
+
+        adAccounts.clear();
+        adAccounts.addAll(accounts);
+
+        Spinner spnAccounts = (Spinner) findViewById(R.id.spnAccount);
+        spnAccounts.setAdapter(adAccounts);
+    }
+
+    private void updateEntities() {
+        Account account = (Account)((Spinner)findViewById(R.id.spnAccount)).getSelectedItem();
+        ArrayList<Entity> entities = register.getEntitiesList(Register.DB_SORT.SORT_USAGE_COMBINED, account);
+
+        adEntities.clear();
+        adEntities.addAll(entities);
+
+        Spinner spnEntities = (Spinner) findViewById(R.id.spnEntity);
+        spnEntities.setAdapter(adEntities);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
