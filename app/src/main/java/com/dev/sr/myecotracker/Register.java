@@ -273,10 +273,9 @@ public class Register extends SQLiteOpenHelper {
                 break;
             case SORT_USAGE_COMBINED:
                 if ( account!=null ) {
-                    sql = "select e.id, e.description, u.usage " +
-                            "from entities e " +
-                            "left outer join usage u on e.id=u.entity and u.account=" + account.id + " " +
-                            "order by u.usage desc";
+                    sql = "select e.id, e.description, (select ifnull(sum(usage),0) from usage where entity=e.id and account="+account.id+") usg "+
+                            "from entities e "+
+                            "order by usg desc, e.usage desc, e.description";
                 }
         }
 
