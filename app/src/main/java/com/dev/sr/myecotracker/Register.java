@@ -196,6 +196,56 @@ public class Register extends SQLiteOpenHelper {
         return rec;
     }
 
+    public ArrayList<Record> getRecordList(Account account, Entity entity, Date dateFrom, Date dateTo, Float amtFrom, Float amtTo) {
+        ArrayList<Record> list = new ArrayList<>();
+
+        String sql = String.format("select id, date, account, entity, amount, description from register where 1=1 ");
+
+        if ( account.id != null ) {
+            sql += " and account="+account.id+" ";
+        }
+
+        if ( entity.id != null ) {
+            sql += " and entity="+entity.id+" ";
+        }
+
+        if ( dateFrom!= null ) {
+            String dtFrom = Helper.toIso(dateFrom);
+            sql += " and date>='"+dtFrom+"' ";
+        }
+
+        if ( dateTo!= null ) {
+            String dtTo = Helper.toIso(dateTo);
+            sql += " and date<='"+dtTo+"' ";
+        }
+
+        if ( amtFrom != null ) {
+            sql += String.format(" and amount>="+Helper.sqlFloat(amtFrom)+" " );
+        }
+
+        if ( amtTo != null ) {
+            sql += String.format(" and amount<="+Helper.sqlFloat(amtTo)+" ");
+        }
+
+        sql += "order by date desc";
+
+        Cursor cursor = db.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Record r = new Record();
+                r.id = cursor.getLong(0);
+                r.date = Helper.isoToDate(cursor.getString(1));
+                r.account = getAccount(cursor.getLong(2));
+                r.entity = getEntity(cursor.getLong(3));
+                r.amount = cursor.getFloat(4);
+                r.description = cursor.getString(5);
+                list.add(r);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return list;
+    }
+
     public ArrayList<Record> getRecordList(Date from, Date to, DB_SORT sort) {
         String dtFrom = Helper.toIso(from);
         String dtTo = Helper.toIso(to);

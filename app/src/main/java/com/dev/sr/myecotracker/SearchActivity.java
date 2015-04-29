@@ -1,10 +1,9 @@
 package com.dev.sr.myecotracker;
 
-import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.SimpleTimeZone;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -13,11 +12,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 
-public class ReportActivity extends ActionBarActivity implements ActionBar.TabListener {
+public class SearchActivity extends ActionBarActivity implements ActionBar.TabListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -33,14 +35,11 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
      * The {@link ViewPager} that will host the section contents.
      */
     ViewPager mViewPager;
-    Register register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_report);
-
-        register = new Register(this);
+        setContentView(R.layout.activity_search);
 
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
@@ -81,54 +80,16 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_report, menu);
+        getMenuInflater().inflate(R.menu.menu_search, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        if (id == R.id.action_info) {
-            Intent i = new Intent(this, InfoActivity.class);
-            startActivity(i);
-        }
-
-        if ( id == R.id.action_newreg ) {
-            Intent intent = new Intent(this, RecordEditActivity.class);
-            intent.putExtra("mode","new");
-            startActivity(intent);
-        }
-
-        if ( id == R.id.action_accountlist ) {
-            Intent intent = new Intent(this, AccountListActivity.class);
-            startActivity(intent);
-        }
-
-        if ( id == R.id.action_entitylist ) {
-            Intent intent = new Intent(this, EntityListActivity.class);
-            startActivity(intent);
-        }
-
-        if ( id == R.id.action_recordlist ) {
-            Intent intent = new Intent(this, RecordListActivity.class);
-            startActivity(intent);
-        }
-
-        if ( id == R.id.action_search ) {
-            Intent intent = new Intent(this, SearchActivity.class);
-            startActivity(intent);
-        }
-
-        /*
-        if ( id == R.id.action_backup ) {
-            register.backup();
-        }
-
-        if ( id == R.id.action_restore ) {
-            register.restore();
-        }
-        */
 
         return super.onOptionsItemSelected(item);
     }
@@ -148,39 +109,13 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-
-        FragmentManager fm = getSupportFragmentManager();
-
-        ReportFragmentDay d = (ReportFragmentDay)fm.findFragmentByTag("android:switcher:"+mViewPager.getId()+":0");
-        if ( d!=null )
-            d.updateTotals();
-
-        ReportFragmentWeek w = (ReportFragmentWeek)fm.findFragmentByTag("android:switcher:" + mViewPager.getId() + ":1");
-        if ( w!=null )
-            w.updateTotals();
-
-        ReportFragmentMonth m = (ReportFragmentMonth) fm.findFragmentByTag("android:switcher:" + mViewPager.getId() + ":2");
-        if ( m!=null )
-            m.updateTotals();
-
-        ReportFragmentWeekBreakdown wb = (ReportFragmentWeekBreakdown)fm.findFragmentByTag("android:switcher:" + mViewPager.getId() + ":3");
-        if ( wb!=null )
-            wb.updateTotals();
-
-        ReportFragmentMonthBreakdown mb = (ReportFragmentMonthBreakdown) fm.findFragmentByTag("android:switcher:" + mViewPager.getId() + ":4");
-        if ( mb!=null )
-            mb.updateTotals();
-    }
-
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
+        public SearchFragmentResults resultFragment;
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -189,40 +124,36 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
         public Fragment getItem(int position) {
             switch ( position ) {
                 case 0:
-                    return ReportFragmentDay.newInstance("1");
+                    return SearchFragmentParam.newInstance(1);
                 case 1:
-                    return ReportFragmentWeek.newInstance("2");
-                case 2:
-                    return ReportFragmentMonth.newInstance("3");
-                case 3:
-                    return ReportFragmentWeekBreakdown.newInstance("4");
-                case 4:
-                    return ReportFragmentMonthBreakdown.newInstance("5");
-                default:
-                    return null;
+                    resultFragment = SearchFragmentResults.newInstance(2);
+                    return resultFragment;
             }
+            return null;
         }
 
         @Override
         public int getCount() {
-            return 5;
+            return 2;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
+            Locale l = Locale.getDefault();
             switch (position) {
                 case 0:
-                    return getString(R.string.report_section_day);
+                    return getString(R.string.title_search_param).toUpperCase(l);
                 case 1:
-                    return getString(R.string.report_section_week);
-                case 2:
-                    return getString(R.string.report_section_month);
-                case 3:
-                    return getString(R.string.report_section_week_bd);
-                case 4:
-                    return getString(R.string.report_section_month_bd);
+                    return getString(R.string.title_search_results).toUpperCase(l);
             }
             return null;
         }
+    }
+
+    public void updateResults(Account account, Entity entity, Date dateFrom, Date dateTo, Float amountFrom, Float amountTo) {
+        SearchFragmentResults frg = (SearchFragmentResults)mSectionsPagerAdapter.resultFragment;
+        frg.updateResults(account, entity, dateFrom, dateTo, amountFrom, amountTo);
+
+        mViewPager.setCurrentItem(1);
     }
 }

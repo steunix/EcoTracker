@@ -33,17 +33,23 @@
     <string name="mese">Month</string>
 
     <string name="date">Date</string>
-    <string name="amount">Amount</string>
+    <string name="amount">Min amount</string>
     <string name="entity">Supplier</string>
     <string name="entities">Suppliers</string>
     <string name="account">Account</string>
     <string name="accounts">Accounts</string>
     <string name="record">Record</string>
     <string name="records">Records</string>
+    <string name="datefrom">From date</string>
+    <string name="dateto">To date</string>
+    <string name="amountfrom">Max amount</string>
+    <string name="amountto">To amount</string>
+    <string name="any">Any</string>
 
     <string name="save">Save</string>
     <string name="create">New</string>
     <string name="delete">Delete</string>
+    <string name="search">Search</string>
 
     <string name="baddate">Invalid date</string>
     <string name="badamount">Invalid amount</string>
@@ -87,4 +93,8 @@
     <string name="backup_complete">Backup complete!</string>
     <string name="restore">Restore</string>
     <string name="restore_complete">Restore complete!</string>
+    <string name="title_activity_search">Search</string>
+
+    <string name="title_search_param">Parameters</string>
+    <string name="title_search_results">Results</string>
 </resources>

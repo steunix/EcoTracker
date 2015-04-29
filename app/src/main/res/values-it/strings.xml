@@ -6,7 +6,7 @@
     <string name="alert_cancel">Annulla</string>
     <string name="alert_ok">OK</string>
     <string name="alert_warning">Attenzione</string>
-    <string name="amount">Importo</string>
+    <string name="amount">Imp minimo</string>
     <string name="amountzero">Importo non valido</string>
     <string name="badamount">Importo non valido</string>
     <string name="baddate">Data non valida</string>
@@ -64,4 +64,13 @@
     <string name="report_section_month_bd">Riepilogo mensile</string>
     <string name="report_section_week_bd">Riepilogo settimanale</string>
     <string name="baddescription">Descrizione non valida</string>
+    <string name="title_activity_search">Cerca</string>
+    <string name="title_search_param">Parametri</string>
+    <string name="title_search_results">Risultati</string>
+    <string name="amountfrom">Imp massimo</string>
+    <string name="amountto">A importo</string>
+    <string name="datefrom">Dal</string>
+    <string name="dateto">Al</string>
+    <string name="search">Cerca</string>
+    <string name="any">Tutto</string>
 </resources>

@@ -16,6 +16,16 @@ public class Helper {
         return string.replace("'","''");
     }
 
+    static Date stringToDate(String date) {
+        try {
+            SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
+            Date d = sf.parse(date);
+            return d;
+        } catch(Exception e) {
+            return null;
+        }
+    }
+
     static Date isoToDate(String date) {
         String y = date.substring(0,4);
         String m = date.substring(5,7);
@@ -80,4 +90,9 @@ public class Helper {
             return String.format("%.02f%s", amount, cs);
     }
 
+    static String sqlFloat(Float number) {
+        String s = String.format("%.02f", number);
+        s = s.replace(",",".");
+        return s;
+    }
 }

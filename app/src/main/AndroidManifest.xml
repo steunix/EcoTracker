@@ -12,41 +12,45 @@
         android:label="@string/app_name"
         android:theme="@style/EcoTheme" >
         <activity
-            android:name="com.dev.sr.myecotracker.ReportActivity"
+            android:name=".ReportActivity"
             android:label="@string/app_name" >
-            <intent-filter android:label="@string/app_long_name">
+            <intent-filter android:label="@string/app_long_name" >
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.dev.sr.myecotracker.RecordEditActivity"
+            android:name=".RecordEditActivity"
             android:label="@string/title_activity_newreg" >
         </activity>
         <activity
-            android:name="com.dev.sr.myecotracker.AccountEditActivity"
+            android:name=".AccountEditActivity"
             android:label="@string/title_activity_new_account" >
         </activity>
         <activity
-            android:name="com.dev.sr.myecotracker.AccountListActivity"
+            android:name=".AccountListActivity"
             android:label="@string/title_activity_account_list" >
         </activity>
         <activity
-            android:name="com.dev.sr.myecotracker.EntityListActivity"
+            android:name=".EntityListActivity"
             android:label="@string/title_activity_entity_list" >
         </activity>
         <activity
-            android:name="com.dev.sr.myecotracker.EntityEditActivity"
+            android:name=".EntityEditActivity"
             android:label="@string/title_activity_entity_edit" >
         </activity>
         <activity
-            android:name="com.dev.sr.myecotracker.RecordListActivity"
+            android:name=".RecordListActivity"
             android:label="@string/title_activity_record_list" >
         </activity>
         <activity
-            android:name="com.dev.sr.myecotracker.InfoActivity"
+            android:name=".InfoActivity"
             android:label="@string/title_activity_info" >
+        </activity>
+        <activity
+            android:name=".SearchActivity"
+            android:label="@string/title_activity_search" >
         </activity>
     </application>
 
