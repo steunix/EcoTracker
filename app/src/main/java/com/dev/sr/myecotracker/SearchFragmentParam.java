@@ -48,8 +48,8 @@ public class SearchFragmentParam extends Fragment {
         Account account = (Account) spnAccount.getSelectedItem();
         Entity  entity  = (Entity)  spnEntity.getSelectedItem();
 
-        editor.putLong("search_account", (account.id==null ? -1 : entity.id) );
-        editor.putLong("search_entity", (entity.id==null ? -1 : entity.id) );
+        editor.putLong("search_account_id", (account.id==null ? -1 : account.id) );
+        editor.putLong("search_entity_id", (entity.id==null ? -1 : entity.id) );
 
         String s;
         s = ((TextView) (current_view.findViewById(R.id.txtDateFrom))).getText().toString();
