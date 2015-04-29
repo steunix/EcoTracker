@@ -76,7 +76,7 @@ public class Register extends SQLiteOpenHelper {
     }
 
     public Account getAccount(Long id) {
-        String sql = String.format("select id, parent, description, type from accounts where id=%d", id);
+        String sql = String.format("select id, ifnull(parent,-1), description, type from accounts where id=%d", id);
         Cursor cursor = db.rawQuery(sql, null);
         Account a = null;
 
@@ -84,6 +84,8 @@ public class Register extends SQLiteOpenHelper {
             a = new Account();
             a.id = cursor.getLong(0);
             a.parent = cursor.getLong(1);
+            if ( a.parent==-1 )
+                a.parent = null;
             a.description = cursor.getString(2);
             a.type = cursor.getString(3);
         }
@@ -114,7 +116,7 @@ public class Register extends SQLiteOpenHelper {
     public ArrayList<Account> getAccountsList(DB_SORT sort) {
         ArrayList<Account> list = new ArrayList<>();
 
-        String sql = "select id, parent, description, type, usage from accounts ";
+        String sql = "select id, ifnull(parent,-1), description, type, usage from accounts ";
         switch ( sort ) {
             case SORT_DESCRIPTION:
                 sql += "order by description, usage desc";
@@ -133,6 +135,8 @@ public class Register extends SQLiteOpenHelper {
                 Account a = new Account();
                 a.id = cursor.getLong(0);
                 a.parent = cursor.getLong(1);
+                if ( a.parent==-1 )
+                    a.parent = null;
                 a.description = cursor.getString(2);
                 a.type = cursor.getString(3);
                 a.usage = cursor.getLong(4);
@@ -527,12 +531,18 @@ public class Register extends SQLiteOpenHelper {
 
         cursor.close();
 
+        String parent;
+        if ( account.parent==null )
+            parent = "null";
+        else
+            parent = String.format("%d", account.parent);
+
         if ( account.id==null )
             sql = String.format(
-                    "insert into accounts ( id, parent, type, description, usage ) values ( null, %d, '%s', '%s',0)", account.parent, account.type, safedsc);
+                    "insert into accounts ( id, parent, type, description, usage ) values ( null, %s, '%s', '%s',0)", parent, account.type, safedsc);
         else
             sql = String.format(
-                    "update accounts set parent=%d, description='%s', type='%s' where id=%d", account.parent, safedsc, account.type, account.id);
+                    "update accounts set parent=%s, description='%s', type='%s' where id=%d", parent, safedsc, account.type, account.id);
 
         try {
             db.execSQL(sql);

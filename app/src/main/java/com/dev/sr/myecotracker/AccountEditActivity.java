@@ -154,7 +154,7 @@ public class AccountEditActivity extends ActionBarActivity {
         Account parent = (Account)((Spinner)findViewById(R.id.spnParentAccount)).getSelectedItem();
 
         if ( parent.description.equals(getString(R.string.none)) )
-            account.parent = 0l;
+            account.parent = null;
         else
             account.parent = parent.id;
 
