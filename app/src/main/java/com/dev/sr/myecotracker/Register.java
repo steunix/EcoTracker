@@ -67,7 +67,7 @@ public class Register extends SQLiteOpenHelper {
         db.execSQL("create index usage_i2 on usage ( entity )");
 
         // Default account and entity
-        db.execSQL("insert into accounts ( id, parent, type, description, usage ) values ( 0, 0, 'EXP', '" + context.getString(R.string.db_account_others) + "', 0)");
+        db.execSQL("insert into accounts ( id, parent, type, description, usage ) values ( 0, null, 'EXP', '" + context.getString(R.string.db_account_others) + "', 0)");
         db.execSQL("insert into entities ( id, description, usage ) values ( 0, '" + context.getString(R.string.db_entity_others) + "', 0)");
     }
 
