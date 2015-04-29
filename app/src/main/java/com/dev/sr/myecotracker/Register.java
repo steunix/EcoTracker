@@ -147,40 +147,6 @@ public class Register extends SQLiteOpenHelper {
         return list;
     }
 
-    /**
-     * Returns account list
-     * @return Account list
-     */
-    public ArrayList<Record> getRecordList(DB_SORT sort) {
-        ArrayList<Record> list = new ArrayList<>();
-
-        String sql = "select id, date, account, entity, amount, description from register ";
-        switch ( sort ) {
-            case SORT_DATE:
-                sql += "order by date";
-                break;
-            case SORT_DATE_DESC:
-                sql += "order by date desc";
-                break;
-        }
-
-        Cursor cursor = db.rawQuery(sql, null);
-        if (cursor.moveToFirst()) {
-            do {
-                Record r = new Record();
-                r.id = cursor.getLong(0);
-                r.date = Helper.isoToDate(cursor.getString(1));
-                r.account = getAccount(cursor.getLong(2));
-                r.entity = getEntity(cursor.getLong(3));
-                r.amount = cursor.getFloat(4);
-                r.description = cursor.getString(5);
-                list.add(r);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        return list;
-    }
-
     public Record getRecord(Long id) {
         Record rec = null;
 
