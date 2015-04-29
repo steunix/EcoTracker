@@ -149,10 +149,10 @@ public class SearchActivity extends ActionBarActivity implements ActionBar.TabLi
         }
     }
 
-    public void updateResults(Account account, Entity entity, Date dateFrom, Date dateTo, Float amountFrom, Float amountTo) {
+    public void updateResults() {
 
         SearchFragmentResults frg = (SearchFragmentResults) getSupportFragmentManager().findFragmentByTag("android:switcher:" + mViewPager.getId()+":1");
-        frg.updateResults(account, entity, dateFrom, dateTo, amountFrom, amountTo);
+        frg.updateResults();
 
         mViewPager.setCurrentItem(1);
 

@@ -1,5 +1,6 @@
 package com.dev.sr.myecotracker;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -44,8 +45,42 @@ public class SearchFragmentResults extends Fragment {
         return rootView;
     }
 
-    public void updateResults(Account account, Entity entity, Date dateFrom, Date dateTo, Float amountFrom, Float amountTo) {
+    public void updateResults() {
         adapter.clear();
+
+        String s;
+        Account account = new Account();
+        Entity entity = new Entity();
+
+        SharedPreferences sharedPref = getActivity().getPreferences(getActivity().getApplicationContext().MODE_PRIVATE);
+
+        account.id = sharedPref.getLong("search_account_id",-1);
+        entity.id = sharedPref.getLong("search_entity_id",-1);
+
+        if ( account.id==-1 )
+            account.id = null;
+        if ( entity.id==-1 )
+            entity.id = null;
+
+        Date dateFrom = null;
+        s = sharedPref.getString("search_date_from", "");
+        if ( !s.equals("") )
+            dateFrom = Helper.stringToDate(s);
+
+        Date dateTo = null;
+        s = sharedPref.getString("search_date_to", "");
+        if ( !s.equals("") )
+            dateTo = Helper.stringToDate(s);
+
+        Float amountFrom = null;
+        s = sharedPref.getString("search_amount_from", "");
+        if ( !s.equals("") )
+            amountFrom = Float.parseFloat(s);
+
+        Float amountTo = null;
+        s = sharedPref.getString("search_amount_to", "");
+        if ( !s.equals("") )
+            amountTo = Float.parseFloat(s);
 
         ArrayList<Record> list = register.getRecordList(account,entity,dateFrom,dateTo,amountFrom,amountTo, Register.DB_SORT.SORT_DATE_DESC);
         adapter.addAll(list);

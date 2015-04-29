@@ -2,7 +2,9 @@ package com.dev.sr.myecotracker;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,8 +42,14 @@ public class SearchFragmentParam extends Fragment {
     }
 
     private void updateResults() {
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
         Account account = (Account) spnAccount.getSelectedItem();
         Entity  entity  = (Entity)  spnEntity.getSelectedItem();
+
+        editor.putLong("search_account", (account.id==null ? -1 : entity.id) );
+        editor.putLong("search_entity", (entity.id==null ? -1 : entity.id) );
 
         String s;
         s = ((TextView) (current_view.findViewById(R.id.txtDateFrom))).getText().toString();
@@ -50,6 +58,7 @@ public class SearchFragmentParam extends Fragment {
             Toast.makeText(current_view.getContext(), R.string.baddate, Toast.LENGTH_SHORT).show();
             return;
         }
+        editor.putString("search_date_from", s);
 
         s = ((TextView) (current_view.findViewById(R.id.txtDateTo))).getText().toString();
         Date dtTo = Helper.stringToDate(s);
@@ -57,6 +66,7 @@ public class SearchFragmentParam extends Fragment {
             Toast.makeText(current_view.getContext(), R.string.baddate, Toast.LENGTH_SHORT).show();
             return;
         }
+        editor.putString("search_date_to", s);
 
         Float amtFrom;
         try {
@@ -70,6 +80,7 @@ public class SearchFragmentParam extends Fragment {
 
             amtFrom = null;
         }
+        editor.putString("search_amount_from", s);
 
         Float amtTo;
         try {
@@ -83,15 +94,10 @@ public class SearchFragmentParam extends Fragment {
 
             amtTo = null;
         }
+        editor.putString("search_amount_to", s);
+        editor.commit();
 
-        ((SearchActivity)getActivity()).updateResults(
-                account,
-                entity,
-                dtFrom,
-                dtTo,
-                amtFrom,
-                amtTo
-        );
+        ((SearchActivity) getActivity()).updateResults();
     }
 
     @Override
