@@ -126,7 +126,7 @@ public class SearchFragmentResults extends Fragment {
         r.entity = new Entity();
         r.account.type = r.account.type_expense;
         r.account.description = getString(R.string.saldo);
-        r.amount = exp;
+        r.amount = bal;
         r.entity.description = "";
         r.date = null;
 
