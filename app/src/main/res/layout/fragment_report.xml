@@ -63,7 +63,6 @@
         android:layout_alignParentBottom="false"
         android:layout_alignParentStart="false"
         android:layout_below="@+id/sel"
-        android:background="@drawable/rounded_border"
         android:layout_centerHorizontal="true"
         android:rowCount="3">
 
