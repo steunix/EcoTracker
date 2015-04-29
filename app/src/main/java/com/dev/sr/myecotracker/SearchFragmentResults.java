@@ -47,7 +47,7 @@ public class SearchFragmentResults extends Fragment {
     public void updateResults(Account account, Entity entity, Date dateFrom, Date dateTo, Float amountFrom, Float amountTo) {
         adapter.clear();
 
-        ArrayList<Record> list = register.getRecordList(account,entity,dateFrom,dateTo,amountFrom,amountTo);
+        ArrayList<Record> list = register.getRecordList(account,entity,dateFrom,dateTo,amountFrom,amountTo, Register.DB_SORT.SORT_DATE_DESC);
         adapter.addAll(list);
     }
 

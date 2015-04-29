@@ -166,7 +166,15 @@ public class Register extends SQLiteOpenHelper {
         return rec;
     }
 
-    public ArrayList<Record> getRecordList(Account account, Entity entity, Date dateFrom, Date dateTo, Float amtFrom, Float amtTo) {
+    public ArrayList<Record> getRecordList(Date from, Date to, DB_SORT sort) {
+        Account a = new Account();
+        a.id = null;
+        Entity e = new Entity();
+        e.id = null;
+        return getRecordList(a, e, from, to, null, null, sort);
+    }
+
+    public ArrayList<Record> getRecordList(Account account, Entity entity, Date dateFrom, Date dateTo, Float amtFrom, Float amtTo, DB_SORT sort) {
         ArrayList<Record> list = new ArrayList<>();
 
         String sql = String.format("select id, date, account, entity, amount, description from register where 1=1 ");
@@ -197,38 +205,12 @@ public class Register extends SQLiteOpenHelper {
             sql += String.format(" and amount<="+Helper.sqlFloat(amtTo)+" ");
         }
 
-        sql += "order by date desc";
-
-        Cursor cursor = db.rawQuery(sql, null);
-        if (cursor.moveToFirst()) {
-            do {
-                Record r = new Record();
-                r.id = cursor.getLong(0);
-                r.date = Helper.isoToDate(cursor.getString(1));
-                r.account = getAccount(cursor.getLong(2));
-                r.entity = getEntity(cursor.getLong(3));
-                r.amount = cursor.getFloat(4);
-                r.description = cursor.getString(5);
-                list.add(r);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        return list;
-    }
-
-    public ArrayList<Record> getRecordList(Date from, Date to, DB_SORT sort) {
-        String dtFrom = Helper.toIso(from);
-        String dtTo = Helper.toIso(to);
-
-        ArrayList<Record> list = new ArrayList<>();
-
-        String sql = String.format("select id, date, account, entity, amount, description from register where date>='%s' and date<='%s' ", dtFrom, dtTo);
         switch ( sort ) {
             case SORT_DATE:
-                sql += "order by date";
+                sql += " order by date";
                 break;
             case SORT_DATE_DESC:
-                sql += "order by date desc";
+                sql += " order by date desc";
                 break;
         }
 
