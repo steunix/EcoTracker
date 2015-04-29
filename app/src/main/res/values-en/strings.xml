@@ -7,7 +7,7 @@
     <string name="alert_cancel">Cancel</string>
     <string name="alert_ok">OK</string>
     <string name="alert_warning">Warning</string>
-    <string name="amount">Min amount</string>
+    <string name="amount">Amount</string>
     <string name="amountzero">Invalid amount</string>
     <string name="badamount">Invalid amount</string>
     <string name="baddate">Invalid date</string>
@@ -67,8 +67,8 @@
     <string name="title_activity_search">Search</string>
     <string name="title_search_param">Parameters</string>
     <string name="title_search_results">Results</string>
-    <string name="amountfrom">Max amount</string>
-    <string name="amountto">To amount</string>
+    <string name="amountfrom">Min amount</string>
+    <string name="amountto">Max amount</string>
     <string name="datefrom">From date</string>
     <string name="dateto">To date</string>
     <string name="search">Search</string>

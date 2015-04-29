@@ -33,7 +33,7 @@
     <string name="mese">Month</string>
 
     <string name="date">Date</string>
-    <string name="amount">Min amount</string>
+    <string name="amount">Amount</string>
     <string name="entity">Supplier</string>
     <string name="entities">Suppliers</string>
     <string name="account">Account</string>
@@ -42,8 +42,8 @@
     <string name="records">Records</string>
     <string name="datefrom">From date</string>
     <string name="dateto">To date</string>
-    <string name="amountfrom">Max amount</string>
-    <string name="amountto">To amount</string>
+    <string name="amountfrom">Min amount</string>
+    <string name="amountto">Max amount</string>
     <string name="any">Any</string>
 
     <string name="save">Save</string>
