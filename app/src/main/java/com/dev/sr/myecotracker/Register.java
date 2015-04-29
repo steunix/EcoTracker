@@ -468,7 +468,7 @@ public class Register extends SQLiteOpenHelper {
     public boolean saveRecord(Record record) {
         String sql;
         String sqlDate = Helper.toIso(record.date);
-        String sqlAmount = record.amount.toString();
+        String sqlAmount = Helper.sqlFloat(record.amount);
         String safedsc = Helper.sqlString(record.description);
 
         if ( record.id==null )
