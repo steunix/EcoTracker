@@ -115,7 +115,6 @@ public class SearchActivity extends ActionBarActivity implements ActionBar.TabLi
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        public SearchFragmentResults resultFragment;
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -126,10 +125,10 @@ public class SearchActivity extends ActionBarActivity implements ActionBar.TabLi
                 case 0:
                     return SearchFragmentParam.newInstance(1);
                 case 1:
-                    resultFragment = SearchFragmentResults.newInstance(2);
-                    return resultFragment;
+                    return SearchFragmentResults.newInstance(2);
+                default:
+                    return null;
             }
-            return null;
         }
 
         @Override
@@ -151,9 +150,11 @@ public class SearchActivity extends ActionBarActivity implements ActionBar.TabLi
     }
 
     public void updateResults(Account account, Entity entity, Date dateFrom, Date dateTo, Float amountFrom, Float amountTo) {
-        SearchFragmentResults frg = (SearchFragmentResults)mSectionsPagerAdapter.resultFragment;
+
+        SearchFragmentResults frg = (SearchFragmentResults) getSupportFragmentManager().findFragmentByTag("android:switcher:" + mViewPager.getId()+":1");
         frg.updateResults(account, entity, dateFrom, dateTo, amountFrom, amountTo);
 
         mViewPager.setCurrentItem(1);
+
     }
 }
