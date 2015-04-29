@@ -84,7 +84,10 @@ public class Helper {
 
     static String formatAmount(Float amount) {
         String cs = Currency.getInstance(Locale.getDefault()).getSymbol();
-        if ( amount>=0 )
+
+        if ( amount==0 )
+            return String.format("%.02f%s", 0f, cs );
+        if ( amount>0 )
             return "+"+String.format("%.02f%s", amount, cs );
         else
             return String.format("%.02f%s", amount, cs);
