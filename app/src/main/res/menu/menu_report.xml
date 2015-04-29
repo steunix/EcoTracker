@@ -16,12 +16,6 @@
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_recordlist"
-        android:icon="@drawable/ic_folder"
-        android:title="@string/records"
-        android:orderInCategory="100"
-        app:showAsAction="ifRoom" />
-    <item
         android:id="@+id/action_accountlist"
         android:icon="@drawable/ic_account"
         android:title="@string/accounts"

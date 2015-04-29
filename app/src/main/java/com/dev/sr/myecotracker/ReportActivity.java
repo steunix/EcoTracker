@@ -110,11 +110,6 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
             startActivity(intent);
         }
 
-        if ( id == R.id.action_recordlist ) {
-            Intent intent = new Intent(this, RecordListActivity.class);
-            startActivity(intent);
-        }
-
         if ( id == R.id.action_search ) {
             Intent intent = new Intent(this, SearchActivity.class);
             startActivity(intent);

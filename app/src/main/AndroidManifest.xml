@@ -41,10 +41,6 @@
             android:label="@string/title_activity_entity_edit" >
         </activity>
         <activity
-            android:name=".RecordListActivity"
-            android:label="@string/title_activity_record_list" >
-        </activity>
-        <activity
             android:name=".InfoActivity"
             android:label="@string/title_activity_info" >
         </activity>
