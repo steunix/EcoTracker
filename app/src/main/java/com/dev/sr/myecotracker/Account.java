@@ -9,6 +9,7 @@ public class Account {
 
     public final String type_income = "INC";
     public final String type_expense= "EXP";
+    public final String type_balance= "BAL";
 
     public Long   id;
     public Long   parent;

@@ -49,6 +49,53 @@ public class SearchFragmentResults extends Fragment {
 
         ArrayList<Record> list = register.getRecordList(account,entity,dateFrom,dateTo,amountFrom,amountTo, Register.DB_SORT.SORT_DATE_DESC);
         adapter.addAll(list);
+
+        int i;
+        Record r;
+
+        Float exp = 0f, inc = 0f, bal = 0f;
+        for ( i=0; i<list.size(); i++ ) {
+            r = list.get(i);
+            if ( r.account.type.equals(r.account.type_expense) )
+                exp += r.amount;
+            else
+                inc += r.amount;
+        }
+        bal = inc-exp;
+
+        r = new Record();
+
+        r.account = new Account();
+        r.entity = new Entity();
+        r.account.type = r.account.type_income;
+        r.account.description = getString(R.string.entrate);
+        r.amount = inc;
+        r.entity.description = "";
+        r.date = null;
+
+        adapter.addAll(r);
+
+        r = new Record();
+        r.account = new Account();
+        r.entity = new Entity();
+        r.account.type = r.account.type_expense;
+        r.account.description = getString(R.string.uscite);
+        r.amount = exp;
+        r.entity.description = "";
+        r.date = null;
+
+        adapter.addAll(r);
+
+        r = new Record();
+        r.account = new Account();
+        r.entity = new Entity();
+        r.account.type = r.account.type_expense;
+        r.account.description = getString(R.string.saldo);
+        r.amount = exp;
+        r.entity.description = "";
+        r.date = null;
+
+        adapter.addAll(r);
     }
 
 }

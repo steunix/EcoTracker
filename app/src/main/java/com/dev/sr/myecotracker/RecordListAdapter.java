@@ -46,14 +46,19 @@ public class RecordListAdapter extends ArrayAdapter<Record> {
         TextView lentity = (TextView) rowView.findViewById(R.id.lblRLEntity);
 
         Record r = recordList.get(position);
-        ldate.setText(Helper.dateToString(r.date));
+
+        if ( r.date!=null )
+            ldate.setText(Helper.dateToString(r.date));
+        else
+            ldate.setText("");
+
         laccount.setText(r.account.description);
         lentity.setText(r.entity.description);
         lamount.setText(r.getAmountString());
 
         if ( r.account.type.equals(r.account.type_income) )
             lamount.setTextAppearance(getContext(), R.style.income );
-        else
+        if ( r.account.type.equals(r.account.type_expense) )
             lamount.setTextAppearance(getContext(), R.style.expense );
         return rowView;
     }
