@@ -35,7 +35,7 @@ public class EntityEditActivity extends ActionBarActivity {
 
             currentEntity = register.getEntity(editEntity);
 
-            EditText descr = (EditText) findViewById(R.id.txtEntityDescr);
+            EditText descr = (EditText) findViewById(R.id.txtEEDescr);
             descr.setText(currentEntity.description);
         } else {
             // New account
@@ -96,7 +96,7 @@ public class EntityEditActivity extends ActionBarActivity {
     public void saveEntity() {
         Entity entity = new Entity();
 
-        entity.description = ((EditText) findViewById(R.id.txtEntityDescr)).getText().toString().trim();
+        entity.description = ((EditText) findViewById(R.id.txtEEDescr)).getText().toString().trim();
 
         if (entity.description.length() == 0) {
             Toast.makeText(this, R.string.baddescription, Toast.LENGTH_SHORT).show();

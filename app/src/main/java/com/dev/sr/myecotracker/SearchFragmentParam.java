@@ -126,8 +126,8 @@ public class SearchFragmentParam extends Fragment {
         adAccount = new AccountListAdapter(context, accountList );
         adEntitiy = new EntityListAdapter(context, entityList);
 
-        spnEntity = (Spinner) current_view.findViewById(R.id.spnEntity);
-        spnAccount = (Spinner) current_view.findViewById(R.id.spnAccount);
+        spnEntity = (Spinner) current_view.findViewById(R.id.spnSearchEntity);
+        spnAccount = (Spinner) current_view.findViewById(R.id.spnSearchAccount);
 
         spnAccount.setAdapter(adAccount);
         spnEntity.setAdapter(adEntitiy);

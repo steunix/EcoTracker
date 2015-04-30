@@ -32,7 +32,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txtAccountDescr"
+            android:id="@+id/txtAEDescr"
             android:layout_column="2"
             android:singleLine="true"
             android:inputType="textCapSentences" />
@@ -58,7 +58,7 @@
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/spnAccountType"
+            android:id="@+id/spnAEAccountType"
             android:layout_column="2"
             android:spinnerMode="dropdown" />
     </TableRow>
@@ -83,7 +83,7 @@
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/lstCategories"
+            android:id="@+id/lstAECategories"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
              />

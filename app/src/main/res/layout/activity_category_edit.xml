@@ -31,7 +31,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txtCatetoryDescr"
+            android:id="@+id/txtCEDescr"
             android:layout_column="2"
             android:singleLine="true"
             android:inputType="textCapSentences" />

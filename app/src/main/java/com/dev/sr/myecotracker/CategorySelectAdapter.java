@@ -45,10 +45,10 @@ public class CategorySelectAdapter extends ArrayAdapter<CategorySelect> {
 
         CategorySelect cs = categoryList.get(position);
 
-        TextView lblDescr = (TextView) rowView.findViewById(R.id.txtDescription);
+        TextView lblDescr = (TextView) rowView.findViewById(R.id.txtCCLDescription);
         lblDescr.setText(cs.category.description);
 
-        CheckBox chkSel = (CheckBox) rowView.findViewById(R.id.chkSelected);
+        CheckBox chkSel = (CheckBox) rowView.findViewById(R.id.chkCCLSelected);
         chkSel.setChecked(cs.selected);
         chkSel.setTag(cs);
 

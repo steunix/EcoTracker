@@ -22,7 +22,7 @@
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/spnAccount"
+            android:id="@+id/spnSearchAccount"
             android:layout_column="1"
             android:spinnerMode="dropdown" />
     </TableRow>
@@ -43,7 +43,7 @@
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/spnEntity"
+            android:id="@+id/spnSearchEntity"
             android:layout_column="1"
             android:spinnerMode="dropdown" />
     </TableRow>

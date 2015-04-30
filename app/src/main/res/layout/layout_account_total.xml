@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/lblRLAccount"
+            android:id="@+id/lblATLAccount"
             android:layout_column="0"
             android:text="@string/none"
             android:textColor="@color/text_color" />
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/none"
-            android:id="@+id/lblRLAmount"
+            android:id="@+id/lblATLAmount"
             android:layout_column="1"
             android:gravity="right"
             android:textColor="#000000" />

@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:inputType="date"
             android:ems="10"
-            android:id="@+id/txtDate"
+            android:id="@+id/txtREDate"
             android:layout_column="2" />
 
     </TableRow>
@@ -58,7 +58,7 @@
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/spnAccount"
+            android:id="@+id/spnREAccount"
             android:layout_column="2"
             android:layout_gravity="center_vertical" />
 
@@ -95,7 +95,7 @@
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/spnEntity"
+            android:id="@+id/spnREEntity"
             android:layout_column="2"
             android:layout_gravity="center_vertical" />
 
@@ -134,7 +134,7 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
-            android:id="@+id/txtAmount"
+            android:id="@+id/txtREAmount"
             android:layout_column="2" />
     </TableRow>
 
@@ -158,7 +158,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/txtDescription"
+            android:id="@+id/txtREDescription"
             android:layout_column="2"
             android:inputType="textCapSentences|textMultiLine" />
     </TableRow>

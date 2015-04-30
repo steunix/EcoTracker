@@ -44,7 +44,7 @@ public class CategoryListAdapter extends ArrayAdapter<Category> {
 
         View rowView = inflater.inflate(R.layout.layout_category, parent, false);
 
-        TextView lblDescr = (TextView) rowView.findViewById(R.id.txtDescription);
+        TextView lblDescr = (TextView) rowView.findViewById(R.id.txtCLDescription);
 
         Category a = categoryList.get(position);
         lblDescr.setText(a.description);

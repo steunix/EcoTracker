@@ -35,7 +35,7 @@ public class CategoryEditActivity extends ActionBarActivity {
 
             currentCategory = register.getCategory(editCategory);
 
-            EditText descr = (EditText) findViewById(R.id.txtCatetoryDescr);
+            EditText descr = (EditText) findViewById(R.id.txtCEDescr);
             descr.setText(currentCategory.description);
         } else {
             // New account
@@ -97,7 +97,7 @@ public class CategoryEditActivity extends ActionBarActivity {
     public void saveCategory() {
         Category category = new Category();
 
-        category.description = ((EditText) findViewById(R.id.txtCatetoryDescr)).getText().toString().trim();
+        category.description = ((EditText) findViewById(R.id.txtCEDescr)).getText().toString().trim();
 
         if (category.description.length() == 0) {
             Toast.makeText(this, R.string.baddescription, Toast.LENGTH_SHORT).show();

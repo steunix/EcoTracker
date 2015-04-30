@@ -40,13 +40,13 @@ public class AccountEditActivity extends ActionBarActivity {
         types.add(getString(R.string.type_income));
 
         // Fills type
-        Spinner spnType = (Spinner) findViewById(R.id.spnAccountType);
+        Spinner spnType = (Spinner) findViewById(R.id.spnAEAccountType);
         ArrayAdapter<String> adType = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item,types);
         spnType.setAdapter(adType);
 
         // Fills categories
         ArrayList<Category> cat = register.getCategoriesList();
-        ListView lstCat = (ListView) findViewById(R.id.lstCategories);
+        ListView lstCat = (ListView) findViewById(R.id.lstAECategories);
 
         Intent i = getIntent();
         mode = i.getExtras().getString("mode");
@@ -65,7 +65,7 @@ public class AccountEditActivity extends ActionBarActivity {
                 spnType.setSelection(1);
 
             // Description
-            EditText descr = (EditText) findViewById(R.id.txtAccountDescr);
+            EditText descr = (EditText) findViewById(R.id.txtAEDescr);
             descr.setText(currentAccount.description);
 
             // Categories
@@ -138,14 +138,14 @@ public class AccountEditActivity extends ActionBarActivity {
     public void saveAccount(View v) {
         Account account = new Account();
 
-        account.description = ((EditText)findViewById(R.id.txtAccountDescr)).getText().toString().trim();
+        account.description = ((EditText)findViewById(R.id.txtAEDescr)).getText().toString().trim();
 
         if (account.description.length() == 0) {
             Toast.makeText(this, R.string.baddescription, Toast.LENGTH_SHORT).show();
             return;
         }
 
-        String t = ((Spinner)findViewById(R.id.spnAccountType)).getSelectedItem().toString();
+        String t = ((Spinner)findViewById(R.id.spnAEAccountType)).getSelectedItem().toString();
         if ( t.equals(getString(R.string.type_expense)) )
             account.type = account.type_expense;
         else

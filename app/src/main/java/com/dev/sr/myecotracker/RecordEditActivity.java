@@ -36,13 +36,13 @@ public class RecordEditActivity extends ActionBarActivity {
         adAccounts = new AccountListAdapter(this, new ArrayList<Account>());
         adEntities = new EntityListAdapter(this, new ArrayList<Entity>());
 
-        Spinner spnAccounts = (Spinner) findViewById(R.id.spnAccount);
-        Spinner spnEntities = (Spinner) findViewById(R.id.spnEntity);
+        Spinner spnAccounts = (Spinner) findViewById(R.id.spnREAccount);
+        Spinner spnEntities = (Spinner) findViewById(R.id.spnREEntity);
 
         updateAccounts();
         updateEntities();
 
-        EditText txtDate = (EditText) findViewById(R.id.txtDate);
+        EditText txtDate = (EditText) findViewById(R.id.txtREDate);
         String strDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
         txtDate.setText(strDate);
 
@@ -60,10 +60,10 @@ public class RecordEditActivity extends ActionBarActivity {
 
             txtDate.setText(Helper.dateToString(editRecord.date));
 
-            EditText txtAmount = (EditText) findViewById(R.id.txtAmount);
+            EditText txtAmount = (EditText) findViewById(R.id.txtREAmount);
             txtAmount.setText(editRecord.getRawAmountString());
 
-            EditText txtDescription = (EditText) findViewById(R.id.txtDescription);
+            EditText txtDescription = (EditText) findViewById(R.id.txtREDescription);
             txtDescription.setText(editRecord.description);
         }
 
@@ -86,18 +86,18 @@ public class RecordEditActivity extends ActionBarActivity {
         adAccounts.clear();
         adAccounts.addAll(accounts);
 
-        Spinner spnAccounts = (Spinner) findViewById(R.id.spnAccount);
+        Spinner spnAccounts = (Spinner) findViewById(R.id.spnREAccount);
         spnAccounts.setAdapter(adAccounts);
     }
 
     private void updateEntities() {
-        Account account = (Account)((Spinner)findViewById(R.id.spnAccount)).getSelectedItem();
+        Account account = (Account)((Spinner)findViewById(R.id.spnREAccount)).getSelectedItem();
         ArrayList<Entity> entities = register.getEntitiesList(Register.DB_SORT.SORT_USAGE_COMBINED, account);
 
         adEntities.clear();
         adEntities.addAll(entities);
 
-        Spinner spnEntities = (Spinner) findViewById(R.id.spnEntity);
+        Spinner spnEntities = (Spinner) findViewById(R.id.spnREEntity);
         spnEntities.setAdapter(adEntities);
     }
 
@@ -125,7 +125,7 @@ public class RecordEditActivity extends ActionBarActivity {
 
     public void saveRecord(View view) {
         // Check date
-        EditText _date = (EditText) findViewById(R.id.txtDate);
+        EditText _date = (EditText) findViewById(R.id.txtREDate);
         String sdate = _date.getText().toString();
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         Date date;
@@ -142,7 +142,7 @@ public class RecordEditActivity extends ActionBarActivity {
         }
 
         // Check amount
-        EditText _amount = (EditText) findViewById(R.id.txtAmount);
+        EditText _amount = (EditText) findViewById(R.id.txtREAmount);
         String samount = _amount.getText().toString();
         float amt = 0;
 
@@ -166,9 +166,9 @@ public class RecordEditActivity extends ActionBarActivity {
         else
             r.id = null;
 
-        r.account = (Account)((Spinner)findViewById(R.id.spnAccount)).getSelectedItem();
-        r.entity = (Entity)((Spinner)findViewById(R.id.spnEntity)).getSelectedItem();
-        r.description = ((EditText)findViewById(R.id.txtDescription)).getText().toString().trim();
+        r.account = (Account)((Spinner)findViewById(R.id.spnREAccount)).getSelectedItem();
+        r.entity = (Entity)((Spinner)findViewById(R.id.spnREEntity)).getSelectedItem();
+        r.description = ((EditText)findViewById(R.id.txtREDescription)).getText().toString().trim();
         r.date = date;
         r.amount = amt;
 
