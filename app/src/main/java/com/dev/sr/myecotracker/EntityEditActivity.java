@@ -63,17 +63,16 @@ public class EntityEditActivity extends ActionBarActivity {
         }
 
         if ( id==R.id.action_saveentity ) {
-            saveEntity(null);
+            saveEntity();
         }
 
         if ( id==R.id.action_deleteentity ) {
-            deleteEntity(null);
+            deleteEntity();
         }
         return super.onOptionsItemSelected(item);
     }
 
-    // TODO: remove parameter
-    public void deleteEntity(View v) {
+    public void deleteEntity() {
         AlertDialog.Builder dlg = new AlertDialog.Builder(this);
         dlg.setMessage(R.string.entity_delete_warning)
                 .setTitle(R.string.alert_warning);
@@ -94,8 +93,7 @@ public class EntityEditActivity extends ActionBarActivity {
         d.show();
     }
 
-    // TODO: remove parameter
-    public void saveEntity(View v) {
+    public void saveEntity() {
         Entity entity = new Entity();
 
         entity.description = ((EditText) findViewById(R.id.txtEntityDescr)).getText().toString().trim();
