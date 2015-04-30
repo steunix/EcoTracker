@@ -43,8 +43,8 @@ public class AccountBreakdownAdapter extends ArrayAdapter<AccountBreakdown> {
         View rowView = inflater.inflate(R.layout.layout_account_total, parent, false);
 
         // 3. Get the two text view from the rowView
-        TextView lblDescr = (TextView) rowView.findViewById(R.id.lblRLAccount);
-        TextView lblAmount = (TextView) rowView.findViewById(R.id.lblRLAmount);
+        TextView lblDescr = (TextView) rowView.findViewById(R.id.lblATLAccount);
+        TextView lblAmount = (TextView) rowView.findViewById(R.id.lblATLAmount);
 
         // 4. Set the text for textView
         AccountBreakdown a = accountList.get(position);
