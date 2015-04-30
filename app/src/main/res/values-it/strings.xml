@@ -21,7 +21,6 @@
     <string name="monthlyreport">Riepilogo mensile</string>
     <string name="none">Nessuno</string>
     <string name="notes">Note</string>
-    <string name="parent_account">Conto padre</string>
     <string name="report_section_day">Giorno</string>
     <string name="report_section_month">Mese</string>
     <string name="report_section_week">Settimana</string>
@@ -73,4 +72,8 @@
     <string name="dateto">Al</string>
     <string name="search">Cerca</string>
     <string name="any">Tutto</string>
+    <string name="categories">Categorie</string>
+    <string name="title_activity_category_edit">Modifica categoria</string>
+    <string name="title_activity_category_list">Categorie</string>
+    <string name="title_activity_new_category">Nuova categoria</string>
 </resources>

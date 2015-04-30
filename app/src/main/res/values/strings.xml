@@ -22,6 +22,7 @@
     <string name="title_activity_entity_list">Suppliers</string>
     <string name="title_activity_entity_edit">Edit supplier</string>
     <string name="title_activity_new_entity">New supplier</string>
+    <string name="title_activity_new_category">New category</string>
 
     <string name="type_expense">Expense</string>
     <string name="type_income">Income</string>
@@ -58,9 +59,9 @@
     <string name="saved">Saved!</string>
     <string name="deleted">Deleted!</string>
 
-    <string name="parent_account">Parent account</string>
     <string name="description">Description</string>
     <string name="type">Type</string>
+    <string name="categories">Categories</string>
     <string name="title_activity_record_list">Records</string>
     <string name="title_activity_time_report">Report</string>
 
@@ -75,6 +76,7 @@
 
     <string name="account_delete_warning">Do you want to delete the account and all of its records? Warning: this action cannot be reverted!</string>
     <string name="entity_delete_warning">Do you want to delete the supplier and all of its records? Warning: this action cannot be reverted!</string>
+    <string name="category_delete_warning">Do you want to delete the category? Warning: this action cannot be reverted!</string>
     <string name="alert_warning">Warning</string>
     <string name="alert_ok">OK</string>
     <string name="alert_cancel">Cancel</string>
@@ -97,4 +99,7 @@
 
     <string name="title_search_param">Parameters</string>
     <string name="title_search_results">Results</string>
+    <string name="title_activity_category_list">Categories</string>
+
+    <string name="title_activity_category_edit">Edit category</string>
 </resources>

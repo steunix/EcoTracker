@@ -1,5 +1,9 @@
 package com.dev.sr.myecotracker;
 
+/**
+ * Created by Stefano on 30/04/2015.
+ */
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,18 +14,18 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Adapter for entity list
+ * Adapter for category list
  */
-public class EntityListAdapter extends ArrayAdapter<Entity> {
+public class CategoryListAdapter extends ArrayAdapter<Category> {
     private final Context context;
-    private final ArrayList<Entity> entityList;
+    private final ArrayList<Category> categoryList;
 
-    public EntityListAdapter(Context context, ArrayList<Entity> itemsArrayList) {
+    public CategoryListAdapter(Context context, ArrayList<Category> itemsArrayList) {
 
-        super(context, R.layout.layout_entity, itemsArrayList);
+        super(context, R.layout.layout_category, itemsArrayList);
 
         this.context = context;
-        this.entityList = itemsArrayList;
+        this.categoryList = itemsArrayList;
     }
 
     @Override
@@ -38,11 +42,11 @@ public class EntityListAdapter extends ArrayAdapter<Entity> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View rowView = inflater.inflate(R.layout.layout_entity, parent, false);
+        View rowView = inflater.inflate(R.layout.layout_category, parent, false);
 
         TextView lblDescr = (TextView) rowView.findViewById(R.id.txtDescription);
 
-        Entity a = entityList.get(position);
+        Category a = categoryList.get(position);
         lblDescr.setText(a.description);
 
         return rowView;
@@ -50,8 +54,8 @@ public class EntityListAdapter extends ArrayAdapter<Entity> {
 
     public int getPosition(String description) {
         int i;
-        for ( i=0; i<entityList.size(); i++ ) {
-            if ( entityList.get(i).description.equals(description) )
+        for ( i=0; i<categoryList.size(); i++ ) {
+            if ( categoryList.get(i).description.equals(description) )
                 return i;
         }
         return -1;

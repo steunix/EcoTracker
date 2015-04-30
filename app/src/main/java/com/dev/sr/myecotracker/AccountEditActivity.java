@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ public class AccountEditActivity extends ActionBarActivity {
     Account currentAccount;
     String  mode;
     Register register;
+    CategorySelectAdapter adCat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,14 +33,7 @@ public class AccountEditActivity extends ActionBarActivity {
         none.description = getString(R.string.none);
         none.type = "";
 
-        // Fills parent account
         register = new Register(this);
-        ArrayList<Account> accounts = register.getAccountsList(Register.DB_SORT.SORT_DESCRIPTION);
-        accounts.add(0, none);
-
-        Spinner spnParent = (Spinner) findViewById(R.id.spnParentAccount);
-        AccountListAdapter adAccounts = new AccountListAdapter(this, accounts);
-        spnParent.setAdapter(adAccounts);
 
         List<String> types = new ArrayList<>();
         types.add(getString(R.string.type_expense));
@@ -49,6 +44,10 @@ public class AccountEditActivity extends ActionBarActivity {
         ArrayAdapter<String> adType = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item,types);
         spnType.setAdapter(adType);
 
+        // Fills categories
+        ArrayList<Category> cat = register.getCategoriesList();
+        ListView lstCat = (ListView) findViewById(R.id.lstCategories);
+
         Intent i = getIntent();
         mode = i.getExtras().getString("mode");
         if (mode.equals("edit") ) {
@@ -58,7 +57,6 @@ public class AccountEditActivity extends ActionBarActivity {
             long editAccount = i.getExtras().getLong("id");
 
             currentAccount = register.getAccount(editAccount);
-            Account p = register.getAccount(currentAccount.parent);
 
             // Type
             if ( currentAccount.type.equals(currentAccount.type_expense) )
@@ -70,18 +68,20 @@ public class AccountEditActivity extends ActionBarActivity {
             EditText descr = (EditText) findViewById(R.id.txtAccountDescr);
             descr.setText(currentAccount.description);
 
-            // Parent
-            if ( p!=null ) {
-                int pos;
-                pos = adAccounts.getPosition(p.description);
-                spnParent.setSelection(pos);
-            } else
-                spnParent.setSelection(0);
+            // Categories
+            ArrayList<CategorySelect> catlist = register.getAccountCategoriesSelect(currentAccount);
+            adCat = new CategorySelectAdapter(getApplicationContext(), catlist);
+            lstCat.setAdapter(adCat);
 
         } else {
             // New account
             setTitle(getString(R.string.title_activity_new_account));
             currentAccount = new Account();
+
+            // Categories
+            ArrayList<CategorySelect> catlist = register.getAccountCategoriesSelect(currentAccount);
+            adCat = new CategorySelectAdapter(getApplicationContext(), catlist);
+            lstCat.setAdapter(adCat);
         }
     }
 
@@ -151,18 +151,14 @@ public class AccountEditActivity extends ActionBarActivity {
         else
             account.type = account.type_income;
 
-        Account parent = (Account)((Spinner)findViewById(R.id.spnParentAccount)).getSelectedItem();
-
-        if ( parent.description.equals(getString(R.string.none)) )
-            account.parent = null;
-        else
-            account.parent = parent.id;
-
         String mode = getIntent().getExtras().getString("mode");
         if ( mode.equals("edit") )
             account.id = currentAccount.id;
         else
             account.id = null;
+
+        // Categories
+        account.categories = adCat.getSelectedCategories();
 
         try {
             if (register.saveAccount(account)) {

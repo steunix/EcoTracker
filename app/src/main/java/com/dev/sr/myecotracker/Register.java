@@ -20,7 +20,7 @@ package com.dev.sr.myecotracker;
  * Class for the database
  */
 public class Register extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private SQLiteDatabase db;
     private Context context;
@@ -73,6 +73,143 @@ public class Register extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion ) {
+        if ( newVersion==2 ) {
+            db.execSQL("create table categories ( id integer primary key, description text )");
+
+            db.execSQL("create table account_categories ( account integer, category integer )");
+            db.execSQL("create index account_categories_i1 on account_categories ( account )");
+            db.execSQL("create index account_categories_i2 on account_categories ( category )");
+        }
+    }
+
+    // Categories
+    public Category getCategory(Long id) {
+        String sql = String.format("select id, description from categories where id=%d", id);
+        Cursor cursor = db.rawQuery(sql, null);
+        Category c = null;
+
+        if (cursor.moveToFirst()) {
+            c = new Category();
+            c.id = cursor.getLong(0);
+            c.description = cursor.getString(1);
+        }
+
+        cursor.close();
+        return c;
+    }
+
+    public boolean deleteCategory (Category category) {
+        try {
+            db.execSQL("delete from account_categories where category=" + category.id);
+            db.execSQL("delete from categories where id=" + category.id);
+        } catch ( Exception ex ) {
+            return false;
+        }
+        return true;
+    }
+
+    public ArrayList<Category> getAccountCategories ( Account account ) {
+        ArrayList<Category> cat = new ArrayList<>();
+
+        String sql = String.format("select c.id, c.description from categories c, account_categories a where a.account=c.id and a.account=%d", account.id);
+        Cursor cursor = db.rawQuery(sql, null);
+
+        if (cursor.moveToFirst()) {
+            Category c = new Category();
+            c.id = cursor.getLong(0);
+            c.description = cursor.getString(1);
+
+            cat.add(c);
+        }
+
+        cursor.close();
+        return cat;
+    }
+
+    public ArrayList<CategorySelect> getAccountCategoriesSelect( Account account ) {
+        ArrayList<CategorySelect> cat = new ArrayList<>();
+
+        String sql = String.format(
+                "select c.id, c.description, (select ifnull(count(*),0) from account_categories where category=c.id and account=%d) sel from categories c order by sel desc, c.description",
+                (account.id==null ? -1 : account.id));
+        Cursor cursor = db.rawQuery(sql, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                CategorySelect c = new CategorySelect();
+                c.category = new Category();
+                c.category.id = cursor.getLong(0);
+                c.category.description = cursor.getString(1);
+                c.selected = (cursor.getLong(2) > 0);
+                cat.add(c);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return cat;
+    }
+
+    public ArrayList<Category> getCategoriesList() {
+        ArrayList<Category> list = new ArrayList<>();
+
+        String sql = "select id, description from categories order by description ";
+
+        Cursor cursor = db.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Category a = new Category();
+                a.id = cursor.getLong(0);
+                a.description = cursor.getString(1);
+                list.add(a);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return list;
+    }
+
+    public boolean saveCategory(Category category) throws ETExists {
+        String sql;
+        String safedsc = Helper.sqlString(category.description);
+        Long   cnt;
+
+        Cursor cursor = db.rawQuery("select count(*) from categories where description='"+safedsc+"'"+
+                (category.id==null ? "" : " and id!="+category.id)
+                , null);
+        cursor.moveToFirst();
+        cnt = cursor.getLong(0);
+
+        cursor.close();
+
+        if ( cnt>0 )
+            throw new ETExists();
+
+        if ( category.id==null )
+            sql = String.format("insert into categories ( id, description ) values ( null, '%s')", safedsc);
+        else
+            sql = String.format("update categories set description='%s' where id=%d", safedsc, category.id);
+
+        try {
+            db.execSQL(sql);
+        } catch ( Exception e ) {
+            return false;
+        }
+
+        return true;
+    }
+
+    // Accounts
+    public Long getNextAccountId() {
+        String sql = String.format("select ifnull(max(id),0)+1 from accounts");
+        Cursor cursor = db.rawQuery(sql, null);
+        long next;
+
+        if (cursor.moveToFirst())
+            next = cursor.getLong(0);
+        else
+            next = 0;
+
+        cursor.close();
+        return next;
     }
 
     public Account getAccount(Long id) {
@@ -83,36 +220,15 @@ public class Register extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             a = new Account();
             a.id = cursor.getLong(0);
-            a.parent = cursor.getLong(1);
-            if ( a.parent==-1 )
-                a.parent = null;
             a.description = cursor.getString(2);
             a.type = cursor.getString(3);
+            a.categories = getAccountCategories(a);
         }
 
         cursor.close();
         return a;
     }
 
-    public Entity getEntity(Long id) {
-        String sql = String.format("select id, description from entities where id=%d", id);
-        Cursor cursor = db.rawQuery(sql, null);
-        Entity e = null;
-
-        if (cursor.moveToFirst()) {
-            e = new Entity();
-            e.id = cursor.getLong(0);
-            e.description = cursor.getString(1);
-        }
-
-        cursor.close();
-        return e;
-    }
-
-    /**
-     * Returns account list
-     * @return Account list
-     */
     public ArrayList<Account> getAccountsList(DB_SORT sort) {
         ArrayList<Account> list = new ArrayList<>();
 
@@ -134,17 +250,30 @@ public class Register extends SQLiteOpenHelper {
             do {
                 Account a = new Account();
                 a.id = cursor.getLong(0);
-                a.parent = cursor.getLong(1);
-                if ( a.parent==-1 )
-                    a.parent = null;
                 a.description = cursor.getString(2);
                 a.type = cursor.getString(3);
                 a.usage = cursor.getLong(4);
+                a.categories = getAccountCategories(a);
                 list.add(a);
             } while (cursor.moveToNext());
         }
         cursor.close();
         return list;
+    }
+
+    public Entity getEntity(Long id) {
+        String sql = String.format("select id, description from entities where id=%d", id);
+        Cursor cursor = db.rawQuery(sql, null);
+        Entity e = null;
+
+        if (cursor.moveToFirst()) {
+            e = new Entity();
+            e.id = cursor.getLong(0);
+            e.description = cursor.getString(1);
+        }
+
+        cursor.close();
+        return e;
     }
 
     public Record getRecord(Long id) {
@@ -465,6 +594,8 @@ public class Register extends SQLiteOpenHelper {
         String sql;
         String safedsc = Helper.sqlString(account.description);
         Long   cnt;
+        int    i;
+        Long   id;
 
         Cursor cursor = db.rawQuery("select count(*) from accounts where description='"+safedsc+"'"+
                 (account.id==null ? "" : " and id!="+account.id)
@@ -479,18 +610,20 @@ public class Register extends SQLiteOpenHelper {
 
         cursor.close();
 
-        String parent;
-        if ( account.parent==null )
-            parent = "null";
-        else
-            parent = String.format("%d", account.parent);
-
-        if ( account.id==null )
+        if ( account.id==null ) {
+            id = getNextAccountId();
             sql = String.format(
-                    "insert into accounts ( id, parent, type, description, usage ) values ( null, %s, '%s', '%s',0)", parent, account.type, safedsc);
-        else
+                    "insert into accounts ( id, type, description, usage ) values ( %d, %s, '%s', '%s',0)", id, account.type, safedsc);
+        } else {
+            id = account.id;
             sql = String.format(
-                    "update accounts set parent=%s, description='%s', type='%s' where id=%d", parent, safedsc, account.type, account.id);
+                    "update accounts set parent=null, description='%s', type='%s' where id=%d", safedsc, account.type, account.id);
+        }
+        // Apply categories
+        db.execSQL( "delete from account_categories where account="+id);
+        for ( i=0; i<account.categories.size(); i++ ) {
+            db.execSQL( "insert into account_categories ( account, category ) values ( "+id+", "+account.categories.get(i).id+")");
+        }
 
         try {
             db.execSQL(sql);

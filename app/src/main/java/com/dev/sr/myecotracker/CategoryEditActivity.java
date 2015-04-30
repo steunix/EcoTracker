@@ -12,16 +12,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-public class EntityEditActivity extends ActionBarActivity {
+public class CategoryEditActivity extends ActionBarActivity {
 
-    Entity currentEntity;
-    String mode;
     Register register;
+    String   mode;
+    Category currentCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_entity_edit);
+        setContentView(R.layout.activity_category_edit);
 
         register = new Register(this);
 
@@ -29,27 +29,27 @@ public class EntityEditActivity extends ActionBarActivity {
         mode = i.getExtras().getString("mode");
         if (mode.equals("edit") ) {
             // Edit existing account
-            setTitle ( getString(R.string.title_activity_entity_edit));
+            setTitle ( getString(R.string.title_activity_category_edit));
 
-            Long editEntity = i.getExtras().getLong("id");
+            Long editCategory = i.getExtras().getLong("id");
 
-            currentEntity = register.getEntity(editEntity);
+            currentCategory = register.getCategory(editCategory);
 
-            EditText descr = (EditText) findViewById(R.id.txtEntityDescr);
-            descr.setText(currentEntity.description);
+            EditText descr = (EditText) findViewById(R.id.txtCatetoryDescr);
+            descr.setText(currentCategory.description);
         } else {
             // New account
-            setTitle(getString(R.string.title_activity_new_entity));
-            currentEntity = new Entity();
+            setTitle(getString(R.string.title_activity_new_category));
+            currentCategory = new Category();
         }
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_entity_edit, menu);
-        if ( mode.equals("new") || currentEntity.id==0 )
-            menu.findItem(R.id.action_deleteentity).setVisible(false);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_category_edit, menu);
+        if ( mode.equals("new") )
+            menu.findItem(R.id.action_deletecategory).setVisible(false);
         return true;
     }
 
@@ -62,24 +62,24 @@ public class EntityEditActivity extends ActionBarActivity {
             startActivity(i);
         }
 
-        if ( id==R.id.action_saveentity ) {
-            saveEntity(null);
+        if ( id==R.id.action_savecategory ) {
+            saveCategory();
         }
 
-        if ( id==R.id.action_deleteentity ) {
-            deleteEntity(null);
+        if ( id==R.id.action_deletecategory ) {
+            deleteCategory();
         }
+
         return super.onOptionsItemSelected(item);
     }
 
-    // TODO: remove parameter
-    public void deleteEntity(View v) {
+    public void deleteCategory() {
         AlertDialog.Builder dlg = new AlertDialog.Builder(this);
-        dlg.setMessage(R.string.entity_delete_warning)
+        dlg.setMessage(R.string.category_delete_warning)
                 .setTitle(R.string.alert_warning);
         dlg.setPositiveButton(R.string.alert_ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        register.deleteEntity(currentEntity);
+                        register.deleteCategory(currentCategory);
                         Toast.makeText(getApplicationContext(), R.string.deleted, Toast.LENGTH_SHORT).show();
                         finish();
                     }
@@ -94,25 +94,24 @@ public class EntityEditActivity extends ActionBarActivity {
         d.show();
     }
 
-    // TODO: remove parameter
-    public void saveEntity(View v) {
-        Entity entity = new Entity();
+    public void saveCategory() {
+        Category category = new Category();
 
-        entity.description = ((EditText) findViewById(R.id.txtEntityDescr)).getText().toString().trim();
+        category.description = ((EditText) findViewById(R.id.txtCatetoryDescr)).getText().toString().trim();
 
-        if (entity.description.length() == 0) {
+        if (category.description.length() == 0) {
             Toast.makeText(this, R.string.baddescription, Toast.LENGTH_SHORT).show();
             return;
         }
 
         String mode = getIntent().getExtras().getString("mode");
         if ( mode.equals("edit") )
-            entity.id = currentEntity.id;
+            category.id = currentCategory.id;
         else
-            entity.id = null;
+            category.id = null;
 
         try {
-            if (register.saveEntity(entity)) {
+            if (register.saveCategory(category)) {
                 Toast.makeText(this, R.string.saved, Toast.LENGTH_SHORT).show();
                 finish();
             }

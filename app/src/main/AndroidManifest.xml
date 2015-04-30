@@ -48,6 +48,14 @@
             android:name=".SearchActivity"
             android:label="@string/title_activity_search" >
         </activity>
+        <activity
+            android:name=".CategoryListActivity"
+            android:label="@string/title_activity_category_list" >
+        </activity>
+        <activity
+            android:name=".CategoryEditActivity"
+            android:label="@string/title_activity_category_edit" >
+        </activity>
     </application>
 
 </manifest>

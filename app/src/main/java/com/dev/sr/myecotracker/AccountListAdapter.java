@@ -43,7 +43,7 @@ public class AccountListAdapter extends ArrayAdapter<Account> {
         View rowView = inflater.inflate(R.layout.layout_account, parent, false);
 
         // 3. Get the two text view from the rowView
-        TextView lblDescr = (TextView) rowView.findViewById(R.id.description);
+        TextView lblDescr = (TextView) rowView.findViewById(R.id.txtDescription);
         TextView lblType = (TextView) rowView.findViewById(R.id.type);
 
         // 4. Set the text for textView

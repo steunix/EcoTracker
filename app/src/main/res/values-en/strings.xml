@@ -22,7 +22,6 @@
     <string name="monthlyreport">Monthly report</string>
     <string name="none">None</string>
     <string name="notes">Notes</string>
-    <string name="parent_account">Parent account</string>
     <string name="report_section_day">Day</string>
     <string name="report_section_month">Month</string>
     <string name="report_section_week">Week</string>
@@ -73,4 +72,8 @@
     <string name="dateto">To date</string>
     <string name="search">Search</string>
     <string name="any">Any</string>
+    <string name="categories">Categories</string>
+    <string name="title_activity_category_edit">Edit category</string>
+    <string name="title_activity_category_list">Categories</string>
+    <string name="title_activity_new_category">New category</string>
 </resources>

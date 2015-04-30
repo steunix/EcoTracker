@@ -2,6 +2,8 @@ package com.dev.sr.myecotracker;
 
 import android.content.Context;
 
+import java.util.ArrayList;
+
 /**
  * Created by Stefano on 02/04/2015.
  */
@@ -12,17 +14,17 @@ public class Account {
     public final String type_balance= "BAL";
 
     public Long   id;
-    public Long   parent;
     public String description;
     public String type;
     public Long   usage;
+    public ArrayList<Category> categories;
 
     public Account() {
         id = new Long(0);
-        parent = new Long(0);
         description = "";
         type = "";
         usage = new Long(0);
+        categories = null;
     }
 
     public String getTypeDescription(Context context) {
@@ -32,4 +34,5 @@ public class Account {
             return context.getString(R.string.type_expense);
         return "";
     }
+
 }
