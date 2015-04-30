@@ -98,6 +98,7 @@ public class SearchFragmentResults extends Fragment {
         }
         bal = inc-exp;
 
+        // TODO: find a better way to show totals
         r = new Record();
 
         r.account = new Account();

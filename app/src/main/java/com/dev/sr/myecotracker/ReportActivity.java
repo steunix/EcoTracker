@@ -120,6 +120,10 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
             startActivity(intent);
         }
 
+        // TODO: provide a first-run activity with a brief description off accounts, categories and suppliers
+
+        // TODO: provide a settings activity where one can backup/restore db
+
         /*
         if ( id == R.id.action_backup ) {
             register.backup();
