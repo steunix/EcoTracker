@@ -76,4 +76,5 @@
     <string name="title_activity_category_edit">Modifica categoria</string>
     <string name="title_activity_category_list">Categorie</string>
     <string name="title_activity_new_category">Nuova categoria</string>
+    <string name="category_delete_warning">Cancellare la categoria? Attenzione, non si può tornare indietro!</string>
 </resources>

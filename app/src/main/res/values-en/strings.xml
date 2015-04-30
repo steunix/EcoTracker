@@ -76,4 +76,5 @@
     <string name="title_activity_category_edit">Edit category</string>
     <string name="title_activity_category_list">Categories</string>
     <string name="title_activity_new_category">New category</string>
+    <string name="category_delete_warning">Do you want to delete the category? Warning: this action cannot be reverted!</string>
 </resources>
