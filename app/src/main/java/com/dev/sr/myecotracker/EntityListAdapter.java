@@ -41,7 +41,6 @@ public class EntityListAdapter extends ArrayAdapter<Entity> {
         View rowView = inflater.inflate(R.layout.layout_entity, parent, false);
 
         TextView lblDescr = (TextView) rowView.findViewById(R.id.description);
-        TextView lblType = (TextView) rowView.findViewById(R.id.type);
 
         Entity a = entityList.get(position);
         lblDescr.setText(a.description);
