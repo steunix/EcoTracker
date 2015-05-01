@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -75,6 +76,14 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
+
+        SharedPreferences sharedPref = getPreferences(getApplicationContext().MODE_PRIVATE);
+        //if ( sharedPref.getLong("first_run",1)==1 ) {
+        if ( 1==1 ) {
+            Intent intent = new Intent(getApplicationContext(), IntroActivity.class);
+            startActivity(intent);
+        }
+
     }
 
 
@@ -119,8 +128,6 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
             Intent intent = new Intent(this, SearchActivity.class);
             startActivity(intent);
         }
-
-        // TODO: provide a first-run activity with a brief description off accounts, categories and suppliers
 
         // TODO: provide a settings activity where one can backup/restore db
 

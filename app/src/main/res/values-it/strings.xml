@@ -77,4 +77,15 @@
     <string name="title_activity_category_list">Categorie</string>
     <string name="title_activity_new_category">Nuova categoria</string>
     <string name="category_delete_warning">Cancellare la categoria? Attenzione, non si può tornare indietro!</string>
+    <string name="go_ahead">Ok, vai avanti</string>
+    <string name="intro_account_fuel">Carburante</string>
+    <string name="intro_account_insurance">Assicurazione</string>
+    <string name="intro_account_maintenance">Tagliando</string>
+    <string name="intro_accounts">Benvenuto in MyEcoTracker. La prima cosa che dovresti conoscere sono i \'conti\': contengono le tue spese e i tuoi guadagni, e puoi crearne quanti vuoi. Per esempio \'Carburante\', \'Tagliando\', \'Assicurazione\'.\n\nPremi il pulsante \'OK\' e li creerò per te.</string>
+    <string name="intro_categories">Ad ogni conto si possono assegnare una o più categorie: ti aiuteranno a mantenere raggruppati i conti per pertinenza. Per esempio una categoria \'Auto\' potrebbe essere create per i conti \'Carburante\', \'Tagliando\' e \'Assicurazione\'. Premi \'OK\' e lo farò io.\n\nLe categorie non sono obbligatorie, e possono essere create, cancellate e modificate in qualunque momento.</string>
+    <string name="intro_finished">E\' tutto. Hai qualche conto, le categorie e un fornitore e sei pronto per crearne altri.\n\nVai!</string>
+    <string name="intro_supplier">Il prossimo e ultimo passo è creare qualche fornitore, che rappresenta la persona o struttura verso la quale spendi i tuoi soldi, o dalla quale li ricevi. Per l\'esempio precedente, potresti creare un \'Stazione di servizio\'. Lo farò io per te.\n\nI fornitori non sono obbligatori, ma più ne crei e più dettaglio potrai poi avere nei report.</string>
+    <string name="intro_entity_gas">Stazione di servizio</string>
+    <string name="intro_category_car">Auto</string>
+    <string name="title_activity_intro">Benvenuto</string>
 </resources>

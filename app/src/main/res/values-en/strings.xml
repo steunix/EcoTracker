@@ -77,4 +77,15 @@
     <string name="title_activity_category_list">Categories</string>
     <string name="title_activity_new_category">New category</string>
     <string name="category_delete_warning">Do you want to delete the category? Warning: this action cannot be reverted!</string>
+    <string name="go_ahead">Ok, go ahead</string>
+    <string name="intro_account_fuel">Fuel</string>
+    <string name="intro_account_insurance">Car insurance</string>
+    <string name="intro_account_maintenance">Car maintenance</string>
+    <string name="intro_accounts">Welcome to MyEcoTracker. The first thing you should know about are the \'accounts\': these holds your expenses and your         incomes, and you can create as many as you want. For example \'Fuel\', \'Car maintenance\', \'Insurance\'.\n\n         Press the \'OK\' button and I will create them for you.</string>
+    <string name="intro_categories">Each account you create can be assigned one or more categories: those will help you keep the accounts that refer to the same         subject together. For example a category \'Car\' could be applied to the accounts \'Fuel\', \'Car maintenance\', \'Insurance\'. Press \'OK\' and I\'ll         do it for you.\n\n         Note that categories are not mandatory and can be created, deleted, adjusted at any time.</string>
+    <string name="intro_category_car">Car</string>
+    <string name="intro_entity_gas">Foo gas station</string>
+    <string name="intro_finished">That\'s all folks. You have basic accounts, categories and supplier, and you\'re ready to create more to adjust to your needs.\n\n         Happy recording!</string>
+    <string name="intro_supplier">The next and last step is to create some suppliers, which represent the people or commodities you spend or earn from. These are not         Following the previous example, you could create a \'Foo gas station\'. I\'ll do it for you.\n\n         Suppliers are not mandatory, but the more specific you are, the more you\'ll get analitics data later.</string>
+    <string name="title_activity_intro">Welcome</string>
 </resources>
