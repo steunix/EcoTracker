@@ -613,22 +613,25 @@ public class Register extends SQLiteOpenHelper {
         if ( account.id==null ) {
             id = getNextAccountId();
             sql = String.format(
-                    "insert into accounts ( id, type, description, usage ) values ( %d, %s, '%s', 0)", id, account.type, safedsc);
+                    "insert into accounts ( id, type, description, usage ) values ( %d, '%s', '%s', 0)", id, account.type, safedsc);
         } else {
             id = account.id;
             sql = String.format(
                     "update accounts set parent=null, description='%s', type='%s' where id=%d", safedsc, account.type, account.id);
         }
-        // Apply categories
-        db.execSQL( "delete from account_categories where account="+id);
-        for ( i=0; i<account.categories.size(); i++ ) {
-            db.execSQL( "insert into account_categories ( account, category ) values ( "+id+", "+account.categories.get(i).id+")");
-        }
 
         try {
             db.execSQL(sql);
-        } catch ( Exception e ) {
+        } catch (Exception e) {
             return false;
+        }
+
+        // Apply categories
+        db.execSQL( "delete from account_categories where account="+id);
+        if ( account.categories!=null ) {
+            for (i = 0; i < account.categories.size(); i++) {
+                db.execSQL("insert into account_categories ( account, category ) values ( " + id + ", " + account.categories.get(i).id + ")");
+            }
         }
         return true;
     }
