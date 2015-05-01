@@ -613,7 +613,7 @@ public class Register extends SQLiteOpenHelper {
         if ( account.id==null ) {
             id = getNextAccountId();
             sql = String.format(
-                    "insert into accounts ( id, type, description, usage ) values ( %d, %s, '%s', '%s',0)", id, account.type, safedsc);
+                    "insert into accounts ( id, type, description, usage ) values ( %d, %s, '%s', 0)", id, account.type, safedsc);
         } else {
             id = account.id;
             sql = String.format(
