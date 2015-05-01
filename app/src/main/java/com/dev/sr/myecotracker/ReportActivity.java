@@ -78,8 +78,7 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
         }
 
         SharedPreferences sharedPref = getPreferences(getApplicationContext().MODE_PRIVATE);
-        //if ( sharedPref.getLong("first_run",1)==1 ) {
-        if ( 1==1 ) {
+        if ( sharedPref.getLong("first_run",1)==1 ) {
             Intent intent = new Intent(getApplicationContext(), IntroActivity.class);
             startActivity(intent);
         }
