@@ -2,6 +2,7 @@ package com.dev.sr.myecotracker;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -101,7 +102,7 @@ public class IntroActivity extends ActionBarActivity {
 
         step++;
         if ( step==5 ) {
-            SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor editor = sharedPref.edit();
 
             editor.putLong("first_run", 0l);

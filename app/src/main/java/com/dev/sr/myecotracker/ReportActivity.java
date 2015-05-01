@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -77,7 +78,7 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
                             .setTabListener(this));
         }
 
-        SharedPreferences sharedPref = getPreferences(getApplicationContext().MODE_PRIVATE);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         if ( sharedPref.getLong("first_run",1)==1 ) {
             Intent intent = new Intent(getApplicationContext(), IntroActivity.class);
             startActivity(intent);
