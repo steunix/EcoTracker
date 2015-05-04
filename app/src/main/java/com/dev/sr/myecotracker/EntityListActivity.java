@@ -84,6 +84,11 @@ public class EntityListActivity extends ActionBarActivity {
             startActivity(intent);
         }
 
+        if ( id == R.id.action_categorylist ) {
+            Intent intent = new Intent(this, CategoryListActivity.class);
+            startActivity(intent);
+        }
+
         return super.onOptionsItemSelected(item);
     }
 }

@@ -76,7 +76,16 @@ public class CategoryListActivity extends ActionBarActivity {
             Intent intent = new Intent(this, CategoryEditActivity.class );
             intent.putExtra("mode", "new");
             startActivity(intent);
-            return true;
+        }
+
+        if (id == R.id.action_accountlist) {
+            Intent intent = new Intent(this, AccountListActivity.class );
+            startActivity(intent);
+        }
+
+        if (id == R.id.action_entitylist) {
+            Intent intent = new Intent(this, EntityListActivity.class );
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

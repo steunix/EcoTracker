@@ -10,6 +10,20 @@
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/action_accountlist"
+        android:icon="@drawable/ic_account"
+        android:title="@string/accounts"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_entitylist"
+        android:icon="@drawable/ic_entity"
+        android:title="@string/entities"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom" />
+
     <item android:id="@+id/action_info" android:title="@string/action_info"
         android:orderInCategory="100" app:showAsAction="never" />
 

@@ -17,6 +17,13 @@
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/action_categorylist"
+        android:icon="@drawable/ic_category"
+        android:title="@string/categories"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom" />
+
     <item android:id="@+id/action_info" android:title="@string/action_info"
         android:orderInCategory="100" app:showAsAction="never" />
 
