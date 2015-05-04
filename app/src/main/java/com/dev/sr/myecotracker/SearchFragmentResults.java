@@ -42,6 +42,8 @@ public class SearchFragmentResults extends Fragment {
         ListView lst = (ListView) rootView.findViewById(R.id.lstResults);
         lst.setAdapter(adapter);
 
+        updateResults();
+
         return rootView;
     }
 

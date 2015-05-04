@@ -139,6 +139,50 @@ public class SearchFragmentParam extends Fragment {
                 updateResults();
             }
         });
+
+        if ( savedInstanceState==null ) {
+            // If no saved state, read default values saved in preferences
+            Account account = new Account();
+            Entity entity = new Entity();
+            String s;
+            TextView txt;
+
+            SharedPreferences sharedPref = getActivity().getPreferences(getActivity().getApplicationContext().MODE_PRIVATE);
+
+            account.id = sharedPref.getLong("search_account_id", -1);
+            entity.id = sharedPref.getLong("search_entity_id", -1);
+
+            if (account.id != -1)
+                spnAccount.setSelection(adAccount.getPosition(account));
+
+            if (entity.id != -1)
+                spnEntity.setSelection(adEntitiy.getPosition(entity));
+
+            s = sharedPref.getString("search_date_from", "");
+            if (!s.equals("")) {
+                txt = (TextView) current_view.findViewById(R.id.txtDateFrom);
+                txt.setText(s);
+            }
+
+            s = sharedPref.getString("search_date_to", "");
+            if (!s.equals("")) {
+                txt = (TextView) current_view.findViewById(R.id.txtDateTo);
+                txt.setText(s);
+            }
+
+            s = sharedPref.getString("search_amount_from", "");
+            if (!s.equals("")) {
+                txt = (TextView) current_view.findViewById(R.id.txtAmountFrom);
+                txt.setText(s);
+            }
+
+            s = sharedPref.getString("search_amount_to", "");
+            if (!s.equals("")) {
+                txt = (TextView) current_view.findViewById(R.id.txtAmountTo);
+                txt.setText(s);
+            }
+
+        }
         return rootView;
     }
 
