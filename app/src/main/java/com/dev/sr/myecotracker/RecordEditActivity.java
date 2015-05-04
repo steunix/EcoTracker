@@ -38,6 +38,7 @@ public class RecordEditActivity extends ActionBarActivity {
     AccountListAdapter adAccounts;
     EntityListAdapter adEntities;
     LocationManager locManager;
+    String mode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,7 @@ public class RecordEditActivity extends ActionBarActivity {
         txtDate.setText(strDate);
 
         Intent i = getIntent();
-        String mode = i.getExtras().getString("mode");
+        mode = i.getExtras().getString("mode");
         if (mode.equals("edit") ) {
 
             editRecord = register.getRecord(i.getExtras().getLong("id"));
@@ -138,6 +139,8 @@ public class RecordEditActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_record_edit, menu);
+        if ( mode.equals("new") )
+            menu.findItem(R.id.action_deleterecord).setVisible(false);
         return true;
     }
 
@@ -154,7 +157,32 @@ public class RecordEditActivity extends ActionBarActivity {
             saveRecord(null);
         }
 
+        if ( id==R.id.action_deleterecord ) {
+            deleteRecord();
+        }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    public void deleteRecord() {
+        AlertDialog.Builder dlg = new AlertDialog.Builder(this);
+        dlg.setMessage(R.string.record_delete_warning)
+                .setTitle(R.string.alert_warning);
+        dlg.setPositiveButton(R.string.alert_ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        register.deleteRecord(editRecord);
+                        Toast.makeText(getApplicationContext(), R.string.deleted, Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }
+        );
+        dlg.setNegativeButton(R.string.alert_cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                }
+        );
+        AlertDialog d = dlg.create();
+        d.show();
     }
 
     public void saveRecord(View view) {
@@ -198,7 +226,7 @@ public class RecordEditActivity extends ActionBarActivity {
         r.location = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
         Intent i = getIntent();
-        if ( i.getExtras().getString("mode").equals("edit") )
+        if ( mode.equals("edit") )
             r.id = editRecord.id;
         else
             r.id = null;

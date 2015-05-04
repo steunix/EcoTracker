@@ -625,6 +625,15 @@ public class Register extends SQLiteOpenHelper {
         return next;
     }
 
+    public boolean deleteRecord (Record record) {
+        try {
+            db.execSQL("delete from register where id=" + record.id);
+        } catch ( Exception ex ) {
+            return false;
+        }
+        return true;
+    }
+
     public boolean saveRecord(Record record) {
         String sql;
         String sqlDate = Helper.toIso(record.date);

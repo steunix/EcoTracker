@@ -90,4 +90,5 @@
     <string name="title_activity_intro">Benvenuto</string>
     <string name="location">Posizione</string>
     <string name="notavailable">Non disponibile</string>
+    <string name="record_delete_warning">Vuoi cancellare questa registrazione? Attenzione, non si può tornare indietro!</string>
 </resources>

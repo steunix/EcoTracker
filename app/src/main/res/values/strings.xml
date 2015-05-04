@@ -79,6 +79,7 @@
     <string name="account_delete_warning">Do you want to delete the account and all of its records? Warning: this action cannot be reverted!</string>
     <string name="entity_delete_warning">Do you want to delete the supplier and all of its records? Warning: this action cannot be reverted!</string>
     <string name="category_delete_warning">Do you want to delete the category? Warning: this action cannot be reverted!</string>
+    <string name="record_delete_warning">Do you want to delete this record? Warning: this action cannot be reverted!</string>
     <string name="alert_warning">Warning</string>
     <string name="alert_ok">OK</string>
     <string name="alert_cancel">Cancel</string>
