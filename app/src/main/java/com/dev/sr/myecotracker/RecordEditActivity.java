@@ -1,14 +1,18 @@
 package com.dev.sr.myecotracker;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -16,6 +20,7 @@ import android.widget.Toast;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -188,5 +193,41 @@ public class RecordEditActivity extends ActionBarActivity {
         Intent i = new Intent(this, AccountEditActivity.class);
         i.putExtra("mode","new");
         startActivity(i);
+    }
+
+    public void openCalendar(View v) {
+        DialogFragment f = new DatePickerFragment();
+        f.show(getSupportFragmentManager(), "datePicker");
+    }
+
+    public static class DatePickerFragment extends DialogFragment
+            implements DatePickerDialog.OnDateSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            int year, month, day;
+
+            EditText txtDate = (EditText) getActivity().findViewById(R.id.txtREDate);
+            Date date = Helper.stringToDate(txtDate.getText().toString());
+
+            Calendar c = Calendar.getInstance();
+            if ( date!=null )
+                c.setTime(date);
+
+            year = c.get(Calendar.YEAR);
+            month = c.get(Calendar.MONTH);
+            day = c.get(Calendar.DAY_OF_MONTH);
+
+            return new DatePickerDialog(getActivity(), this, year, month, day);
+        }
+
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            EditText txtDate = (EditText) getActivity().findViewById(R.id.txtREDate);
+            Calendar c = Calendar.getInstance();
+            c.set(Calendar.YEAR, year);
+            c.set(Calendar.MONTH, month);
+            c.set(Calendar.DAY_OF_MONTH, day);
+            txtDate.setText(Helper.dateToString(c.getTime()));
+        }
     }
 }

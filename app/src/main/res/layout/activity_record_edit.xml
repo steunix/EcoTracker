@@ -36,6 +36,17 @@
             android:id="@+id/txtREDate"
             android:layout_column="2" />
 
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:id="@+id/imgRECalendar"
+            android:layout_column="3"
+            android:src="@drawable/ic_calendar_black"
+            android:maxHeight="32dp"
+            android:maxWidth="32dp"
+            android:scaleType="fitCenter"
+            android:onClick="openCalendar" />
+
     </TableRow>
 
     <TableRow
