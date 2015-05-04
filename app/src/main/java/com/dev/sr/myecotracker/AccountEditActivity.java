@@ -163,6 +163,10 @@ public class AccountEditActivity extends ActionBarActivity {
         try {
             if (register.saveAccount(account)) {
                 Toast.makeText(this, R.string.saved, Toast.LENGTH_SHORT).show();
+                Intent intent = getIntent();
+                intent.putExtra("newid", account.id);
+                setResult(RESULT_OK, intent);
+                finish();
                 finish();
             }
         } catch ( Register.ETExists ex ) {

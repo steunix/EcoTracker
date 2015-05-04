@@ -456,10 +456,6 @@ public class Register extends SQLiteOpenHelper {
         return list;
     }
 
-    /**
-     * Returns the entities list
-     * @return Entities list
-     */
     public ArrayList<Entity> getEntitiesList(DB_SORT sort, Account account) {
         ArrayList<Entity> list = new ArrayList<>();
 
@@ -702,7 +698,6 @@ public class Register extends SQLiteOpenHelper {
         String safedsc = Helper.sqlString(account.description);
         Long   cnt;
         int    i;
-        Long   id;
 
         Cursor cursor = db.rawQuery("select count(*) from accounts where description='"+safedsc+"'"+
                 (account.id==null ? "" : " and id!="+account.id)
@@ -718,11 +713,10 @@ public class Register extends SQLiteOpenHelper {
         cursor.close();
 
         if ( account.id==null ) {
-            id = getNextAccountId();
+            account.id = getNextAccountId();
             sql = String.format(
-                    "insert into accounts ( id, type, description, usage ) values ( %d, '%s', '%s', 0)", id, account.type, safedsc);
+                    "insert into accounts ( id, type, description, usage ) values ( %d, '%s', '%s', 0)", account.id, account.type, safedsc);
         } else {
-            id = account.id;
             sql = String.format(
                     "update accounts set parent=null, description='%s', type='%s' where id=%d", safedsc, account.type, account.id);
         }
@@ -734,13 +728,27 @@ public class Register extends SQLiteOpenHelper {
         }
 
         // Apply categories
-        db.execSQL( "delete from account_categories where account="+id);
+        db.execSQL( "delete from account_categories where account="+account.id);
         if ( account.categories!=null ) {
             for (i = 0; i < account.categories.size(); i++) {
-                db.execSQL("insert into account_categories ( account, category ) values ( " + id + ", " + account.categories.get(i).id + ")");
+                db.execSQL("insert into account_categories ( account, category ) values ( " + account.id + ", " + account.categories.get(i).id + ")");
             }
         }
         return true;
+    }
+
+    public Long getNextEntityId() {
+        String sql = String.format("select ifnull(max(id),0)+1 from entities");
+        Cursor cursor = db.rawQuery(sql, null);
+        long next;
+
+        if (cursor.moveToFirst())
+            next = cursor.getLong(0);
+        else
+            next = 0;
+
+        cursor.close();
+        return next;
     }
 
     public boolean saveEntity(Entity entity) throws ETExists {
@@ -759,10 +767,12 @@ public class Register extends SQLiteOpenHelper {
         if ( cnt>0 )
             throw new ETExists();
 
-        if ( entity.id==null )
-            sql = String.format("insert into entities ( id, description, usage ) values ( null, '%s', 0)", safedsc);
-        else
+        if ( entity.id==null ) {
+            entity.id = getNextEntityId();
+            sql = String.format("insert into entities ( id, description, usage ) values ( %d, '%s', 0)", entity.id, safedsc);
+        } else {
             sql = String.format("update entities set description='%s' where id=%d", safedsc, entity.id);
+        }
 
         try {
             db.execSQL(sql);

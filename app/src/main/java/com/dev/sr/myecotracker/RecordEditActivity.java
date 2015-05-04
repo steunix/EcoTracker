@@ -243,13 +243,29 @@ public class RecordEditActivity extends ActionBarActivity {
     public void newEntity(View v) {
         Intent i = new Intent(this, EntityEditActivity.class);
         i.putExtra("mode","new");
-        startActivity(i);
+        startActivityForResult(i, 1);
     }
 
     public void newAccount(View v) {
         Intent i = new Intent(this, AccountEditActivity.class);
         i.putExtra("mode","new");
-        startActivity(i);
+        startActivityForResult(i, 2);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if ( requestCode==1 && resultCode==RESULT_OK ) {
+            Long id = data.getExtras().getLong("newid");
+            updateEntities();
+            Entity e = register.getEntity(id);
+            // TODO: set current spinner item
+        }
+        if ( requestCode==1 && resultCode==RESULT_OK ) {
+            Long id = data.getExtras().getLong("newid");
+            updateAccounts();
+            Account a = register.getAccount(id);
+            // TODO: set current spinner item
+        }
     }
 
     public void openCalendar(View v) {

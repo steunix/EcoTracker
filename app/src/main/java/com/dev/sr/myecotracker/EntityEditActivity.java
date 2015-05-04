@@ -112,6 +112,9 @@ public class EntityEditActivity extends ActionBarActivity {
         try {
             if (register.saveEntity(entity)) {
                 Toast.makeText(this, R.string.saved, Toast.LENGTH_SHORT).show();
+                Intent intent = getIntent();
+                intent.putExtra("newid", entity.id);
+                setResult(RESULT_OK, intent);
                 finish();
             }
         } catch ( Register.ETExists ex ) {
