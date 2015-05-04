@@ -3,18 +3,24 @@ package com.dev.sr.myecotracker;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
+import android.net.Uri;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.ParseException;
@@ -22,6 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 
 public class RecordEditActivity extends ActionBarActivity {
@@ -30,6 +37,7 @@ public class RecordEditActivity extends ActionBarActivity {
     Register register;
     AccountListAdapter adAccounts;
     EntityListAdapter adEntities;
+    LocationManager locManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +78,27 @@ public class RecordEditActivity extends ActionBarActivity {
 
             EditText txtDescription = (EditText) findViewById(R.id.txtREDescription);
             txtDescription.setText(editRecord.description);
+
+            TextView txt = (TextView) findViewById(R.id.txtAELocation);
+            if ( editRecord.location==null )
+                txt.setText(getString(R.string.notavailable));
+            else
+                txt.setText(editRecord.getLocationString());
+
+        } else {
+            editRecord = new Record();
+
+            Context context = getApplicationContext();
+            locManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+
+            editRecord.location = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+            TextView txt = (TextView) findViewById(R.id.txtAELocation);
+            if ( editRecord.location!=null ) {
+                txt.setText(editRecord.getLocationString());
+            } else
+                txt.setText(getString(R.string.notavailable));
+
         }
 
         // Add events for click
@@ -165,6 +194,9 @@ public class RecordEditActivity extends ActionBarActivity {
         // Save record
         Record r = new Record();
 
+        // Location
+        r.location = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
         Intent i = getIntent();
         if ( i.getExtras().getString("mode").equals("edit") )
             r.id = editRecord.id;
@@ -198,6 +230,15 @@ public class RecordEditActivity extends ActionBarActivity {
     public void openCalendar(View v) {
         DialogFragment f = new DatePickerFragment();
         f.show(getSupportFragmentManager(), "datePicker");
+    }
+
+    public void openPosition(View v) {
+        if ( editRecord.location==null )
+            return;
+
+        String uri = String.format(Locale.getDefault(), "geo:%s", editRecord.getLocationString());
+        Intent searchAddress = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+        startActivity(searchAddress);
     }
 
     public static class DatePickerFragment extends DialogFragment

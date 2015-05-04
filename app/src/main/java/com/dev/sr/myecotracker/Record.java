@@ -2,6 +2,7 @@ package com.dev.sr.myecotracker;
 
 import android.app.Application;
 import android.content.Context;
+import android.location.Location;
 
 import java.util.Currency;
 import java.util.Date;
@@ -17,6 +18,7 @@ public class Record {
     public Entity  entity;
     public Float   amount;
     public String  description;
+    public Location location;
 
     public Record() {
         id = 0l;
@@ -25,6 +27,7 @@ public class Record {
         entity = null;
         amount = 0f;
         description = "";
+        location = null;
     }
 
     public String getAmountString() {
@@ -43,4 +46,15 @@ public class Record {
     public String getRawAmountString() {
         return String.format("%.02f", this.amount);
     }
+
+    public String getLocationString() {
+        if ( location==null )
+            return "";
+        else {
+            String s = String.format("%f#%f", location.getLatitude(), location.getLongitude());
+            s = s.replace(",", ".").replace("#", ",");
+            return s;
+        }
+    }
+
 }

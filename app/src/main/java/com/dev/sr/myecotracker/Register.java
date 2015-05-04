@@ -5,6 +5,7 @@ package com.dev.sr.myecotracker;
         import android.database.sqlite.SQLiteDatabase;
         import android.database.sqlite.SQLiteException;
         import android.database.sqlite.SQLiteOpenHelper;
+        import android.location.Location;
         import android.os.Environment;
         import android.util.Log;
         import android.widget.Toast;
@@ -20,7 +21,7 @@ package com.dev.sr.myecotracker;
  * Class for the database
  */
 public class Register extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     private SQLiteDatabase db;
     private Context context;
@@ -79,6 +80,11 @@ public class Register extends SQLiteOpenHelper {
             db.execSQL("create table account_categories ( account integer, category integer )");
             db.execSQL("create index account_categories_i1 on account_categories ( account )");
             db.execSQL("create index account_categories_i2 on account_categories ( category )");
+        }
+
+        if ( newVersion==3 ) {
+            db.execSQL("alter table register add column latitude real");
+            db.execSQL("alter table register add column longitude real");
         }
     }
 
@@ -156,7 +162,7 @@ public class Register extends SQLiteOpenHelper {
 
         String sql = String.format(
                 "select c.id, c.description, (select ifnull(count(*),0) from account_categories where category=c.id and account=%d) sel from categories c order by sel desc, c.description",
-                (account.id==null ? -1 : account.id));
+                (account.id == null ? -1 : account.id));
         Cursor cursor = db.rawQuery(sql, null);
 
         if (cursor.moveToFirst()) {
@@ -322,7 +328,7 @@ public class Register extends SQLiteOpenHelper {
     public Record getRecord(Long id) {
         Record rec = null;
 
-        String sql = String.format("select id, date, account, entity, amount, description from register where id=%d", id);
+        String sql = String.format("select id, date, account, entity, amount, description, ifnull(latitude,10000), ifnull(longitude,10000) from register where id=%d", id);
         Cursor cursor = db.rawQuery(sql, null);
 
         if (cursor.moveToFirst()) {
@@ -333,6 +339,15 @@ public class Register extends SQLiteOpenHelper {
             rec.entity = getEntity(cursor.getLong(3));
             rec.amount = cursor.getFloat(4);
             rec.description = cursor.getString(5);
+
+            if ( cursor.getFloat(6)!=10000 && cursor.getFloat(7)!=10000 ) {
+                Location location = new Location("");
+                location.setLatitude(cursor.getFloat(6));
+                location.setLongitude(cursor.getFloat(7));
+                rec.location = location;
+            } else {
+                rec.location = null;
+            }
         }
         cursor.close();
         return rec;
@@ -349,7 +364,7 @@ public class Register extends SQLiteOpenHelper {
     public ArrayList<Record> getRecordList(Account account, Entity entity, Date dateFrom, Date dateTo, Float amtFrom, Float amtTo, DB_SORT sort) {
         ArrayList<Record> list = new ArrayList<>();
 
-        String sql = String.format("select id, date, account, entity, amount, description from register where 1=1 ");
+        String sql = String.format("select id, date, account, entity, amount, description, ifnull(latitude,10000), ifnull(longitude,10000) from register where 1=1 ");
 
         if ( account.id != null ) {
             sql += " and account="+account.id+" ";
@@ -396,6 +411,16 @@ public class Register extends SQLiteOpenHelper {
                 r.entity = getEntity(cursor.getLong(3));
                 r.amount = cursor.getFloat(4);
                 r.description = cursor.getString(5);
+
+                if ( cursor.getFloat(6)!=10000 && cursor.getFloat(7)!=10000 ) {
+                    Location location = new Location("");
+                    location.setLatitude(cursor.getFloat(6));
+                    location.setLongitude(cursor.getFloat(7));
+                    r.location = location;
+                } else {
+                    r.location = null;
+                }
+
                 list.add(r);
             } while (cursor.moveToNext());
         }
@@ -410,8 +435,8 @@ public class Register extends SQLiteOpenHelper {
         ArrayList<AccountBreakdown> list = new ArrayList<>();
 
         String sql = String.format(
-                "select r.account, a.type, a.description, sum(r.amount) from register r, accounts a "+
-                        "where r.account=a.id and r.date>='%s' and r.date<='%s' "+
+                "select r.account, a.type, a.description, sum(r.amount) from register r, accounts a " +
+                        "where r.account=a.id and r.date>='%s' and r.date<='%s' " +
                         "group by r.account, a.type, a.description order by a.type desc, sum(r.amount) desc, a.description ", dtFrom, dtTo);
 
         Cursor cursor = db.rawQuery(sql, null);
@@ -585,18 +610,37 @@ public class Register extends SQLiteOpenHelper {
         return true;
     }
 
+    // Records
+    public Long getNextRecordId() {
+        String sql = String.format("select ifnull(max(id),0)+1 from register");
+        Cursor cursor = db.rawQuery(sql, null);
+        long next;
+
+        if (cursor.moveToFirst())
+            next = cursor.getLong(0);
+        else
+            next = 0;
+
+        cursor.close();
+        return next;
+    }
+
     public boolean saveRecord(Record record) {
         String sql;
         String sqlDate = Helper.toIso(record.date);
         String sqlAmount = Helper.sqlFloat(record.amount);
         String safedsc = Helper.sqlString(record.description);
+        Long id;
 
-        if ( record.id==null )
-            sql = "insert into register (id,date,account,entity,amount,description) values "+
-                    "(null, '"+sqlDate+"', "+record.account.id+", "+record.entity.id+", "+sqlAmount+",'"+safedsc+"')";
-        else
-            sql = "update register set date='"+sqlDate+"', account="+record.account.id+", entity="+record.entity.id+", "+
-                    "amount="+sqlAmount+", description='"+safedsc+"' where id="+record.id;
+        if ( record.id==null ) {
+            id = getNextRecordId();
+            sql = String.format("insert into register (id,date,account,entity,amount,description) values (%d,'%s',%d,%d,%s,'%s')",
+                    id, sqlDate, record.account.id, record.entity.id, sqlAmount, safedsc);
+        } else {
+            id = record.id;
+            sql = String.format("update register set date='%s', account=%d, entity=%d, amount=%s, description='%s' where id=%d",
+                    sqlDate, record.account.id, record.entity.id, sqlAmount, safedsc, id);
+        }
 
         try {
             db.execSQL(sql);
@@ -604,6 +648,13 @@ public class Register extends SQLiteOpenHelper {
             return false;
         }
 
+        // Stores location
+        if ( record.location!=null ) {
+            sql = String.format("update register set latitude=%f, longitude=%f where id=%d", record.location.getLatitude(), record.location.getLongitude(), id);
+            db.execSQL(sql);
+        }
+
+        // Updates usages
         db.execSQL( "update accounts set usage = ifnull(usage,0)+1 where id="+record.account.id);
         db.execSQL( "update entities set usage = ifnull(usage,0)+1 where id="+record.entity.id);
         sql = "insert into usage ( account, entity, usage ) values ( "+record.account.id+", "+record.entity.id+",0 )";

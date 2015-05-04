@@ -88,4 +88,6 @@
     <string name="intro_entity_gas">Stazione di servizio</string>
     <string name="intro_category_car">Auto</string>
     <string name="title_activity_intro">Benvenuto</string>
+    <string name="location">Posizione</string>
+    <string name="notavailable">Non disponibile</string>
 </resources>

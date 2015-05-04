@@ -88,4 +88,6 @@
     <string name="intro_finished">That\'s all folks. You have basic accounts, categories and supplier, and you\'re ready to create more to adjust to your needs.\n\n         Happy recording!</string>
     <string name="intro_supplier">The next and last step is to create some suppliers, which represent the people or commodities you spend or earn from. These are not         Following the previous example, you could create a \'Foo gas station\'. I\'ll do it for you.\n\n         Suppliers are not mandatory, but the more specific you are, the more you\'ll get analitics data later.</string>
     <string name="title_activity_intro">Welcome</string>
+    <string name="location">Location</string>
+    <string name="notavailable">Not available</string>
 </resources>

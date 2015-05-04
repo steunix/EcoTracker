@@ -46,6 +46,7 @@
     <string name="amountfrom">Min amount</string>
     <string name="amountto">Max amount</string>
     <string name="any">Any</string>
+    <string name="location">Location</string>
 
     <string name="save">Save</string>
     <string name="create">New</string>
@@ -58,6 +59,7 @@
     <string name="amountzero">Invalid amount</string>
     <string name="saved">Saved!</string>
     <string name="deleted">Deleted!</string>
+    <string name="notavailable">Not available</string>
 
     <string name="description">Description</string>
     <string name="type">Type</string>
