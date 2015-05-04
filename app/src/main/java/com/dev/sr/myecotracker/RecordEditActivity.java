@@ -6,7 +6,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.support.v4.app.DialogFragment;
@@ -15,7 +14,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -191,6 +189,7 @@ public class RecordEditActivity extends ActionBarActivity {
         String sdate = _date.getText().toString();
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         Date date;
+
         try {
             date = df.parse(sdate);
             if (sdate.length() != 10 ) {
@@ -206,6 +205,8 @@ public class RecordEditActivity extends ActionBarActivity {
         // Check amount
         EditText _amount = (EditText) findViewById(R.id.txtREAmount);
         String samount = _amount.getText().toString();
+        samount = samount.replace(",",".");
+
         float amt = 0;
 
         try {
@@ -222,10 +223,6 @@ public class RecordEditActivity extends ActionBarActivity {
         // Save record
         Record r = new Record();
 
-        // Location
-        r.location = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-        Intent i = getIntent();
         if ( mode.equals("edit") )
             r.id = editRecord.id;
         else
