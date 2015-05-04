@@ -85,7 +85,23 @@ public class IntroActivity extends ActionBarActivity {
             category.description = getString(R.string.intro_category_car);
 
             try {
+                Account acc;
+
                 register.saveCategory(category);
+
+                category = register.getCategory(getString(R.string.intro_category_car));
+
+                acc = register.getAccount(getString(R.string.intro_account_fuel));
+                acc.addCategory(category);
+                register.saveAccount(acc);
+
+                acc = register.getAccount(getString(R.string.intro_account_maintenance));
+                acc.addCategory(category);
+                register.saveAccount(acc);
+
+                acc = register.getAccount(getString(R.string.intro_account_insurance));
+                acc.addCategory(category);
+                register.saveAccount(acc);
             } catch(Exception e) { }
         }
 

@@ -82,7 +82,32 @@ public class Register extends SQLiteOpenHelper {
         }
     }
 
+    public boolean execSQL(String sql) throws Exception {
+        try {
+            db.rawQuery(sql, null);
+        } catch ( Exception e ) {
+            throw ( e );
+        }
+        return true;
+    }
+
     // Categories
+    public Category getCategory(String description) {
+        String safedsc = Helper.sqlString(description);
+        String sql = String.format("select id, description from categories where description='%s'", safedsc);
+        Cursor cursor = db.rawQuery(sql, null);
+        Category c = null;
+
+        if (cursor.moveToFirst()) {
+            c = new Category();
+            c.id = cursor.getLong(0);
+            c.description = cursor.getString(1);
+        }
+
+        cursor.close();
+        return c;
+    }
+
     public Category getCategory(Long id) {
         String sql = String.format("select id, description from categories where id=%d", id);
         Cursor cursor = db.rawQuery(sql, null);
@@ -214,6 +239,24 @@ public class Register extends SQLiteOpenHelper {
 
     public Account getAccount(Long id) {
         String sql = String.format("select id, ifnull(parent,-1), description, type from accounts where id=%d", id);
+        Cursor cursor = db.rawQuery(sql, null);
+        Account a = null;
+
+        if (cursor.moveToFirst()) {
+            a = new Account();
+            a.id = cursor.getLong(0);
+            a.description = cursor.getString(2);
+            a.type = cursor.getString(3);
+            a.categories = getAccountCategories(a);
+        }
+
+        cursor.close();
+        return a;
+    }
+
+    public Account getAccount(String description) {
+        String safedsc = Helper.sqlString(description);
+        String sql = String.format("select id, ifnull(parent,-1), description, type from accounts where description='%s'", safedsc);
         Cursor cursor = db.rawQuery(sql, null);
         Account a = null;
 

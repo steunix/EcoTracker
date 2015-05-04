@@ -35,4 +35,9 @@ public class Account {
         return "";
     }
 
+    public void addCategory(Category category) {
+        if ( categories == null )
+            categories = new ArrayList<>();
+        categories.add(category);
+    }
 }
