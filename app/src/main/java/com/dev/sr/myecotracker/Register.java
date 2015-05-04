@@ -58,7 +58,7 @@ public class Register extends SQLiteOpenHelper {
         db.execSQL("create index accounts_i1 on accounts ( description )");
         db.execSQL("create index accounts_i2 on accounts ( parent )");
 
-        db.execSQL("create table register ( id integer primary key, date text, account integer, entity integer, amount real, description text )");
+        db.execSQL("create table register ( id integer primary key, date text, account integer, entity integer, amount real, description text, latitude real, longitude real )");
         db.execSQL("create index register_i1 on register ( date )");
         db.execSQL("create index register_i2 on register ( account )");
         db.execSQL("create index register_i3 on register ( entity )");
@@ -67,6 +67,11 @@ public class Register extends SQLiteOpenHelper {
         db.execSQL("create index usage_i1 on usage ( account )");
         db.execSQL("create index usage_i2 on usage ( entity )");
 
+        db.execSQL("create table categories ( id integer primary key, description text )");
+        db.execSQL("create table account_categories ( account integer, category integer )");
+        db.execSQL("create index account_categories_i1 on account_categories ( account )");
+        db.execSQL("create index account_categories_i2 on account_categories ( category )");
+
         // Default account and entity
         db.execSQL("insert into accounts ( id, parent, type, description, usage ) values ( 0, null, 'EXP', '" + context.getString(R.string.db_account_others) + "', 0)");
         db.execSQL("insert into entities ( id, description, usage ) values ( 0, '" + context.getString(R.string.db_entity_others) + "', 0)");
@@ -74,15 +79,14 @@ public class Register extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion ) {
-        if ( newVersion==2 ) {
+        if ( oldVersion<2 ) {
             db.execSQL("create table categories ( id integer primary key, description text )");
-
             db.execSQL("create table account_categories ( account integer, category integer )");
             db.execSQL("create index account_categories_i1 on account_categories ( account )");
             db.execSQL("create index account_categories_i2 on account_categories ( category )");
         }
 
-        if ( newVersion==3 ) {
+        if ( oldVersion<3 ) {
             db.execSQL("alter table register add column latitude real");
             db.execSQL("alter table register add column longitude real");
         }
