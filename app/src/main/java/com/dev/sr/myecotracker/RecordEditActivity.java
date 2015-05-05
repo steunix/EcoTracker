@@ -299,13 +299,20 @@ public class RecordEditActivity extends ActionBarActivity {
             Long id = data.getExtras().getLong("newid");
             updateEntities();
             Entity e = register.getEntity(id);
-            // TODO: set current spinner item
+
+            int pos = adEntities.getPosition(e.description);
+            Spinner spnEntities = (Spinner) findViewById(R.id.spnREEntity);
+            spnEntities.setSelection(pos);
+
         }
-        if ( requestCode==1 && resultCode==RESULT_OK ) {
+        if ( requestCode==2 && resultCode==RESULT_OK ) {
             Long id = data.getExtras().getLong("newid");
             updateAccounts();
             Account a = register.getAccount(id);
-            // TODO: set current spinner item
+
+            int pos = adAccounts.getPosition(a.description);
+            Spinner spnAccounts = (Spinner) findViewById(R.id.spnREAccount);
+            spnAccounts.setSelection(pos);
         }
     }
 
