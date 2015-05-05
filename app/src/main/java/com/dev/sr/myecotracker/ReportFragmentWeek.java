@@ -92,7 +92,7 @@ public class ReportFragmentWeek extends Fragment {
         cur.setText(Helper.dateToString(d1,d2));
 
         TextView ti = (TextView) current_view.findViewById(R.id.txtEntrate);
-        TextView te = (TextView) current_view.findViewById(R.id.txtUscite);
+        TextView te = (TextView) current_view.findViewById(R.id.txtSRExpenses);
         TextView ts = (TextView) current_view.findViewById(R.id.txtSaldo);
 
         float e = register.weekExpense(cal.getTime());

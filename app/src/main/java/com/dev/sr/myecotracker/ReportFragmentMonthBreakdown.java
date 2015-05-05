@@ -1,12 +1,10 @@
 package com.dev.sr.myecotracker;
 
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -88,7 +86,7 @@ public class ReportFragmentMonthBreakdown extends Fragment {
         cur.setText(String.format("%02d/%4d", current_month, current_year));
 
         TextView ti = (TextView) current_view.findViewById(R.id.txtEntrate);
-        TextView te = (TextView) current_view.findViewById(R.id.txtUscite);
+        TextView te = (TextView) current_view.findViewById(R.id.txtSRExpenses);
         TextView ts = (TextView) current_view.findViewById(R.id.txtSaldo);
 
         float e = register.monthExpense(current_year,current_month);

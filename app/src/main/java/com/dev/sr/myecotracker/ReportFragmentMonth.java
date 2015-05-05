@@ -99,7 +99,7 @@ public class ReportFragmentMonth extends Fragment {
         cur.setText(String.format("%02d/%4d", current_month, current_year));
 
         TextView ti = (TextView) current_view.findViewById(R.id.txtEntrate);
-        TextView te = (TextView) current_view.findViewById(R.id.txtUscite);
+        TextView te = (TextView) current_view.findViewById(R.id.txtSRExpenses);
         TextView ts = (TextView) current_view.findViewById(R.id.txtSaldo);
 
         float e = register.monthExpense(current_year,current_month);

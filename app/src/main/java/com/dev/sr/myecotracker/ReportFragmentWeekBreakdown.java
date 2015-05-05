@@ -1,12 +1,10 @@
 package com.dev.sr.myecotracker;
 
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -81,7 +79,7 @@ public class ReportFragmentWeekBreakdown extends Fragment {
         cur.setText(Helper.dateToString(d1,d2));
 
         TextView ti = (TextView) current_view.findViewById(R.id.txtEntrate);
-        TextView te = (TextView) current_view.findViewById(R.id.txtUscite);
+        TextView te = (TextView) current_view.findViewById(R.id.txtSRExpenses);
         TextView ts = (TextView) current_view.findViewById(R.id.txtSaldo);
 
         float e = register.weekExpense(cal.getTime());
