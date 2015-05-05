@@ -28,9 +28,9 @@
     <string name="type_income">Income</string>
     <string name="none">None</string>
 
-    <string name="entrate">Incomes</string>
-    <string name="uscite">Expenses</string>
-    <string name="saldo">Balance</string>
+    <string name="income">Income</string>
+    <string name="expenses">Expenses</string>
+    <string name="balance">Balance</string>
     <string name="mese">Month</string>
 
     <string name="date">Date</string>

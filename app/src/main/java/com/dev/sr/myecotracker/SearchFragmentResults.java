@@ -106,7 +106,7 @@ public class SearchFragmentResults extends Fragment {
         r.account = new Account();
         r.entity = new Entity();
         r.account.type = r.account.type_income;
-        r.account.description = getString(R.string.entrate);
+        r.account.description = getString(R.string.income);
         r.amount = inc;
         r.entity.description = "";
         r.date = null;
@@ -117,7 +117,7 @@ public class SearchFragmentResults extends Fragment {
         r.account = new Account();
         r.entity = new Entity();
         r.account.type = r.account.type_expense;
-        r.account.description = getString(R.string.uscite);
+        r.account.description = getString(R.string.expenses);
         r.amount = exp;
         r.entity.description = "";
         r.date = null;
@@ -128,7 +128,7 @@ public class SearchFragmentResults extends Fragment {
         r.account = new Account();
         r.entity = new Entity();
         r.account.type = r.account.type_expense;
-        r.account.description = getString(R.string.saldo);
+        r.account.description = getString(R.string.balance);
         r.amount = bal;
         r.entity.description = "";
         r.date = null;

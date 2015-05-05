@@ -15,7 +15,6 @@
     <string name="description">Descrizione</string>
     <string name="entity">Fornitore</string>
     <string name="entity_delete_warning">Cancellare il fornitore e tutte le sue registrazioni? Attenzione, non si può tornare indietro!</string>
-    <string name="entrate">Entrate</string>
     <string name="exists_already">Esiste già!</string>
     <string name="mese">Mese</string>
     <string name="monthlyreport">Riepilogo mensile</string>
@@ -24,7 +23,6 @@
     <string name="report_section_day">Giorno</string>
     <string name="report_section_month">Mese</string>
     <string name="report_section_week">Settimana</string>
-    <string name="saldo">Saldo</string>
     <string name="save">Salva</string>
     <string name="saved">Registrato!</string>
     <string name="title_activity_account_list">Conti</string>
@@ -39,7 +37,6 @@
     <string name="type">Tipo</string>
     <string name="type_expense">Spesa</string>
     <string name="type_income">Entrata</string>
-    <string name="uscite">Uscite</string>
     <string name="account">Conto</string>
     <string name="copyright">© 2015 Stefano Rivoir</string>
     <string name="action_info">Info</string>
@@ -91,4 +88,7 @@
     <string name="location">Posizione</string>
     <string name="notavailable">Non disponibile</string>
     <string name="record_delete_warning">Vuoi cancellare questa registrazione? Attenzione, non si può tornare indietro!</string>
+    <string name="balance">Saldo</string>
+    <string name="expenses">Spese</string>
+    <string name="income">Enrate</string>
 </resources>

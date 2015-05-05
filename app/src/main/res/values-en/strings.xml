@@ -16,7 +16,6 @@
     <string name="description">Description</string>
     <string name="entity">Supplier</string>
     <string name="entity_delete_warning">Do you want to delete the supplier and all of its records? Warning: this action cannot be reverted!</string>
-    <string name="entrate">Incomes</string>
     <string name="exists_already">This already exists!</string>
     <string name="mese">Month</string>
     <string name="monthlyreport">Monthly report</string>
@@ -25,7 +24,6 @@
     <string name="report_section_day">Day</string>
     <string name="report_section_month">Month</string>
     <string name="report_section_week">Week</string>
-    <string name="saldo">Balance</string>
     <string name="save">Save</string>
     <string name="saved">Saved!</string>
     <string name="title_activity_account_list">Accounts</string>
@@ -40,7 +38,6 @@
     <string name="type">Type</string>
     <string name="type_expense">Expense</string>
     <string name="type_income">Income</string>
-    <string name="uscite">Expenses</string>
     <string name="copyright">© 2015 Stefano Rivoir</string>
     <string name="action_info">About</string>
     <string name="title_activity_info">About</string>
@@ -91,4 +88,7 @@
     <string name="location">Location</string>
     <string name="notavailable">Not available</string>
     <string name="record_delete_warning">Do you want to delete this record? Warning: this action cannot be reverted!</string>
+    <string name="balance">Balance</string>
+    <string name="expenses">Expenses</string>
+    <string name="income">Income</string>
 </resources>
