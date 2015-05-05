@@ -22,7 +22,7 @@ public class IntroActivity extends ActionBarActivity {
         setContentView(R.layout.activity_intro);
 
         step = 1;
-        register = new Register(this);
+        register = Register.getInstance(this);
         updateText();
     }
 

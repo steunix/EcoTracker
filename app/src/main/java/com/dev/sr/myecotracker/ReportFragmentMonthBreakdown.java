@@ -28,7 +28,7 @@ public class ReportFragmentMonthBreakdown extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_report, container, false);
 
-        register = new Register(v.getContext());
+        register = Register.getInstance(v.getContext());
 
         Calendar c = Calendar.getInstance();
 

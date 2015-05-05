@@ -30,7 +30,7 @@ public class ReportFragmentWeekBreakdown extends Fragment {
 
         cal = Calendar.getInstance();
 
-        register = new Register(v.getContext());
+        register = Register.getInstance(v.getContext());
 
         ImageButton b = (ImageButton) v.findViewById(R.id.btnPrevious);
         b.setOnClickListener(new View.OnClickListener() {

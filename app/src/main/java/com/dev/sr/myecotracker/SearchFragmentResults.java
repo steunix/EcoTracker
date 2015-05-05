@@ -39,7 +39,7 @@ public class SearchFragmentResults extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_search_results, container, false);
         current_view = rootView;
 
-        register = new Register(rootView.getContext());
+        register = Register.getInstance(rootView.getContext());
 
         adapter = new RecordListAdapter(rootView.getContext(),new ArrayList<Record>());
         ListView lst = (ListView) rootView.findViewById(R.id.lstResults);

@@ -21,7 +21,7 @@ public class AccountListActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_list);
 
-        register = new Register(this);
+        register = Register.getInstance(this);
         updateList();
     }
 

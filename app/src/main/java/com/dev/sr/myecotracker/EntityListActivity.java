@@ -22,7 +22,7 @@ public class EntityListActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entity_list);
 
-        register = new Register(this);
+        register = Register.getInstance(this);
         updateList();
     }
 

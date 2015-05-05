@@ -33,7 +33,7 @@ public class AccountEditActivity extends ActionBarActivity {
         none.description = getString(R.string.none);
         none.type = "";
 
-        register = new Register(this);
+        register = Register.getInstance(this);
 
         List<String> types = new ArrayList<>();
         types.add(getString(R.string.type_expense));

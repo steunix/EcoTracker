@@ -21,6 +21,9 @@ package com.dev.sr.myecotracker;
  * Class for the database
  */
 public class Register extends SQLiteOpenHelper {
+
+    private static Register sInstance;
+
     private static final int DATABASE_VERSION = 3;
 
     private SQLiteDatabase db;
@@ -35,7 +38,13 @@ public class Register extends SQLiteOpenHelper {
         SORT_USAGE_COMBINED
     }
 
-    Register(Context ctx) {
+    public static synchronized Register getInstance(Context context) {
+        if ( sInstance==null )
+            sInstance = new Register(context);
+        return sInstance;
+    }
+
+    private Register(Context ctx) {
         super(ctx, "myecotracker.db", null, DATABASE_VERSION);
         context = ctx;
 

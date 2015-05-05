@@ -50,7 +50,7 @@ public class RecordEditActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_edit);
 
-        register = new Register(this);
+        register = Register.getInstance(this);
 
         adAccounts = new AccountListAdapter(this, new ArrayList<Account>());
         adEntities = new EntityListAdapter(this, new ArrayList<Entity>());

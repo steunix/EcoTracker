@@ -21,7 +21,7 @@ public class CategoryListActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_list);
 
-        register = new Register(getApplicationContext());
+        register = Register.getInstance(getApplicationContext());
         updateList();
     }
 

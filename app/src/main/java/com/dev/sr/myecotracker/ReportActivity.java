@@ -42,7 +42,7 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report);
 
-        register = new Register(this);
+        register = Register.getInstance(this);
 
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();

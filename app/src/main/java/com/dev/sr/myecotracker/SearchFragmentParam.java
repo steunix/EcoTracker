@@ -109,7 +109,7 @@ public class SearchFragmentParam extends Fragment {
 
         Activity activity = getActivity();
         Context context = activity.getApplicationContext();
-        Register register = new Register(context);
+        Register register = Register.getInstance(context);
 
         Account anyAccount = new Account();
         anyAccount.id = null;
