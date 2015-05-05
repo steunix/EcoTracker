@@ -146,15 +146,18 @@ public class Register extends SQLiteOpenHelper {
     public ArrayList<Category> getAccountCategories ( Account account ) {
         ArrayList<Category> cat = new ArrayList<>();
 
-        String sql = String.format("select c.id, c.description from categories c, account_categories a where a.account=c.id and a.account=%d", account.id);
+        String sql = String.format("select c.id, c.description from categories c, account_categories a where a.category=c.id and a.account=%d order by c.description",
+                account.id);
         Cursor cursor = db.rawQuery(sql, null);
 
         if (cursor.moveToFirst()) {
-            Category c = new Category();
-            c.id = cursor.getLong(0);
-            c.description = cursor.getString(1);
+            do {
+                Category c = new Category();
+                c.id = cursor.getLong(0);
+                c.description = cursor.getString(1);
 
-            cat.add(c);
+                cat.add(c);
+            } while ( cursor.moveToNext() );
         }
 
         cursor.close();
