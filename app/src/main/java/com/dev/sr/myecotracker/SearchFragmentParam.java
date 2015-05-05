@@ -152,11 +152,15 @@ public class SearchFragmentParam extends Fragment {
             account.id = sharedPref.getLong("search_account_id", -1);
             entity.id = sharedPref.getLong("search_entity_id", -1);
 
-            if (account.id != -1)
-                spnAccount.setSelection(adAccount.getPosition(account));
+            if (account.id != -1) {
+                account = register.getAccount(account.id);
+                spnAccount.setSelection(adAccount.getPosition(account.description));
+            }
 
-            if (entity.id != -1)
-                spnEntity.setSelection(adEntitiy.getPosition(entity));
+            if (entity.id != -1) {
+                entity = register.getEntity(entity.id);
+                spnEntity.setSelection(adEntitiy.getPosition(entity.description));
+            }
 
             s = sharedPref.getString("search_date_from", "");
             if (!s.equals("")) {
