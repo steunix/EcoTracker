@@ -36,6 +36,9 @@ public class Account {
     }
 
     public String getCategories() {
+        if ( categories==null )
+            return "";
+
         int i;
         String s = "";
         for ( i=0; i<categories.size(); i++ )
