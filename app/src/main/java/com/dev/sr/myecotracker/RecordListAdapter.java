@@ -1,6 +1,7 @@
 package com.dev.sr.myecotracker;
 
 import android.content.Context;
+import android.opengl.Visibility;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,7 @@ public class RecordListAdapter extends ArrayAdapter<Record> {
         TextView laccount = (TextView) rowView.findViewById(R.id.lblRLAccount);
         TextView lamount = (TextView) rowView.findViewById(R.id.lblRLAmount);
         TextView lentity = (TextView) rowView.findViewById(R.id.lblRLEntity);
+        TextView ldescr = (TextView) rowView.findViewById(R.id.lblRLDescription);
 
         Record r = recordList.get(position);
 
@@ -55,6 +57,14 @@ public class RecordListAdapter extends ArrayAdapter<Record> {
         laccount.setText(r.account.description);
         lentity.setText(r.entity.description);
         lamount.setText(r.getAmountString());
+
+        if ( r.description.length()>0 ) {
+            ldescr.setText(r.description);
+            ldescr.setVisibility(View.VISIBLE);
+        } else {
+            ldescr.setText("");
+            ldescr.setVisibility(View.GONE);
+        }
 
         if ( r.account.type.equals(r.account.type_income) )
             lamount.setTextAppearance(getContext(), R.style.income );

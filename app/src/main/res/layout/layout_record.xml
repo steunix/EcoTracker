@@ -62,4 +62,21 @@
             android:layout_span="2"
             android:textColor="@color/text_color_light" />
     </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/none"
+            android:id="@+id/lblRLDescription"
+            android:layout_column="0"
+            android:layout_span="2"
+            android:textColor="@color/text_color_light"
+            android:visibility="visible" />
+    </TableRow>
+
 </TableLayout>
