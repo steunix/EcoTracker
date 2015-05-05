@@ -35,25 +35,18 @@ public class AccountListAdapter extends ArrayAdapter<Account> {
     }
 
     public View getCustomView(int position, View convertView, ViewGroup parent) {
-        // 1. Create inflater
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        // 2. Get rowView from inflater
         View rowView = inflater.inflate(R.layout.layout_account, parent, false);
 
-        // 3. Get the two text view from the rowView
         TextView lblDescr = (TextView) rowView.findViewById(R.id.txtALDescription);
         TextView lblType = (TextView) rowView.findViewById(R.id.txtALType);
-        TextView lblCat = (TextView) rowView.findViewById(R.id.txtALCategories);
 
-        // 4. Set the text for textView
         Account a = accountList.get(position);
         lblDescr.setText(a.description);
-        lblType.setText(a.getTypeDescription(context));
-        lblCat.setText(a.getCategories());
+        lblType.setText(a.getFullDescription(context));
 
-        // 5. retrn rowView
         return rowView;
     }
 

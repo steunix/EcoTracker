@@ -1,5 +1,6 @@
 package com.dev.sr.myecotracker;
 
+import android.app.Application;
 import android.content.Context;
 
 import java.util.ArrayList;
@@ -48,6 +49,15 @@ public class Account {
             s = s.substring(0,s.length()-1);
 
         return s;
+    }
+
+    public String getFullDescription(Context context) {
+        String s = getTypeDescription(context);
+        String s2= getCategories();
+        if ( s2.length()>0 )
+            return s +": "+s2;
+        else
+            return s;
     }
 
     public void addCategory(Category category) {
