@@ -67,11 +67,6 @@ public class CategoryListActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_info) {
-            Intent i = new Intent(this, InfoActivity.class);
-            startActivity(i);
-        }
-
         if (id == R.id.action_newcategory) {
             Intent intent = new Intent(this, CategoryEditActivity.class );
             intent.putExtra("mode", "new");
@@ -85,6 +80,16 @@ public class CategoryListActivity extends ActionBarActivity {
 
         if (id == R.id.action_entitylist) {
             Intent intent = new Intent(this, EntityListActivity.class );
+            startActivity(intent);
+        }
+
+        if ( id==R.id.action_settings ) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+        }
+
+        if ( id==R.id.action_info ) {
+            Intent intent = new Intent(this, InfoActivity.class);
             startActivity(intent);
         }
 

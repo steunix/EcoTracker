@@ -91,4 +91,12 @@
     <string name="balance">Saldo</string>
     <string name="expenses">Spese</string>
     <string name="income">Enrate</string>
+    <string name="title_activity_settings">Impostazioni</string>
+    <string name="enablegps">Abilita GPS per le registrazioni</string>
+    <string name="disabled">Disabilitato</string>
+    <string name="enabled">Abilitato</string>
+    <string name="off">Off</string>
+    <string name="on">On</string>
+    <string name="yes">Sì</string>
+    <string name="no">No</string>
 </resources>

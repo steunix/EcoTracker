@@ -91,4 +91,12 @@
     <string name="balance">Balance</string>
     <string name="expenses">Expenses</string>
     <string name="income">Income</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="enablegps">Enable GPS for records</string>
+    <string name="disabled">Disabled</string>
+    <string name="enabled">Enabled</string>
+    <string name="off">Off</string>
+    <string name="on">On</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

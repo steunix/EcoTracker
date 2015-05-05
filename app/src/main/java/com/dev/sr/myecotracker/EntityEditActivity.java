@@ -57,11 +57,6 @@ public class EntityEditActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_info) {
-            Intent i = new Intent(this, InfoActivity.class);
-            startActivity(i);
-        }
-
         if ( id==R.id.action_saveentity ) {
             saveEntity();
         }
@@ -69,6 +64,17 @@ public class EntityEditActivity extends ActionBarActivity {
         if ( id==R.id.action_deleteentity ) {
             deleteEntity();
         }
+
+        if ( id==R.id.action_settings ) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+        }
+
+        if ( id==R.id.action_info ) {
+            Intent intent = new Intent(this, InfoActivity.class);
+            startActivity(intent);
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

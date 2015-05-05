@@ -67,11 +67,6 @@ public class AccountListActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_info) {
-            Intent i = new Intent(this, InfoActivity.class);
-            startActivity(i);
-        }
-
         if (id == R.id.action_newaccount) {
             Intent intent = new Intent(this, AccountEditActivity.class );
             intent.putExtra("mode", "new");
@@ -85,6 +80,16 @@ public class AccountListActivity extends ActionBarActivity {
 
         if ( id == R.id.action_categorylist ) {
             Intent intent = new Intent(this, CategoryListActivity.class);
+            startActivity(intent);
+        }
+
+        if ( id==R.id.action_settings ) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+        }
+
+        if ( id==R.id.action_info ) {
+            Intent intent = new Intent(this, InfoActivity.class);
             startActivity(intent);
         }
 

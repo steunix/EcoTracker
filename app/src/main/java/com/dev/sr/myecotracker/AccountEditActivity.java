@@ -98,17 +98,22 @@ public class AccountEditActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_info) {
-            Intent i = new Intent(this, InfoActivity.class);
-            startActivity(i);
-        }
-
         if ( id==R.id.action_saveaccount ) {
             saveAccount(null);
         }
 
         if ( id==R.id.action_deleteaccount ) {
             deleteAccount(null);
+        }
+
+        if ( id==R.id.action_settings ) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+        }
+
+        if ( id==R.id.action_info ) {
+            Intent intent = new Intent(this, InfoActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

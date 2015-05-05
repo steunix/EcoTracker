@@ -57,17 +57,22 @@ public class CategoryEditActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_info) {
-            Intent i = new Intent(this, InfoActivity.class);
-            startActivity(i);
-        }
-
         if ( id==R.id.action_savecategory ) {
             saveCategory();
         }
 
         if ( id==R.id.action_deletecategory ) {
             deleteCategory();
+        }
+
+        if ( id==R.id.action_settings ) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+        }
+
+        if ( id==R.id.action_info ) {
+            Intent intent = new Intent(this, InfoActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

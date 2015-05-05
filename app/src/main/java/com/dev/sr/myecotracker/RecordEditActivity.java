@@ -6,10 +6,12 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -90,14 +92,17 @@ public class RecordEditActivity extends ActionBarActivity {
                 txt.setText(editRecord.getLocationString());
 
         } else {
-            trackGPS();
-
             editRecord = new Record();
             editRecord.location = null;
 
             TextView txt = (TextView) findViewById(R.id.txtAELocation);
-            txt.setText(getString(R.string.notavailable));
 
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            if ( preferences.getBoolean("enable_gps",false) ) {
+                trackGPS();
+                txt.setText(getString(R.string.notavailable));
+            } else
+                txt.setText(getString(R.string.disabled));
         }
 
         // Add events for click
@@ -180,17 +185,22 @@ public class RecordEditActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_info) {
-            Intent i = new Intent(this, InfoActivity.class);
-            startActivity(i);
-        }
-
         if ( id==R.id.action_saverecord ) {
             saveRecord();
         }
 
         if ( id==R.id.action_deleterecord ) {
             deleteRecord();
+        }
+
+        if ( id==R.id.action_settings ) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+        }
+
+        if ( id==R.id.action_info ) {
+            Intent intent = new Intent(this, InfoActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

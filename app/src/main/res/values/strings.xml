@@ -60,6 +60,13 @@
     <string name="saved">Saved!</string>
     <string name="deleted">Deleted!</string>
     <string name="notavailable">Not available</string>
+    <string name="enablegps">Enable GPS for records</string>
+    <string name="enabled">Enabled</string>
+    <string name="disabled">Disabled</string>
+    <string name="on">On</string>
+    <string name="off">Off</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
     <string name="description">Description</string>
     <string name="type">Type</string>
@@ -134,5 +141,5 @@
     <string name="intro_account_insurance">Car insurance</string>
     <string name="intro_category_car">Car</string>
     <string name="intro_entity_gas">Foo gas station</string>
-
+    <string name="title_activity_settings">Settings</string>
 </resources>

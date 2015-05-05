@@ -98,11 +98,6 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_info) {
-            Intent i = new Intent(this, InfoActivity.class);
-            startActivity(i);
-        }
-
         if ( id == R.id.action_newreg ) {
             Intent intent = new Intent(this, RecordEditActivity.class);
             intent.putExtra("mode","new");
@@ -126,6 +121,16 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
 
         if ( id == R.id.action_search ) {
             Intent intent = new Intent(this, SearchActivity.class);
+            startActivity(intent);
+        }
+
+        if ( id==R.id.action_settings ) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+        }
+
+        if ( id==R.id.action_info ) {
+            Intent intent = new Intent(this, InfoActivity.class);
             startActivity(intent);
         }
 
