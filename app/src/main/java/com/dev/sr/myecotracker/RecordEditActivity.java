@@ -41,6 +41,7 @@ public class RecordEditActivity extends ActionBarActivity {
     String mode;
     boolean GPSEnabled = false;
     LocationListener listener;
+    Location current_location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,11 +121,11 @@ public class RecordEditActivity extends ActionBarActivity {
                 TextView txt = (TextView) findViewById(R.id.txtAELocation);
                 if ( txt==null )
                     return;
-                editRecord.location = location;
-                if ( editRecord.location==null )
+                current_location = location;
+                if ( current_location==null )
                     txt.setText(getString(R.string.notavailable));
                 else
-                    txt.setText(editRecord.getLocationString());
+                    txt.setText(Helper.locationString(current_location));
             }
 
             @Override
@@ -185,7 +186,7 @@ public class RecordEditActivity extends ActionBarActivity {
         }
 
         if ( id==R.id.action_saverecord ) {
-            saveRecord(null);
+            saveRecord();
         }
 
         if ( id==R.id.action_deleterecord ) {
@@ -224,7 +225,7 @@ public class RecordEditActivity extends ActionBarActivity {
         d.show();
     }
 
-    public void saveRecord(View view) {
+    public void saveRecord() {
         // Check date
         EditText _date = (EditText) findViewById(R.id.txtREDate);
         String sdate = _date.getText().toString();
@@ -266,8 +267,10 @@ public class RecordEditActivity extends ActionBarActivity {
 
         if ( mode.equals("edit") )
             r.id = editRecord.id;
-        else
+        else {
             r.id = null;
+            r.location = current_location;
+        }
 
         r.account = (Account)((Spinner)findViewById(R.id.spnREAccount)).getSelectedItem();
         r.entity = (Entity)((Spinner)findViewById(R.id.spnREEntity)).getSelectedItem();

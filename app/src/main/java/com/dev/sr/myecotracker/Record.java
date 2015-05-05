@@ -48,13 +48,7 @@ public class Record {
     }
 
     public String getLocationString() {
-        if ( location==null )
-            return "";
-        else {
-            String s = String.format("%f#%f", location.getLatitude(), location.getLongitude());
-            s = s.replace(",", ".").replace("#", ",");
-            return s;
-        }
+        return Helper.locationString(location);
     }
 
 }

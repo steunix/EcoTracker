@@ -1,5 +1,7 @@
 package com.dev.sr.myecotracker;
 
+import android.location.Location;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Currency;
@@ -97,5 +99,15 @@ public class Helper {
         String s = String.format("%.02f", number);
         s = s.replace(",",".");
         return s;
+    }
+
+    static String locationString(Location location) {
+        if ( location==null )
+            return "";
+        else {
+            String s = String.format("%f#%f", location.getLatitude(), location.getLongitude());
+            s = s.replace(",", ".").replace("#", ",");
+            return s;
+        }
     }
 }
