@@ -6,6 +6,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.support.v4.app.DialogFragment;
@@ -37,6 +39,8 @@ public class RecordEditActivity extends ActionBarActivity {
     EntityListAdapter adEntities;
     LocationManager locManager;
     String mode;
+    boolean GPSEnabled = false;
+    LocationListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,18 +89,13 @@ public class RecordEditActivity extends ActionBarActivity {
                 txt.setText(editRecord.getLocationString());
 
         } else {
+            trackGPS();
+
             editRecord = new Record();
-
-            Context context = getApplicationContext();
-            locManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-
-            editRecord.location = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            editRecord.location = null;
 
             TextView txt = (TextView) findViewById(R.id.txtAELocation);
-            if ( editRecord.location!=null ) {
-                txt.setText(editRecord.getLocationString());
-            } else
-                txt.setText(getString(R.string.notavailable));
+            txt.setText(getString(R.string.notavailable));
 
         }
 
@@ -111,6 +110,40 @@ public class RecordEditActivity extends ActionBarActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+    }
+
+    private void trackGPS() {
+        locManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+        listener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                TextView txt = (TextView) findViewById(R.id.txtAELocation);
+                if ( txt==null )
+                    return;
+                editRecord.location = location;
+                if ( editRecord.location==null )
+                    txt.setText(getString(R.string.notavailable));
+                else
+                    txt.setText(editRecord.getLocationString());
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+
+            }
+        };
+        locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, listener);
+        GPSEnabled = true;
     }
 
     private void updateAccounts() {
@@ -160,6 +193,14 @@ public class RecordEditActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if ( GPSEnabled ) {
+            locManager.removeUpdates(listener);
+        }
     }
 
     public void deleteRecord() {
