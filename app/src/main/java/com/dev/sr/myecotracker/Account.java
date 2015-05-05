@@ -35,6 +35,18 @@ public class Account {
         return "";
     }
 
+    public String getCategories() {
+        int i;
+        String s = "";
+        for ( i=0; i<categories.size(); i++ )
+            s = s + categories.get(i).description+",";
+
+        if ( s.length()>0 )
+            s = s.substring(0,s.length()-1);
+
+        return s;
+    }
+
     public void addCategory(Category category) {
         if ( categories == null )
             categories = new ArrayList<>();

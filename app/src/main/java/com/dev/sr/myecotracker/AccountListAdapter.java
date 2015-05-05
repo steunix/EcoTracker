@@ -45,11 +45,13 @@ public class AccountListAdapter extends ArrayAdapter<Account> {
         // 3. Get the two text view from the rowView
         TextView lblDescr = (TextView) rowView.findViewById(R.id.txtALDescription);
         TextView lblType = (TextView) rowView.findViewById(R.id.txtALType);
+        TextView lblCat = (TextView) rowView.findViewById(R.id.txtALCategories);
 
         // 4. Set the text for textView
         Account a = accountList.get(position);
         lblDescr.setText(a.description);
         lblType.setText(a.getTypeDescription(context));
+        lblCat.setText(a.getCategories());
 
         // 5. retrn rowView
         return rowView;
