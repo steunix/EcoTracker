@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,6 +20,7 @@ public class SearchFragmentResults extends Fragment {
 
     RecordListAdapter adapter;
     Register register;
+    View current_view;
 
     public static SearchFragmentResults newInstance(int sectionNumber) {
         SearchFragmentResults fragment = new SearchFragmentResults();
@@ -35,6 +37,7 @@ public class SearchFragmentResults extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_search_results, container, false);
+        current_view = rootView;
 
         register = new Register(rootView.getContext());
 
@@ -100,40 +103,14 @@ public class SearchFragmentResults extends Fragment {
         }
         bal = inc-exp;
 
-        // TODO: find a better way to show totals
-        r = new Record();
+        TextView txt = (TextView) current_view.findViewById(R.id.txtSRIncome);
+        txt.setText(Helper.formatAmount(inc));
 
-        r.account = new Account();
-        r.entity = new Entity();
-        r.account.type = r.account.type_income;
-        r.account.description = getString(R.string.income);
-        r.amount = inc;
-        r.entity.description = "";
-        r.date = null;
+        txt = (TextView) current_view.findViewById(R.id.txtSRExpenses);
+        txt.setText(Helper.formatAmount(-exp));
 
-        adapter.addAll(r);
-
-        r = new Record();
-        r.account = new Account();
-        r.entity = new Entity();
-        r.account.type = r.account.type_expense;
-        r.account.description = getString(R.string.expenses);
-        r.amount = exp;
-        r.entity.description = "";
-        r.date = null;
-
-        adapter.addAll(r);
-
-        r = new Record();
-        r.account = new Account();
-        r.entity = new Entity();
-        r.account.type = r.account.type_expense;
-        r.account.description = getString(R.string.balance);
-        r.amount = bal;
-        r.entity.description = "";
-        r.date = null;
-
-        adapter.addAll(r);
+        txt = (TextView) current_view.findViewById(R.id.txtSRBalance);
+        txt.setText(Helper.formatAmount(bal));
     }
 
 }
