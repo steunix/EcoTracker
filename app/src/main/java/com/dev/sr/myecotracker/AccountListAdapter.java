@@ -58,7 +58,7 @@ public class AccountListAdapter extends ArrayAdapter<Account> {
     public int getPosition(String description) {
         int i;
         for ( i=0; i<accountList.size(); i++ ) {
-            if ( accountList.get(i).description == description )
+            if ( accountList.get(i).description.equals(description) )
                 return i;
         }
         return -1;
