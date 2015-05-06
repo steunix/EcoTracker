@@ -12,6 +12,8 @@ import android.widget.Switch;
 
 public class SettingsActivity extends ActionBarActivity {
 
+    // TODO: provide backup/restore db
+
     SharedPreferences preferences;
 
     @Override

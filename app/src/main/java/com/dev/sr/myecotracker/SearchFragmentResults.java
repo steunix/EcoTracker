@@ -16,6 +16,7 @@ import java.util.Date;
  * Created by Stefano on 29/04/2015.
  */
 public class SearchFragmentResults extends Fragment {
+
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     RecordListAdapter adapter;

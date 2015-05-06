@@ -134,8 +134,6 @@ public class ReportActivity extends ActionBarActivity implements ActionBar.TabLi
             startActivity(intent);
         }
 
-        // TODO: provide a settings activity where one can backup/restore db
-
         /*
         if ( id == R.id.action_backup ) {
             register.backup();

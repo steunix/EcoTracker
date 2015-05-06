@@ -22,6 +22,8 @@ import java.util.Date;
  */
 public class SearchFragmentParam extends Fragment {
 
+    // TODO: provide calendar for dates
+
     private View current_view;
     AccountListAdapter adAccount;
     EntityListAdapter adEntitiy;
