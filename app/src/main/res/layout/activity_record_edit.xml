@@ -1,4 +1,10 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    android:layout_weight="1">
+
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -23,7 +29,9 @@
             android:src="@drawable/ic_calendar_black"
             android:maxHeight="32dp"
             android:maxWidth="32dp"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitCenter"
+            android:cropToPadding="false"
+            style="@style/icon_style" />
 
         <View style="@style/divider"
             android:layout_column="1" />
@@ -63,7 +71,8 @@
             android:maxHeight="32dp"
             android:maxWidth="32dp"
             android:scaleType="fitCenter"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="center_vertical"
+            style="@style/icon_style" />
 
         <View style="@style/divider"
             android:layout_column="1" />
@@ -101,7 +110,8 @@
             android:maxHeight="32dp"
             android:maxWidth="32dp"
             android:scaleType="fitCenter"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="center_vertical"
+            style="@style/icon_style" />
 
         <View style="@style/divider"
             android:layout_column="1" />
@@ -138,7 +148,8 @@
             android:src="@drawable/ic_amount_black"
             android:maxHeight="32dp"
             android:maxWidth="32dp"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitCenter"
+            style="@style/icon_style" />
 
         <View style="@style/divider"
             android:layout_column="1" />
@@ -165,7 +176,8 @@
             android:src="@drawable/ic_notes_black"
             android:maxHeight="32dp"
             android:maxWidth="32dp"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitCenter"
+            style="@style/icon_style" />
 
         <View style="@style/divider"
             android:layout_column="1" />
@@ -191,7 +203,8 @@
             android:src="@drawable/ic_position_black"
             android:maxHeight="32dp"
             android:maxWidth="32dp"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitCenter"
+            style="@style/icon_style" />
 
         <View style="@style/divider"
             android:layout_column="1" />
@@ -218,3 +231,4 @@
     </TableRow>
 
 </TableLayout>
+</ScrollView>

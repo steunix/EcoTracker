@@ -87,4 +87,8 @@
         <item name="android:background">#cccccc</item>
     </style>
 
+    <style name="icon_style">
+        <item name="android:tint">#8e1413</item>
+        <item name="android:alpha">0.6</item>
+    </style>
 </resources>

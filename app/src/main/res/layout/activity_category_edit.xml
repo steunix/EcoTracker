@@ -24,7 +24,8 @@
             android:src="@drawable/ic_notes_black"
             android:maxHeight="32dp"
             android:maxWidth="32dp"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitCenter"
+            style="@style/icon_style" />
 
         <View style="@style/divider"
             android:layout_column="1" />

@@ -24,7 +24,7 @@
 
             <ImageButton
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:text=""
                 android:id="@+id/btnPrevious"
@@ -45,7 +45,7 @@
 
             <ImageButton
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:text=">"
                 android:id="@+id/btnNext"

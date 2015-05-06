@@ -23,8 +23,8 @@
 
             <ImageButton
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:text=""
                 android:id="@+id/btnPrevious"
                 android:layout_column="0"
@@ -44,8 +44,8 @@
 
             <ImageButton
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:text=">"
                 android:id="@+id/btnNext"
                 android:layout_column="2"
