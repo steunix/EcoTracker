@@ -82,8 +82,8 @@
     <string name="intro_categories">Each account you create can be assigned one or more categories: those will help you keep the accounts that refer to the same         subject together. For example a category \'Car\' could be applied to the accounts \'Fuel\', \'Car maintenance\', \'Insurance\'. Press \'OK\' and I\'ll         do it for you.\n\n         Note that categories are not mandatory and can be created, deleted, adjusted at any time.</string>
     <string name="intro_category_car">Car</string>
     <string name="intro_entity_gas">Foo gas station</string>
-    <string name="intro_finished">That\'s all folks. You have basic accounts, categories and supplier, and you\'re ready to create more to adjust to your needs.\n\n         Happy recording!</string>
-    <string name="intro_supplier">The next and last step is to create some suppliers, which represent the people or commodities you spend or earn from. These are not         Following the previous example, you could create a \'Foo gas station\'. I\'ll do it for you.\n\n         Suppliers are not mandatory, but the more specific you are, the more you\'ll get analitics data later.</string>
+    <string name="intro_finished">That\'s all folks. You have basic accounts, categories and supplier, and you\'re ready to create more to adjust to your needs.\n\nHappy recording!</string>
+    <string name="intro_supplier">The next and last step is to create some suppliers, which represent the people or facilities you spend or earn from. Following the previous example, you could create a \'Foo gas station\'. I\'ll do it for you.\n\nSuppliers are not mandatory, but the more specific you are, the more you\'ll get analitics data later.</string>
     <string name="title_activity_intro">Welcome</string>
     <string name="location">Location</string>
     <string name="notavailable">Not available</string>
