@@ -11,14 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/account"
-            android:id="@+id/textView14"
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:id="@+id/imgSP0"
             android:layout_column="0"
-            android:textColor="@color/text_color" />
+            android:src="@drawable/ic_account_black"
+            android:maxHeight="32dp"
+            android:maxWidth="32dp"
+            android:scaleType="fitCenter" />
 
         <Spinner
             android:layout_width="wrap_content"
@@ -32,14 +33,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/entity"
-            android:id="@+id/textView17"
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:id="@+id/imgSP1"
             android:layout_column="0"
-            android:textColor="@color/text_color" />
+            android:src="@drawable/ic_entity_black"
+            android:maxHeight="32dp"
+            android:maxWidth="32dp"
+            android:scaleType="fitCenter" />
 
         <Spinner
             android:layout_width="wrap_content"
@@ -53,14 +55,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/datefrom"
-            android:id="@+id/textView18"
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:id="@+id/imgSP2"
             android:layout_column="0"
-            android:textColor="@color/text_color" />
+            android:src="@drawable/ic_calendar_black"
+            android:maxHeight="32dp"
+            android:maxWidth="32dp"
+            android:scaleType="fitCenter" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -68,21 +71,23 @@
             android:inputType="date"
             android:ems="10"
             android:id="@+id/txtDateFrom"
-            android:layout_column="1" />
+            android:layout_column="1"
+            android:hint="@string/datefrom" />
     </TableRow>
 
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/dateto"
-            android:id="@+id/textView19"
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:id="@+id/imgSP3"
             android:layout_column="0"
-            android:textColor="@color/text_color" />
+            android:src="@drawable/ic_calendar_black"
+            android:maxHeight="32dp"
+            android:maxWidth="32dp"
+            android:scaleType="fitCenter" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -90,21 +95,23 @@
             android:inputType="date"
             android:ems="10"
             android:id="@+id/txtDateTo"
-            android:layout_column="1" />
+            android:layout_column="1"
+            android:hint="@string/dateto" />
     </TableRow>
 
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/amountfrom"
-            android:id="@+id/textView20"
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:id="@+id/imgSP4"
             android:layout_column="0"
-            android:textColor="@color/text_color" />
+            android:src="@drawable/ic_amount_black"
+            android:maxHeight="32dp"
+            android:maxWidth="32dp"
+            android:scaleType="fitCenter" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -112,21 +119,23 @@
             android:inputType="numberDecimal"
             android:ems="10"
             android:id="@+id/txtAmountFrom"
-            android:layout_column="1" />
+            android:layout_column="1"
+            android:hint="@string/amountfrom" />
     </TableRow>
 
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/amountto"
-            android:id="@+id/textView21"
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:id="@+id/imgSP5"
             android:layout_column="0"
-            android:textColor="@color/text_color" />
+            android:src="@drawable/ic_amount_black"
+            android:maxHeight="32dp"
+            android:maxWidth="32dp"
+            android:scaleType="fitCenter" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -134,7 +143,8 @@
             android:inputType="numberDecimal"
             android:ems="10"
             android:id="@+id/txtAmountTo"
-            android:layout_column="1" />
+            android:layout_column="1"
+            android:hint="@string/amountto" />
     </TableRow>
 
     <Button

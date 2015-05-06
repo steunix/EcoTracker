@@ -17,15 +17,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/description"
-            android:id="@+id/textView10"
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:id="@+id/imgAE0"
             android:layout_column="0"
-            android:layout_gravity="top"
-            android:textColor="@color/text_color" />
+            android:src="@drawable/ic_notes_black"
+            android:maxHeight="32dp"
+            android:maxWidth="32dp"
+            android:scaleType="fitCenter" />
 
         <View style="@style/divider"
             android:layout_column="1" />
@@ -36,22 +36,23 @@
             android:id="@+id/txtAEDescr"
             android:layout_column="2"
             android:singleLine="true"
-            android:inputType="textCapSentences" />
+            android:inputType="textCapSentences"
+            android:hint="@string/description" />
     </TableRow>
 
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/type"
-            android:id="@+id/textView11"
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:id="@+id/imgAE1"
             android:layout_column="0"
-            android:layout_gravity="center_vertical"
-            android:textColor="@color/text_color" />
+            android:src="@drawable/ic_wallet_black"
+            android:maxHeight="32dp"
+            android:maxWidth="32dp"
+            android:scaleType="fitCenter" />
 
         <View style="@style/divider"
             android:layout_column="1" />
@@ -68,15 +69,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/categories"
-            android:id="@+id/textView12"
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:id="@+id/imgAE2"
             android:layout_column="0"
-            android:layout_gravity="center_vertical"
-            android:textColor="@color/text_color" />
+            android:src="@drawable/ic_category_black"
+            android:maxHeight="32dp"
+            android:maxWidth="32dp"
+            android:scaleType="fitCenter" />
 
         <View style="@style/divider"
             android:layout_column="1" />

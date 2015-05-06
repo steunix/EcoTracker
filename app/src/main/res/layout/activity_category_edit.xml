@@ -16,15 +16,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/description"
-            android:id="@+id/textView12"
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:id="@+id/imgCEAE0"
             android:layout_column="0"
-            android:textColor="@color/text_color"
-            android:layout_gravity="top" />
+            android:src="@drawable/ic_notes_black"
+            android:maxHeight="32dp"
+            android:maxWidth="32dp"
+            android:scaleType="fitCenter" />
 
         <View style="@style/divider"
             android:layout_column="1" />
@@ -35,7 +35,8 @@
             android:id="@+id/txtCEDescr"
             android:layout_column="2"
             android:singleLine="true"
-            android:inputType="textCapSentences" />
+            android:inputType="textCapSentences"
+            android:hint="@string/description" />
     </TableRow>
 
 </TableLayout>
