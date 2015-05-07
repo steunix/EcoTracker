@@ -43,7 +43,7 @@ public class RecordEditActivity extends ActionBarActivity {
     String mode;
     boolean GPSEnabled = false;
     LocationListener listener;
-    Location current_location;
+    Location current_location = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +85,7 @@ public class RecordEditActivity extends ActionBarActivity {
             EditText txtDescription = (EditText) findViewById(R.id.txtREDescription);
             txtDescription.setText(editRecord.description);
 
-            TextView txt = (TextView) findViewById(R.id.txtAELocation);
+            TextView txt = (TextView) findViewById(R.id.txtRELocation);
             if ( editRecord.location==null )
                 txt.setText(getString(R.string.notavailable));
             else
@@ -95,7 +95,7 @@ public class RecordEditActivity extends ActionBarActivity {
             editRecord = new Record();
             editRecord.location = null;
 
-            TextView txt = (TextView) findViewById(R.id.txtAELocation);
+            TextView txt = (TextView) findViewById(R.id.txtRELocation);
 
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             if ( preferences.getBoolean("enable_gps",false) ) {
@@ -119,14 +119,24 @@ public class RecordEditActivity extends ActionBarActivity {
     }
 
     private void trackGPS() {
-        locManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+        try {
+            locManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+        } catch ( Exception E ) {
+            return;
+        }
         listener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                TextView txt = (TextView) findViewById(R.id.txtAELocation);
+                TextView txt = (TextView) findViewById(R.id.txtRELocation);
                 if ( txt==null )
                     return;
-                current_location = location;
+
+                if ( location==null )
+                    return;
+
+                if ( current_location==null || (current_location.getAccuracy() > location.getAccuracy()) )
+                    current_location = location;
+
                 if ( current_location==null )
                     txt.setText(getString(R.string.notavailable));
                 else
@@ -148,8 +158,16 @@ public class RecordEditActivity extends ActionBarActivity {
 
             }
         };
-        locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, listener);
-        GPSEnabled = true;
+
+        try {
+            locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, listener);
+            GPSEnabled = true;
+        } catch ( Exception e ) {}
+
+        try {
+            locManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, listener);
+            GPSEnabled = true;
+        } catch ( Exception e ) {};
     }
 
     private void updateAccounts() {

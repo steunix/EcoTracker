@@ -671,7 +671,8 @@ public class Register extends SQLiteOpenHelper {
 
         // Stores location
         if ( record.location!=null ) {
-            sql = String.format("update register set latitude=%f, longitude=%f where id=%d", record.location.getLatitude(), record.location.getLongitude(), id);
+            sql = String.format("update register set latitude=%s, longitude=%s where id=%d",
+                    Helper.sqlDouble(record.location.getLatitude()), Helper.sqlDouble(record.location.getLongitude()), id);
             db.execSQL(sql);
         }
 

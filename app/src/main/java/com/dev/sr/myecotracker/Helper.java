@@ -88,15 +88,21 @@ public class Helper {
         String cs = Currency.getInstance(Locale.getDefault()).getSymbol();
 
         if ( amount==0 )
-            return String.format("%.02f%s", 0f, cs );
+            return String.format("%.2f%s", 0f, cs );
         if ( amount>0 )
-            return "+"+String.format("%.02f%s", amount, cs );
+            return "+"+String.format("%.2f%s", amount, cs );
         else
-            return String.format("%.02f%s", amount, cs);
+            return String.format("%.2f%s", amount, cs);
     }
 
     static String sqlFloat(Float number) {
-        String s = String.format("%.02f", number);
+        String s = String.format("%.2f", number);
+        s = s.replace(",",".");
+        return s;
+    }
+
+    static String sqlDouble(double number) {
+        String s = String.format("%.10f", number);
         s = s.replace(",",".");
         return s;
     }
