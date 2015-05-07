@@ -213,7 +213,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/txtAELocation"
+            android:id="@+id/txtRELocation"
             android:layout_column="2"
             android:textColor="@color/text_color"
             android:layout_gravity="top" />
